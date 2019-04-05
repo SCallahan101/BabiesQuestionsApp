@@ -92,7 +92,7 @@ router.put("/:id", jsonParser, (req, res) => {
   }
   const toUpdate = {};
   // const question = { "content", "childAge", "foundAnswer"};
-  const updateableInputs = ["id", "parentName", "title", "zipcode", question];
+  const updateableInputs = ["id", "parentName", "title", "zipcode"];
 
 
   updateableInputs.forEach(input => {

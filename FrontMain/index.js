@@ -43,7 +43,30 @@ function addPost(dataPost) {
           <br>
           <input type='textarea' id='comment_${dataPost.id}'>
           <input type='hidden' value='${dataPost.id}'>
-          <button>Edit my post!</button>
+          <button class='editPost'>Edit my post!</button>
+          <div id='postEditBox'>
+          <form id='postEdit'>
+          <fieldset id='postDesign'>
+            <legend>Edit your post</legend>
+              Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
+              <br>
+              Content: <input id='infoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
+              <br>
+              Your child: <input id='contentInfo' type='text' placeholder='Child age?'>
+              <br>
+              <p>Found your answer?</p>
+                <select id='answer' name='gotAnswer'>
+                  <option value=''>Pick one</option>
+                  <option value='No'>No</option>
+                  <option value='Yes'>Yes</option>
+                </select>
+              <br>
+              <p id='knowWhen'>date: </p>
+              <br>
+              <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
+            </fieldset>
+          </form>
+          </div>
           <button>Delete this Post</button>
         </li>`);
     },
@@ -71,16 +94,25 @@ function deletePost(postId) {
 }
 
 function updatePost(changePost) {
-  console.log('updating post`' + changePost.id + '`');
+  console.log(changePost);
+  console.log('updating post`' + changePost + '`');
   $.ajax({
-    url: posts_centerURL + '/' + changePost.id,
+    url: posts_centerURL + '/' + changePost,
     method: 'PUT',
-    data: changePost,
+    data: {id: changePost},
     success: function(data) {
       console.log('Post have been edited and repost with id' + changePost);
     }
   });
 }
+
+const currentDate = new Date();
+const month = currentDate.getMonth() + 1;
+const day = currentDate.getDate();
+const year = currentDate.getFullYear();
+
+const newCurrentDate = month + "/" + day + "/" + year;
+
 function renderPosts(data) {
   $.each(data.questionPosts, function(i, obj){
     let id = 'questionData_' + i;
@@ -119,8 +151,9 @@ function renderPosts(data) {
               <option value='Yes'>Yes</option>
             </select>
           <br>
-          <p id='knowWhen'>date: </p>
+          <p id='knowWhen'>date: ${newCurrentDate} </p>
           <br>
+          <input type="reset" value="Clear Out">
           <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
         </fieldset>
       </form>
@@ -149,12 +182,12 @@ function renderPosts(data) {
 
 function renderMainPage(){
   console.log("Render page called!");
-  const currentDate = new Date();
-  const month = currentDate.getMonth() + 1;
-  const day = currentDate.getDate();
-  const year = currentDate.getFullYear();
-
-  const newCurrentDate = month + "/" + day + "/" + year;
+  // const currentDate = new Date();
+  // const month = currentDate.getMonth() + 1;
+  // const day = currentDate.getDate();
+  // const year = currentDate.getFullYear();
+  //
+  // const newCurrentDate = month + "/" + day + "/" + year;
 
   $('#container-main').html(`
 
@@ -181,6 +214,7 @@ function renderMainPage(){
       <br>
       <p id='knowWhen'>date: ${newCurrentDate}</p>
       <br>
+      <input type="reset" value="Clear Out">
       <input id="postSubmit" type='submit' value='Submit the post'></input>
       </fieldset>
     </form>
