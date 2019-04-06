@@ -426,7 +426,7 @@ $('#entrySubmit').click(function(e){
 
 function generalQuestions(){
   $('#generalQuestions').click(function(e){
-    console.log('*Entry Submit clicked*');
+    console.log('*general tab clicked*');
     e.preventDefault();
     renderMainPage();
     fetchAllPosts();
@@ -445,16 +445,27 @@ function editPost(){
     console.log('The edit post opened');
     $('#postEditBox').toggle(``);
   })
-  $('#editSubmit').click(function(e){
+  $('#container-main').submit('#editSubmit', function(e){
     e.preventDefault();
     let editedData = {};
     // data.parentName = document.getElementById('whoAndWhere'); //todo add parent name to form
     // data.zipcode = document.getElementById('zip'); //todo add zipcode to form
-    data.title =  document.getElementById('editQuestionTitle').value;
-    data.content = document.getElementById('editnfoData').value;
-    data.childAge = document.getElementById('editContentInfo').value;
-    data.foundAnswer = document.getElementById('editAnswer').value;
-    data.date = document.getElementById('editKnowWhen').value;
+    // editedData.content = document.getElementById('editInfoData').value;
+    // const edContent = editedData.content;
+    // editedData.childAge = document.getElementById('editContentInfo').value;
+    // const edChildAge = editedData.childAge;
+    // editedData.foundAnswer = document.getElementById('editAnswer').value;
+    // const edFoundAnswer = editedData.foundAnswer;
+    // editedData.date = document.getElementById('editKnowWhen').value;
+    // const edDate = editedData.date;
+
+    editedData.title =  document.getElementById('editQuestionTitle').value;
+    // editedData.question = {
+    //     content: editedData.content,
+    //     childAge: editedData.childAge,
+    //     foundAnswer: editedData.foundAnswer,
+    //     date: editedData.date
+    // };
     updatePost(editedData);
   });
 }
