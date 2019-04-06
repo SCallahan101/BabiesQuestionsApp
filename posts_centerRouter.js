@@ -84,15 +84,16 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", jsonParser, (req, res) => {
-  if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+  if(!(req.params.id && req.body.id && req.params.id !== req.body.id)) {
     const message =
     `Request path id (${req.params.id}) and request body id ` + `(${req.body.id}) must match`;
     console.error(message);
+    console.log(`${req.params.id} - ${req.body.id}`);
     return res.status(400).json({message: message});
   }
   const toUpdate = {};
   // const question = { "content", "childAge", "foundAnswer"};
-  const updateableInputs = ["id", "parentName", "title", "zipcode"];
+  const updateableInputs = ["parentName", "title", "zipcode"];
 
 
   updateableInputs.forEach(input => {
