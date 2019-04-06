@@ -101,7 +101,7 @@ function updatePost(changePost) {
     method: 'PUT',
     data: {id: changePost},
     success: function(data) {
-      console.log('Post have been edited and repost with id' + changePost);
+      console.log('Successful reposted - ' + changePost);
     }
   });
 }
@@ -138,20 +138,20 @@ function renderPosts(data) {
       <form id='postEdit'>
       <fieldset id='postDesign'>
         <legend>Edit your post</legend>
-          Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
+          Title: <input id="editQuestionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
           <br>
-          Content: <input id='infoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
+          Content: <input id='editInfoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
           <br>
-          Your child: <input id='contentInfo' type='text' placeholder='Child age?'>
+          Your child: <input id='editContentInfo' type='text' placeholder='Child age?'>
           <br>
           <p>Found your answer?</p>
-            <select id='answer' name='gotAnswer'>
+            <select id='editAnswer' name='gotAnswer'>
               <option value=''>Pick one</option>
               <option value='No'>No</option>
               <option value='Yes'>Yes</option>
             </select>
           <br>
-          <p id='knowWhen'>date: ${newCurrentDate} </p>
+          <p id='editKnowWhen'>date: ${newCurrentDate} </p>
           <br>
           <input type="reset" value="Clear Out">
           <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
@@ -442,9 +442,21 @@ function createPost(){
 function editPost(){
   $('#container-main').on('click', '.editPost', function(e){
     e.preventDefault();
-    console.log('post have been opened for editing purpose.');
+    console.log('The edit post opened');
     $('#postEditBox').toggle(``);
   })
+  $('#editSubmit').click(function(e){
+    e.preventDefault();
+    let editedData = {};
+    // data.parentName = document.getElementById('whoAndWhere'); //todo add parent name to form
+    // data.zipcode = document.getElementById('zip'); //todo add zipcode to form
+    data.title =  document.getElementById('editQuestionTitle').value;
+    data.content = document.getElementById('editnfoData').value;
+    data.childAge = document.getElementById('editContentInfo').value;
+    data.foundAnswer = document.getElementById('editAnswer').value;
+    data.date = document.getElementById('editKnowWhen').value;
+    updatePost(editedData);
+  });
 }
 // function refreshTheData(){
 //   $('#nav').on('click', "#refresh", function(e){
