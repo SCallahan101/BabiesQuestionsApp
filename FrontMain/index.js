@@ -23,7 +23,8 @@ function addPost(dataPost) {
   dataPost.question = {
     content: dataPost.content,
     childAge: dataPost.childAge,
-    foundAnswer: dataPost.foundAnswer
+    foundAnswer: dataPost.foundAnswer,
+    date: dataPost.date
   };
   console.log('add new post: ' + dataPost.parentName + ' ' + dataPost.zipcode + ' ' + dataPost.title + ' ' + dataPost.content + ' ' + dataPost.childAge + ' ' + dataPost.foundAnswer);
   $.ajax({
@@ -39,6 +40,7 @@ function addPost(dataPost) {
           <p>By: ${dataPost.parentName} <span id='zipcode'>from: ${dataPost.zipcode}</span></p>
           <p>Content: ${dataPost.content} <span id='contentInfo'> For my ${dataPost.childAge} yrs child</span></p>
           <p>Found answer? - ${dataPost.foundAnswer} </p>
+          <p>Posted by: ${dataPost.date}</p>
           Put your comment below here:
           <br>
           <input type='textarea' id='comment_${dataPost.id}'>
@@ -95,14 +97,24 @@ function deletePost(postId) {
 
 function updatePost(changePost) {
   console.log(changePost);
-  console.log('updating post`' + changePost + '`');
+  console.log('updating post` ' + changePost + ' `');
   $.ajax({
     url: posts_centerURL + '/' + changePost,
     method: 'PUT',
     data: {id: changePost},
-    success: function(data) {
-      console.log('Successful reposted - ' + changePost);
+    success: function(changePost) {
+      console.log('Successful opened - ' + changePost);
     }
+  })
+  .done(function(changePost){
+    console.log('successful:' + changePost);
+
+  })
+  .fail(function(xhr, status, errorThrown){
+    alert('This process has been failed');
+    console.log('status: ' + status);
+    console.log('error: ' + errorThrown);
+    console.log(xhr);
   });
 }
 
@@ -127,6 +139,7 @@ function renderPosts(data) {
       <p>By: ${obj.parentName} <span>from: ${obj.zipcode}</span></p>
       <p>Content: ${obj.question.content} <span> For my ${obj.question.childAge} yrs child</span></p>
       <p>Found answer? - ${obj.question.foundAnswer} </p>
+      <p>Posted by: ${obj.question.date}</p>
       <div class='post-user'>
       </div>
       Put your comment below here:
@@ -164,8 +177,12 @@ function renderPosts(data) {
 
     $('#' + editButtonId).click(function(e){
       e.preventDefault();
+      $('#postEditBox').toggle(``);
       console.log(`Edit called on ${id}`);
+      // updatePost(obj.id);
+      // let callId = obj.id;
       updatePost(obj.id);
+      editPost(obj.id);
     });
     $('#' + deleteButtonId).click(function(e){
       e.preventDefault();
@@ -439,17 +456,21 @@ function createPost(){
     $('#postbox').toggle(``);
   });
 }
-function editPost(){
-  $('#container-main').on('click', '.editPost', function(e){
-    e.preventDefault();
-    console.log('The edit post opened');
-    $('#postEditBox').toggle(``);
-  })
+function editPost(callId){
+  // $('#container-main').on('click', '.editPost', function(e){
+  //   e.preventDefault();
+  //   console.log('The edit post opened');
+  //   $('#postEditBox').toggle(``);
+  // })
   $('#container-main').submit('#editSubmit', function(e){
     e.preventDefault();
+    console.log(callId);
     let editedData = {};
+    editedData.id = callId;
     // data.parentName = document.getElementById('whoAndWhere'); //todo add parent name to form
     // data.zipcode = document.getElementById('zip'); //todo add zipcode to form
+    editedData.parentName = 'Nobody';
+    editedData.zipcode = 55555;
     // editedData.content = document.getElementById('editInfoData').value;
     // const edContent = editedData.content;
     // editedData.childAge = document.getElementById('editContentInfo').value;
