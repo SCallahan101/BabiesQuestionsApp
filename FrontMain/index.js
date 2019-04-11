@@ -96,14 +96,16 @@ function deletePost(postId) {
 }
 
 function updatePost(changePost) {
+  console.log(changePost.id);
   console.log(changePost);
-  console.log('updating post` ' + changePost + ' `');
+  console.log('updating post` ' + changePost.id + ' `');
   $.ajax({
-    url: posts_centerURL + '/' + changePost,
+    url: posts_centerURL + '/' + changePost.id,
     method: 'PUT',
-    data: {id: changePost},
+    data: JSON.stringify(changePost),
+    // {id: changePost},
     success: function(changePost) {
-      console.log('Successful opened - ' + changePost);
+      console.log('Successful opened - ' + changePost.id);
     }
   })
   .done(function(changePost){
@@ -181,7 +183,7 @@ function renderPosts(data) {
       console.log(`Edit called on ${id}`);
       // updatePost(obj.id);
       // let callId = obj.id;
-      updatePost(obj.id);
+      // updatePost(obj.id);
       editPost(obj.id);
     });
     $('#' + deleteButtonId).click(function(e){
