@@ -99,10 +99,22 @@ function updatePost(changePost) {
   console.log(changePost.id);
   console.log(changePost);
   console.log('updating post` ' + changePost.id + ' `');
+  let id = changePost.id;
   $.ajax({
-    url: posts_centerURL + '/' + changePost.id,
+    url: posts_centerURL + '/' + id,
     method: 'PUT',
-    data: JSON.stringify(changePost),
+    contentType: "application/json",
+    data: {
+      "title": changePost.title,
+      "parentName": changePost.parentName,
+      "zipcode": changePost.zipcode,
+      "question": {
+        "content": changePost.content,
+        "childAge": changePost.childAge,
+        "foundAnswer": changePost.foundAnswer,
+        "date": changePost.date
+      }
+    },
     // {id: changePost},
     success: function(changePost) {
       console.log('Successful opened - ' + changePost.id);
