@@ -99,25 +99,33 @@ function updatePost(changePost) {
   console.log(changePost.id);
   console.log(changePost);
   console.log('updating post` ' + changePost.id + ' `');
+  // changePost.question = {
+  //   content: changePost.content,
+  //   childAge: changePost.childAge,
+  //   foundAnswer: changePost.foundAnswer,
+  //   date: changePost.date
+  // }
   let id = changePost.id;
   $.ajax({
     url: posts_centerURL + '/' + id,
-    method: 'PUT',
+    method: "PUT",
     contentType: "application/json",
-    data: {
+    // dataType: "json",
+    data: JSON.stringify({
       "title": changePost.title,
       "parentName": changePost.parentName,
       "zipcode": changePost.zipcode,
-      "question": {
+      // "question": {
         "content": changePost.content,
         "childAge": changePost.childAge,
         "foundAnswer": changePost.foundAnswer,
         "date": changePost.date
-      }
-    },
+      // }
+    }),
     // {id: changePost},
     success: function(changePost) {
-      console.log('Successful opened - ' + changePost.id);
+      console.log('Successful opened - ' + changePost);
+      //need to fix this.
     }
   })
   .done(function(changePost){
@@ -441,7 +449,7 @@ function showNav(){
   $(createPost);
   $(myPosts);
   $(generalQuestions);
-  $(editPost);
+  // $(editPost);
 }
 
 $(profileCreation);
@@ -485,7 +493,7 @@ function editPost(callId){
     // data.zipcode = document.getElementById('zip'); //todo add zipcode to form
     editedData.parentName = 'Nobody';
     editedData.zipcode = 55555;
-    // editedData.content = document.getElementById('editInfoData').value;
+    editedData.content = document.getElementById('editInfoData').value;
     // const edContent = editedData.content;
     // editedData.childAge = document.getElementById('editContentInfo').value;
     // const edChildAge = editedData.childAge;
