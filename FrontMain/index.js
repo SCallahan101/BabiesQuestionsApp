@@ -18,6 +18,27 @@ function fetchAllPosts() {
   $.ajax(postsData);
 }
 
+//For my post - user's whole posts.
+// let name = "Nick" + " Reed"; //parentName
+function fetchUserPosts() {
+  const userPostsData = {
+    url: posts_centerURL,
+    // + '/' + name,
+    // cache: false,
+    dataType: 'json',
+    type: 'GET',
+    success:
+    // function(response){
+      // console.log("Nick");
+      // let result = "Nick";
+      renderPosts
+    // }
+  };
+  console.log(userPostsData);
+  $.ajax(userPostsData);
+}
+//_____________________________________________________________
+
 //Call AJAX FRAMEWORK
 function addPost(dataPost) {
   dataPost.question = {
@@ -115,12 +136,12 @@ function updatePost(changePost) {
       "title": changePost.title,
       "parentName": changePost.parentName,
       "zipcode": changePost.zipcode,
-      // "question": {
+      "question": {
         "content": changePost.content,
         "childAge": changePost.childAge,
         "foundAnswer": changePost.foundAnswer,
         "date": changePost.date
-      // }
+      }
     }),
     // {id: changePost},
     success: function(changePost) {
@@ -383,11 +404,11 @@ function getSuggestion(){
 $(getSuggestion);
 
 function myPosts(){
-  $('.container').on('click', '#myPosts', function(e){
+  $('#myPosts').click(function(e){
         console.log('*my Posts clicked*');
         e.preventDefault();
         renderMainPage();
-        fetchAllPosts();
+        fetchUserPosts();
   });
 }
 
@@ -491,15 +512,15 @@ function editPost(callId){
     editedData.id = callId;
     // data.parentName = document.getElementById('whoAndWhere'); //todo add parent name to form
     // data.zipcode = document.getElementById('zip'); //todo add zipcode to form
-    editedData.parentName = 'Nobody';
-    editedData.zipcode = 55555;
+    // editedData.parentName = 'Nobody';
+    // editedData.zipcode = 55555;
     editedData.content = document.getElementById('editInfoData').value;
     // const edContent = editedData.content;
-    // editedData.childAge = document.getElementById('editContentInfo').value;
+    editedData.childAge = document.getElementById('editContentInfo').value;
     // const edChildAge = editedData.childAge;
-    // editedData.foundAnswer = document.getElementById('editAnswer').value;
+    editedData.foundAnswer = document.getElementById('editAnswer').value;
     // const edFoundAnswer = editedData.foundAnswer;
-    // editedData.date = document.getElementById('editKnowWhen').value;
+    editedData.date = document.getElementById('editKnowWhen').value;
     // const edDate = editedData.date;
 
     editedData.title =  document.getElementById('editQuestionTitle').value;

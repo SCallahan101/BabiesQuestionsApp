@@ -92,8 +92,8 @@ router.put("/:id", jsonParser, (req, res) => {
     return res.status(400).json({message: message});
   }
   const toUpdate = {};
-  // const question = { "content", "childAge", "foundAnswer"};
-  const updateableInputs = ["parentName", "title", "zipcode"];
+  const question = ["content", "childAge", "foundAnswer", "date"];
+  const updateableInputs = ["parentName", "title", "zipcode", "question"];
 
 
   updateableInputs.forEach(input => {

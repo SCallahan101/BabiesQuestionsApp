@@ -5,7 +5,11 @@ const mongoose = require("mongoose");
 const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const passport = require('passport');
 require('dotenv').config();
+
+const {router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 
 mongoose.Promise = global.Promise;
 
@@ -14,7 +18,23 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('common'));
 
+//passport and jwt part
+app.use('/api/users', usersRouter);
+app.use('/api/auth', authRouter);
 
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
+app.get('/api/protected', jwtAuth, (req, res ) => {
+  return res.json({
+    data: 'nodeJWT'
+  });
+});
+
+app.use('*', (req, res) => {
+  return res.status(404).json({message: 'NOT FOUND - Alert Check here!'});
+})
+
+//----------------------------------------------
 
 const posts_centerRouter = require('./posts_centerRouter')
 
