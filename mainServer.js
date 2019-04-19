@@ -20,9 +20,9 @@ app.use(morgan('common'));
 
 // passport and jwt part
 app.use('/api/users', usersRouter);
-console.log(usersRouter);
+// console.log(usersRouter);
 app.use('/api/auth', authRouter);
-console.log(authRouter);
+// console.log(authRouter);
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 

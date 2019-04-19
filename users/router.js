@@ -85,7 +85,7 @@ router.post('/', jsonParser, (req, res) => {
   }
   return User.hashPassword(password);
   })
-  .then(has => {
+  .then(hash => {
     return User.create({
       username,
       password: hash,
@@ -100,13 +100,13 @@ router.post('/', jsonParser, (req, res) => {
     if (err.reason === 'ValidationError') {
       return res.status(err.code).json(err);
     }
-    res.status(500).json({code: 500, message: 'Internal Server Error'});
+    res.status(500).json({code: 500, message: 'Internal Server Error1'});
   });
 });
 
 router.get('/', (req, res) => {
   return User.find()
   .then(users => res.json(users.map(user => user.serialize())))
-  .catch(err => res.status(500).json({message: 'Internal Server Error'}));
+  .catch(err => res.status(500).json({message: 'Internal Server Error2'}));
 });
 module.exports = {router};
