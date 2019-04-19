@@ -150,6 +150,8 @@ footer {
   margin: 5px 0;
 }
 #profileContainer {
+  margin-top: 20px;
+  margin-left: 40%;
   padding: 10px;
   display: inline-block;
 }
@@ -159,6 +161,9 @@ footer {
   border-radius: 3px;
 }
 #secondaryContainer {
+  /* display: grid;
+  grid-template-columns: auto auto auto auto; */
+
   border: solid green 1px;
   margin-top: 5px;
   padding: 10px;
@@ -166,6 +171,11 @@ footer {
   height: 450px;
   overflow: scroll;
   /* text-align: center; */
+}
+
+#usersPosts {
+  display: grid;
+  grid-template-columns: auto auto;
 }
 .eachPost {
   list-style-type: none;

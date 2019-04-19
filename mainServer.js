@@ -9,7 +9,7 @@ const passport = require('passport');
 require('dotenv').config();
 
 const {router: usersRouter } = require('./users');
-const { router: authRouter, localStrategy, jwtStrategy} = require('./auth');
+const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 
 mongoose.Promise = global.Promise;
 
@@ -18,9 +18,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('common'));
 
-//passport and jwt part
+// passport and jwt part
 app.use('/api/users', usersRouter);
+console.log(usersRouter);
 app.use('/api/auth', authRouter);
+console.log(authRouter);
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 

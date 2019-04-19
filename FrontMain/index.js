@@ -423,9 +423,7 @@ function myPosts(){
             <br>
             Last Name: <input class='profiletext' type='text' placeholder='Required Input'>
             <br>
-            Email: <input class='profiletext' type='text' placeholder='Required Input'>
-            <br>
-            Date of Birth: <input class='profiletext' type='text' placeholder='Required Input'>
+            Zipcode: <input class='profiletext' type=''text' placeholder='Required Input'>
             <br>
             Username: <input class='profiletext' type='text' placeholder='Required Input'>
             <br>
