@@ -11,7 +11,7 @@ const router = express.Router();
 const createAuthToken =  function(user){
   return jwt.sign({user}, config.JWT_SECRET, {
     subject: user.username,
-    expiresIn: config.username,
+    expiresIn: config.JWT_EXPIRY,
     algorithm: 'HS256'
   });
 };
@@ -27,6 +27,7 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 
 router.post('/refresh', jwtAuth, (req, res) => {
   const authToken = createAuthToken(req.user);
+  res.json({authToken});
 });
 
 module.exports = {router};
