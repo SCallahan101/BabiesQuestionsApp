@@ -28,6 +28,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 // passport and jwt part
 app.use('/api/users/', usersRouter);
 // console.log(usersRouter);
