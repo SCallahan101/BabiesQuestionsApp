@@ -176,6 +176,7 @@ footer {
 #usersPosts {
   display: grid;
   grid-template-columns: auto auto;
+  grid-gap: 10px;
 }
 .eachPost {
   list-style-type: none;

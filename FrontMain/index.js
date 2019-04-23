@@ -5,6 +5,8 @@
 
 const posts_centerURL = 'http://localhost:4747/questionPost'
 
+const usersDataBankURL = 'http://localhost:4747/questionPost/api/users'
+
 function fetchAllPosts() {
   const postsData = {
     url: posts_centerURL,
@@ -412,6 +414,40 @@ function myPosts(){
   });
 }
 
+//_____________________________________________________________
+//users database
+
+// usersDataBankURL
+// function addUsers(userInfo) {
+//   console.log(userInfo.username + ' | ' + userInfo.firstName + ' | ' + userInfo.lastName);
+//   $.ajax({
+//     method: 'POST',
+//     url: usersDataBankURL,
+//     data: JSON.stringify(userInfo),
+//     success: function(data) {
+//       alert('Your profile was submitted');},
+//       datatype: 'json',
+//       contentType: 'application/json'
+//     }
+//     $(addUsers);
+
+ function receiveUserInfo(){
+   $('.container-main').submit('#createdProfile', function(e){
+     e.preventDefault();
+     let userInfoData = {};
+     userInfoData.username = document.getElementById('profileUser').value;
+     console.log(userInfoData.username);
+     userInfoData.password = document.getElementById('profilePW').value;
+     console.log(userInfoData.password);
+     userInfoData.firstName = document.getElementById('profileFN').value;
+     console.log(userInfoData.firstName);
+     userInfoData.lastName = document.getElementById('profileLN').values;
+     console.log(userInfoData.lastName);
+   });
+ }
+ $(receiveUserInfo);
+
+
   function profileCreation() {
     $('#signUp').click(function(e) {
       e.preventDefault();
@@ -419,15 +455,15 @@ function myPosts(){
         `<form>
           <fieldset id='profileContainer'>
             <legend>Profile Builder</legend>
-            First Name: <input class='profiletext' type='text' placeholder='Required Input'>
+            First Name: <input id="profileFN" class='profiletext' type='text' placeholder='Required Input'>
             <br>
-            Last Name: <input class='profiletext' type='text' placeholder='Required Input'>
+            Last Name: <input id="profileLN" class='profiletext' type='text' placeholder='Required Input'>
             <br>
-            Zipcode: <input class='profiletext' type=''text' placeholder='Required Input'>
+            Zipcode: <input id="profileZip" class='profiletext' type=''text' placeholder='Required Input'>
             <br>
-            Username: <input class='profiletext' type='text' placeholder='Required Input'>
+            Username: <input id="profileUser" class='profiletext' type='text' placeholder='Required Input'>
             <br>
-            Password: <input class='profiletext' type='text' placeholder='Required Input'>
+            Password: <input id="profilePW" class='profiletext' type='text' placeholder='Required Input'>
             <br>
             <input id='createdProfile' type='button' value='Finalize the profile'>
           </fieldset>
@@ -510,8 +546,8 @@ function editPost(callId){
     editedData.id = callId;
     // data.parentName = document.getElementById('whoAndWhere'); //todo add parent name to form
     // data.zipcode = document.getElementById('zip'); //todo add zipcode to form
-    // editedData.parentName = 'Nobody';
-    // editedData.zipcode = 55555;
+    editedData.parentName = 'Nobody';
+    editedData.zipcode = 55555;
     editedData.content = document.getElementById('editInfoData').value;
     // const edContent = editedData.content;
     editedData.childAge = document.getElementById('editContentInfo').value;

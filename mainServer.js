@@ -44,9 +44,12 @@ app.get('/api/protected', jwtAuth, (req, res ) => {
   });
 });
 
-app.use('*', (req, res) => {
-  return res.status(404).json({message: 'NOT FOUND - Alert Check here!'});
-})
+
+//Need to take second look at this code and figure why it cause a block
+
+// app.use('*', (req, res) => {
+//   return res.status(404).json({message: 'NOT FOUND - Alert Check here #2!'});
+// })
 
 //----------------------------------------------
 
