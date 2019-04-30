@@ -59,6 +59,23 @@ router.get("/:id", (req, res) => {
       res.status(500).json({message: "Something happened from app.get:id area"});
     });
 });
+
+//set up router for finding parentName
+
+router.get("/:parentName", (req, res)=> {
+  QuestionBoard
+  .find(req.params.parentName)
+  .then(questionPost => res.json(questionPost.serialize()))
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({message: "Something wrong with parentName route"})
+  });
+});
+
+
+
+
+
 //Shannon - keep your eyes on this section for confusing ajax callback
 router.post("/", (req, res) => {
   const requiredInputs = ["parentName", "title"];

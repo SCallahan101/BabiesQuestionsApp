@@ -22,13 +22,15 @@ function fetchAllPosts() {
 
 //For my post - user's whole posts.
 // let name = "Nick" + " Reed"; //parentName
-function fetchUserPosts() {
+function fetchUserPosts(name) {
   const userPostsData = {
     url: posts_centerURL,
     // + '/' + name,
     // cache: false,
+    data: {'parentName': name},
     dataType: 'json',
     type: 'GET',
+    // parentName: parentName,
     success:
     // function(response){
       // console.log("Nick");
@@ -39,6 +41,18 @@ function fetchUserPosts() {
   console.log(userPostsData);
   $.ajax(userPostsData);
 }
+
+
+
+// function getMyPosts(){
+//   $('#myPosts').click(function(e){
+//     e.preventDefault();
+//     let name = 'Sarah Batahi';
+//   })
+//   // let name = 'Sarah Batahi';
+//   fetchUserPosts(name);
+// }
+// $(getMyPosts);
 //_____________________________________________________________
 
 //Call AJAX FRAMEWORK
@@ -68,6 +82,7 @@ function addPost(dataPost) {
           <br>
           <input type='textarea' id='comment_${dataPost.id}'>
           <input type='hidden' value='${dataPost.id}'>
+          <br>
           <button class='editPost'>Edit my post!</button>
           <div id='postEditBox'>
           <form id='postEdit'>
@@ -191,6 +206,7 @@ function renderPosts(data) {
       <br>
       <input type='textarea' id='comment_${obj.id}'>
       <input type='hidden' value='${obj.id}'>
+      <br>
       <button class='editPost' id='${editButtonId}'>Edit my post!</button>
       <div id='postEditBox'>
       <form id='postEdit'>
@@ -294,6 +310,7 @@ function renderMainPage(){
      Put your comment below here:
      <br>
      <input type='textarea'>
+     <br>
      <button id='editCreation'>Edit my post!</button>
      <button class='deleteButton'>Delete this Post</button>
    </li>
@@ -409,8 +426,9 @@ function myPosts(){
   $('#myPosts').click(function(e){
         console.log('*my Posts clicked*');
         e.preventDefault();
-        renderMainPage();
-        fetchUserPosts();
+        let name = 'Sarah' + ' ' + 'Batahi';
+        renderMainPage(name);
+        fetchUserPosts(name);
   });
 }
 
@@ -432,7 +450,7 @@ function myPosts(){
 //     $(addUsers);
 
  function receiveUserInfo(){
-   $('.container-main').submit('#createdProfile', function(e){
+   $('.container').submit('#createdProfile', function(e){
      e.preventDefault();
      let userInfoData = {};
      userInfoData.username = document.getElementById('profileUser').value;
@@ -441,7 +459,7 @@ function myPosts(){
      console.log(userInfoData.password);
      userInfoData.firstName = document.getElementById('profileFN').value;
      console.log(userInfoData.firstName);
-     userInfoData.lastName = document.getElementById('profileLN').values;
+     userInfoData.lastName = document.getElementById('profileLN').value;
      console.log(userInfoData.lastName);
    });
  }
@@ -465,7 +483,8 @@ function myPosts(){
             <br>
             Password: <input id="profilePW" class='profiletext' type='text' placeholder='Required Input'>
             <br>
-            <input id='createdProfile' type='button' value='Finalize the profile'>
+            <button id='createdProfile'>Finalize the profile</button>
+            <input type="reset" value="Clear Inputs">
           </fieldset>
         </form>`
       );
@@ -526,6 +545,15 @@ function generalQuestions(){
     fetchAllPosts();
   });
 }
+function generalIcon(){
+  $('#generalQuestions2').click(function(e){
+    console.log('Menu Icon clicked!');
+    e.preventDefault();
+    renderMainPage();
+    fetchAllPosts();
+  });
+}
+$(generalIcon);
 function createPost(){
   $('.container').on('click', '#postCreation', function(e){
     e.preventDefault();

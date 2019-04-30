@@ -1,13 +1,29 @@
 body * {
   margin: 0;
   padding: 0;
+
 }
 h1 {
   text-align: center;
+  font-size: 30px;
+  /* border: 1px solid gray; */
+  word-wrap: normal;
+  /* margin-right: -10px; */
 }
 
 .container{
-  border: solid black 1px;
+  /* border: solid black 1px; */
+  position: relative;
+}
+#signUp {
+  width: 50px;
+}
+#signUp:hover {
+  background: white;
+  border-radius: 5px;
+}
+#container-main {
+  height: 556px;
 }
 #entryLogin input {
   text-align: center;
@@ -22,6 +38,8 @@ h1 {
 }
 #entrySubmit:hover {
   transform: rotate(270deg);
+  background-color: white;
+  border-radius: 30px;
   /* 45deg or 270deg */
 }
 .box-login {
@@ -29,16 +47,26 @@ h1 {
   padding: 10px;
   text-align: center;
   display: block;
-  border: solid blue;
+  /* background-color: turquoise; */
+  background: -moz-linear-gradient(left, rgba(38,172,192,0) 0%, rgba(38,172,192,0.8) 15%, rgba(38,172,192,1) 19%, rgba(38,172,192,1) 20%, rgba(72,214,222,1) 50%, rgba(38,172,192,1) 80%, rgba(38,172,192,1) 81%, rgba(38,172,192,0.8) 85%, rgba(38,172,192,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, rgba(38,172,192,0) 0%,rgba(38,172,192,0.8) 15%,rgba(38,172,192,1) 19%,rgba(38,172,192,1) 20%,rgba(72,214,222,1) 50%,rgba(38,172,192,1) 80%,rgba(38,172,192,1) 81%,rgba(38,172,192,0.8) 85%,rgba(38,172,192,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, rgba(38,172,192,0) 0%,rgba(38,172,192,0.8) 15%,rgba(38,172,192,1) 19%,rgba(38,172,192,1) 20%,rgba(72,214,222,1) 50%,rgba(38,172,192,1) 80%,rgba(38,172,192,1) 81%,rgba(38,172,192,0.8) 85%,rgba(38,172,192,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0026acc0', endColorstr='#0026acc0',GradientType=1 ); /* IE6-9 */
+
+  border-radius: 10px;
+  /* background-image: linear-gradient(tomato, turquoise); */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* border: solid blue; */
 }
 #reportButton {
   width: 47px;
   position: absolute;
-  left: 7px;
-  bottom: 21px;
+  left: 32px;
+  bottom: 27px;
 }
 #reportButton:hover {
-  background-color: gold;
+  /* background-color: gold; */
+  border: 2px solid skyblue;
   border-radius: 10px;
 }
 footer {
@@ -47,13 +75,13 @@ footer {
 }
 #nav {
   margin: 0 100px;
-  border: solid red;
-  height: 68px;
+  /* border: solid red; */
+  height: 34px;
   text-align: center;
 }
 .navBox {
   display: inline-block;
-  border: solid purple;
+  /* border: solid purple; */
   margin-right: -4px;
   padding: 5px 6px;
   /* background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS09BvaCJg-v4kNXoiDUU39He-7v3gZh3XxaceU1mo1VazG7PDR');
@@ -62,6 +90,9 @@ footer {
 }
 .navBox:hover {
   text-decoration: underline;
+}
+h3{
+  text-align: center;
 }
 #postCreation{
   /* background-color: gold; */
@@ -78,7 +109,8 @@ footer {
   border-radius: 5px;
 }
 #postCreation:hover{
-  background-color: gold;
+  /* background-color: gold; */
+  border: 2px solid skyblue;
   border-radius: 10px;
 }
 #editCreation{
@@ -97,15 +129,19 @@ footer {
   background:  white;
   border: solid lightblue;
   position: absolute;
-  left: 450px;
+  left: 50%;
+  margin-left: -206px;
+  top: 50%;
+  margin-top: -133px;
   z-index: 2;
   padding: 10px;
   display: none;
+  border-radius: 10px;
 }
 #buttonSign {
   position: absolute;
-  left: 15px;
-  top: 178px;
+  left: 10px;
+  top: 100px;
 }
 #postEditBox{
   width: 380px;
@@ -164,15 +200,35 @@ footer {
   /* display: grid;
   grid-template-columns: auto auto auto auto; */
 
-  border: solid green 1px;
+  border: solid white 1px;
   margin-top: 5px;
   padding: 10px;
   margin: -15px 100px;
-  height: 450px;
-  overflow: scroll;
+  height: 535px;
+  overflow-y: scroll;
+  overflow-x:hidden
   /* text-align: center; */
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: lightgrey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: skyblue;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 #usersPosts {
   display: grid;
   grid-template-columns: auto auto;
@@ -180,10 +236,11 @@ footer {
 }
 .eachPost {
   list-style-type: none;
-  border: solid brown 2px;
+  border: solid skyblue 2px;
   margin: 5px 0;
   padding: 8px;
-
+  background-color: white;
+  border-radius: 10px;
 }
 
 ul.f {
@@ -193,4 +250,134 @@ ul.f {
 }
 ul li.s {
   padding-left: 25px;
+}
+#dropMenu {
+  width: 60px;
+  position: absolute;
+  top: 172px;
+  left: 13px;
+  visibility: hidden;
+}
+@media only screen and (max-width:1326px ){
+#container-main {
+  height: 476px;
+}
+#secondaryContainer {
+  height: 450px;
+}
+}
+@media only screen and (max-width:960px ){
+#container-main {
+  height: 475px;
+}
+#secondaryContainer {
+  height: 450px;
+}
+}
+@media only screen and (max-width:792px ){
+  #container-main {
+    height: 486px;
+  }
+  #usersPosts {
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 10px;
+  }
+  #title {
+    font-size: 25px;
+  }
+  #buttonSign{
+    top: 108px;
+  }
+}
+@media only screen and (max-width:600px ){
+#title {
+  font-size: 20px;
+}
+#container-main{
+  margin: auto 5px;
+  position: absolute;
+  top: 5px;
+  height: 523px;
+  /* border: 1px solid black; */
+}
+#secondaryContainer{
+  height: 474px;
+}
+#nav {
+  visibility: hidden;
+  /* border-color: transparent; */
+  /* display: initial; */
+}
+#dropMenu {
+  visibility: visible;
+  display: inline-block;
+  top: 55px;
+  left: 22px;
+  z-index: 1;
+}
+#dropMenu:hover {
+  /* background: gold; */
+border: 2px solid skyblue;
+}
+#menuDesignation {
+  position: relative;
+  display: inline-block;
+}
+
+#navRes {
+  display: none;
+  position: absolute;
+  top: 115px;
+  left: 30px;
+  background-color: #f9f9f9;
+  min-width: 45px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+/* #dropMenu{
+  background-color: gold;
+} */
+/* #dropMenu:hover {
+border: 2px solid gray;
+} */
+
+#menuDesignation:hover #navRes {
+  display: block;
+  border: 1px solid black;
+}
+.navBoxRes {
+  list-style: none;
+  border-bottom: 1px solid black;
+  margin: 5px;
+}
+.navBoxRes:hover{
+  background-color: turquoise;
+  border-radius: 5px;
+
+}
+/* .navBox{
+  position: absolute;
+  left: 0px;
+} */
+}
+/* #buttonSign {
+  top: 68px;
+} */
+/*it makes no sense here how media queries works
+
+/* #postbox {
+  width: 50%;
+  height: 60%;
+  margin-left: -136px
+} */
+@media only screen and (max-width:320px ){
+h1 {
+  margin-right: -58px;
+}
+}
+@media only screen and (max-width: ){
+
 }

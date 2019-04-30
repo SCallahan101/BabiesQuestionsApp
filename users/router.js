@@ -9,6 +9,7 @@ const router =  express.Router();
 const jsonParser = bodyParser.json();
 
 router.post('/', jsonParser, (req, res) => {
+  //link this with the enter page
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -20,6 +21,8 @@ router.post('/', jsonParser, (req, res) => {
       location: missingField
     });
   }
+
+  //link this with profile creation 
   const stringFields = [ 'username', 'password', 'firstName', 'lastName'];
   const nonStringField = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string');
 
