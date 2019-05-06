@@ -1,0 +1,92 @@
+body * {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  text-align: center;
+}
+#entryLogin input {
+  text-align: center;
+  margin: 5px 0;
+}
+#entrySubmit {
+  transform: rotate(180deg);
+  margin: 6px 0;
+}
+#entrySubmit:hover {
+  transform: rotate(270deg);
+  /* 45deg or 270deg */
+}
+.box-login {
+  margin: 60px;
+  padding: 10px;
+  text-align: center;
+  display: block;
+  border: solid blue;
+}
+#reportButton {
+  width: 47px;
+  position: absolute;
+  left: 7px;
+  bottom: 21px;
+}
+#reportButton:hover {
+  background-color: gold;
+  border-radius: 10px;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+}
+#nav {
+  margin: 0 50px;
+  border: solid red;
+  height: 68px;
+  text-align: center;
+}
+.navBox {
+  display: inline-block;
+  border: solid purple;
+  margin-right: -4px;
+  padding: 5px 6px;
+}
+.navBox:hover {
+  text-decoration: underline;
+}
+.reportbox {
+  width: 300px;
+  height: 20px;
+  margin: 5px 0;
+}
+.reporttext {
+  width: 600px;
+  height: 300px;
+  /* text-align: center; */
+  resize: none;
+  margin: 5px 0;
+}
+#profileContainer {
+  padding: 10px;
+  display: inline-block;
+}
+.profiletext {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 3px;
+}
+#secondaryContainer {
+  border: solid green 1px;
+  margin-top: 5px;
+  padding: 10px;
+  margin: 15px 50px;
+  height: 450px;
+  overflow: scroll;
+  /* text-align: center; */
+}
+.eachPost {
+  list-style-type: none;
+  border: solid brown 2px;
+  margin: 5px 0;
+  padding: 8px;
+
+}
