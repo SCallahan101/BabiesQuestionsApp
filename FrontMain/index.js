@@ -4,6 +4,7 @@
 // Another test -
 
 const posts_centerURL = 'http://localhost:4747/questionPost'
+// const userPosts_URL = 'http://localhost:4747/questionPost/User'
 
 const usersDataBankURL = 'http://localhost:4747/questionPost/api/users'
 
@@ -24,22 +25,99 @@ function fetchAllPosts() {
 // let name = "Nick" + " Reed"; //parentName
 function fetchUserPosts(name) {
   const userPostsData = {
-    url: posts_centerURL,
+    url: posts_centerURL + "/parent/" + name ,
     // + '/' + name,
     // cache: false,
-    data: {'parentName': name},
+    // data: {'parentName': name},
     dataType: 'json',
-    type: 'GET',
+    method: 'GET'
+    // ,
     // parentName: parentName,
-    success:
+    // success:
+    // console.log('GET:parentName is successful');
     // function(response){
       // console.log("Nick");
       // let result = "Nick";
-      renderPosts
+      // renderPosts
     // }
   };
   console.log(userPostsData);
-  $.ajax(userPostsData);
+  console.log('parentName:' + name);
+  $.ajax(userPostsData)
+  .done(function(data){
+    console.log("*****DONE*****");
+    renderUserPosts(data);
+  });
+}
+
+function renderUserPosts(data) {
+  console.log("Client received data");
+  console.log(data);
+  $.each(data, function(i, obj){
+    let id = 'questionData_' + i;
+    let deleteButtonId = `deleteButton_${i}`;
+    let editButtonId = `editCreation_${i}`;
+
+    console.log(deleteButtonId);
+    console.log(editButtonId);
+    $('#usersPosts').append(`
+      <li class='eachPost'>
+      <ul id="questionData">Post Title: ${obj.title}</ul>
+      <p>By: ${obj.parentName} <span>from: ${obj.zipcode}</span></p>
+      <p>Content: ${obj.question.content} <span> For my ${obj.question.childAge} yrs child</span></p>
+      <p>Found answer? - ${obj.question.foundAnswer} </p>
+      <p>Posted by: ${obj.question.date}</p>
+      <div class='post-user'>
+      </div>
+      Put your comment below here:
+      <br>
+      <input type='textarea' id='comment_${obj.id}'>
+      <input type='hidden' value='${obj.id}'>
+      <br>
+      <button class='editPost' id='${editButtonId}'>Edit my post!</button>
+      <div id='postEditBox'>
+      <form id='postEdit'>
+      <fieldset id='postDesign'>
+        <legend>Edit your post</legend>
+          Title: <input id="editQuestionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
+          <br>
+          Content: <input id='editInfoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
+          <br>
+          Your child: <input id='editContentInfo' type='text' placeholder='Child age?'>
+          <br>
+          <p>Found your answer?</p>
+            <select id='editAnswer' name='gotAnswer'>
+              <option value=''>Pick one</option>
+              <option value='No'>No</option>
+              <option value='Yes'>Yes</option>
+            </select>
+          <br>
+          <p id='editKnowWhen'>date: ${newCurrentDate} </p>
+          <br>
+          <input type="reset" value="Clear Out">
+          <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
+        </fieldset>
+      </form>
+      </div>
+      <button id='${deleteButtonId}'>Delete this Post</button>
+    </li>`);
+    console.log('Object id:' + obj.id);
+
+    $('#' + editButtonId).click(function(e){
+      e.preventDefault();
+      $('#postEditBox').toggle(``);
+      console.log(`Edit called on ${id}`);
+      // updatePost(obj.id);
+      // let callId = obj.id;
+      // updatePost(obj.id);
+      editPost(obj.id);
+    });
+    $('#' + deleteButtonId).click(function(e){
+      e.preventDefault();
+      deletePost(obj.id);
+      console.log(`Delete called on ${id}`);
+    });
+});
 }
 
 
@@ -186,6 +264,8 @@ const year = currentDate.getFullYear();
 const newCurrentDate = month + "/" + day + "/" + year;
 
 function renderPosts(data) {
+  console.log("Client received data");
+  console.log(data);
   $.each(data.questionPosts, function(i, obj){
     let id = 'questionData_' + i;
     let deleteButtonId = `deleteButton_${i}`;
@@ -426,8 +506,10 @@ function myPosts(){
   $('#myPosts').click(function(e){
         console.log('*my Posts clicked*');
         e.preventDefault();
-        let name = 'Sarah' + ' ' + 'Batahi';
-        renderMainPage(name);
+        //testing
+        // let name = 'Sarah' + ' ' + 'Batahi';
+        let name = 'Tom Smith';
+        renderMainPage();
         fetchUserPosts(name);
   });
 }

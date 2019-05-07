@@ -34,6 +34,68 @@ router.get("/", (req, res) => {
   });
 });
 
+// router.get('/:parentName', (req, res)=> {
+//   QuestionBoard
+//   .find(req.params.parentName)
+//   .then(questionPost => res.json(questionPost.serialize()))
+//   .catch(err => {
+//     console.error(err);
+//     res.status(500).json({error: '500 Server Error on parentName section'});
+//   });
+// });
+
+
+
+// router.get("/:parentName", (req, res) => {
+//   const name = parseInt(req.params.parentName);
+//   if(req.params.parentName === req.body.parentName) {
+//     return res.status(200).send({
+//       success: renderPosts,
+//       message: 'parentName retireved successfully'
+//     });
+//   }
+//     QuestionBoard
+//     .find({"parentName": req.params.parentName})
+//     .then(questionPosts.parentName => {
+//       res.json(
+//         {
+//           questionPosts: questionPosts.parentName.map(
+//             (questionPost) => questionPost.parentName.serialize())
+//         }
+//       );
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       res.status(500).json({message: "Something wrong with your parentName app.get pathway"});
+//     });
+//   return res.status(404).send({
+//     success: 'false',
+//     message: 'Fail to retrieve parentName'
+//   });
+// });
+
+
+
+
+
+// router.get("/User", (req, res)=> {
+//   console.log(req.params.parentName);
+//   QuestionBoard
+//   .find({"parentName": req.params.parentName})
+//   .then(questionPosts.parentName => {
+//     res.json(
+//       {
+//         questionPosts: questionPosts.parentName.map(
+//           (questionPost) => questionPost.parentName.serialize())
+//       }
+//     );
+//   })
+//   .catch(err => {
+//     console.error(err);
+//     res.status(500).json({message: "Something wrong with your parentName app.get pathway"});
+//   });
+// });
+
 // app.get("/questionPost", (req, res) => {
 //   QuestionBoard
 //   .find()
@@ -60,17 +122,33 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.get("/parent/:parentName", (req, res) => {
+  console.log('parentName entered...')
+  QuestionBoard
+    .find({parentName: {$eq: req.params.parentName}})
+    .then(questionPost => {
+      if(questionPost){
+        console.log(questionPost);
+        res.json(questionPost)
+    }
+  }).catch(err => {
+      console.error(err);
+      res.status(500).json({message: "Something happened from app.get:parentName area"});
+    });
+});
+
 //set up router for finding parentName
 
-router.get("/:parentName", (req, res)=> {
-  QuestionBoard
-  .find(req.params.parentName)
-  .then(questionPost => res.json(questionPost.serialize()))
-  .catch(err => {
-    console.error(err);
-    res.status(500).json({message: "Something wrong with parentName route"})
-  });
-});
+// router.get("/:parentName", (req, res)=> {
+//   console.log(req.data.parentName);
+//   QuestionBoard
+//   .find(req.params.parentName)
+//   .then(questionPost => res.json(questionPost.serialize()))
+//   .catch(err => {
+//     console.error(err);
+//     res.status(500).json({message: "Something wrong with parentName route"})
+//   });
+// });
 
 
 
