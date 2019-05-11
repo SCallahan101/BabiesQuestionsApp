@@ -208,8 +208,8 @@ router.delete("/:id", (req, res) => {
   .catch(err => res.status(500).json({message: "Something happened in app.delete area"}));
 });
 
-router.use("*", function(req, res) {
-  res.status(404).json({message: "Not Found"});
-});
+// router.use("*", function(req, res) {
+//   res.status(404).json({message: "Not Found"});
+// });
 
 module.exports = router;

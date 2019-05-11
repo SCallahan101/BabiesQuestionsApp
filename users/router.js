@@ -22,7 +22,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  //link this with profile creation 
+  //link this with profile creation
   const stringFields = [ 'username', 'password', 'firstName', 'lastName'];
   const nonStringField = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string');
 

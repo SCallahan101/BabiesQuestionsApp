@@ -1,18 +1,107 @@
 'use strict'
 
 
-// Another test -
+// JWT works
+// function getToken(){
+// const loginURL = 'http://localhost:4747/api/auth/login'
+// const xhr = new XMLHttpRequest();
+// let userElement = document.getElementById('loginUsername');
+// let passwordElement = document.getElementById('loginPassword');
+// const tokenElement = document.getElementById('token');
+// let user = userElement.value;
+// let password = passwordElement.value;
+//
+// xhr.open('POST', loginURL, true);
+// xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+// xhr.addEventListener('load', function(){
+//   let responseObject = JSON.parse(this.response);
+//   console.log(responseObject);
+//   if(responseObject.token){
+//     tokenElement.innerHTML = responseObject.token;
+//   }else {
+//     tokenElement.innerHTML = "No Token received";
+//   }
+// });
+// let sendObject = JSON.stringify({name: user, password: password});
+// console.log('going to send', sendObject);
+// xhr.send(sendObject);
+// }
+//
+// function collectLoginData(){
+//   $('#entryLogin').on('click', '#entrySubmit', function(e){
+//     e.preventDefault();
+//     $(getToken);
+//   })
+// }
+// $(collectLoginData);
+function collectLoginData(){
+  $('#entryLogin').on('click','#entrySubmit', function(e){
+    e.preventDefault();
+    // const entryInfo = {};
+    let username = document.getElementById('loginUsername').value;
+    console.log('username: ' +  username);
+    let password = document.getElementById('loginPassword').value;
+    console.log("password: " + password);
+    // console.log(username "|" password);
+    loginEntry(username, password)
+    })
+}
+$(collectLoginData);
+
+function loginEntry(user, pw){
+  console.log(user + " | " + pw);
+  const loginData = {
+    url: usersLoginURL,
+    data: {
+      'username': user,
+      'password': pw
+    },
+    dataType: 'json',
+    method: 'POST',
+    success: function passIt(callback){
+      console.log(callback);
+      // const jwtAuth = new jwtAuth(callback);
+      transferJWT(callback);
+
+      // const confirmedJWT = new localStrategy(data.user, data.password, callback);
+    }
+  };
+  console.log(loginData);
+  $.ajax(loginData);
+}
+function transferJWT(jwt){
+  console.log(jwt);
+  const loginJWT = {
+    url: usersDataBankURL,
+    headers:{'Authorization': "Bearer " +  jwt},
+    //Still cant get it pass the verfied jwt
+    // data: jwt,
+    datatype: 'json',
+    method: 'GET',
+    success: loginToMainPage
+  }
+
+  console.log(loginJWT);
+  $.ajax(loginJWT);
+}
+
+function userCreation(){
+
+}
+
+
 
 const posts_centerURL = 'http://localhost:4747/questionPost'
 // const userPosts_URL = 'http://localhost:4747/questionPost/User'
 
-const usersDataBankURL = 'http://localhost:4747/questionPost/api/users'
+const usersLoginURL = 'http://localhost:4747/api/auth/login'
+const usersDataBankURL = 'http://localhost:4747/api/protected'
 
 function fetchAllPosts() {
   const postsData = {
     url: posts_centerURL,
     dataType: 'json',
-    type: 'GET',
+    method: 'GET',
     success: renderPosts
   };
   console.log(postsData);
@@ -552,7 +641,7 @@ function myPosts(){
     $('#signUp').click(function(e) {
       e.preventDefault();
       $('.container').html(
-        `<form>
+        `<form>entrySubmit
           <fieldset id='profileContainer'>
             <legend>Profile Builder</legend>
             First Name: <input id="profileFN" class='profiletext' type='text' placeholder='Required Input'>
@@ -611,6 +700,7 @@ function showNav(){
 $(profileCreation);
 $(reportIssue);
 
+function loginToMainPage(){
 $('#entrySubmit').click(function(e){
   console.log("***Entry submit  clicked");
   e.preventDefault();
@@ -618,6 +708,7 @@ $('#entrySubmit').click(function(e){
   showNav();
   fetchAllPosts();
 });
+}
 
 function generalQuestions(){
   $('#generalQuestions').click(function(e){
