@@ -43,10 +43,47 @@ function collectLoginData(){
     let password = document.getElementById('loginPassword').value;
     console.log("password: " + password);
     // console.log(username "|" password);
+    getInfoFromUsername(username)
     loginEntry(username, password)
     })
 }
 $(collectLoginData);
+
+const usernamesDb = 'http://localhost:4747/api/users'
+
+function getInfoFromUsername(dataName){
+  console.log("retrieved the username: " + dataName);
+  const usernamePath = {
+    url: usernamesDb + "/singleUsername/" + dataName,
+    // data: {
+    //   'username': dataName
+    // },
+    dataType: 'json',
+    method: 'GET'
+    // success:
+  };
+  $.ajax(usernamePath)
+  .done(function(name){
+    console.log('Confirmed transfer ' + name.firstName + ' to My Post tab');
+    fetchUserPosts(name);
+  });
+}
+
+// $(getInfoFromUsername);
+
+function myPosts(){
+  $('#myPosts').click(function(e){
+        console.log('*my Posts clicked*');
+        e.preventDefault();
+        //testing
+        // let name = 'Sarah' + ' ' + 'Batahi';
+        let name = 'Tom Smith';
+        renderMainPage();
+        fetchUserPosts(name);
+  });
+}
+
+
 
 function loginEntry(user, pw){
   console.log(user + " | " + pw);
@@ -59,7 +96,7 @@ function loginEntry(user, pw){
     dataType: 'json',
     method: 'POST',
     success: function passIt(callback){
-      console.log(callback);
+      console.log("First Step - received and sending: " + callback.authToken);
       // const jwtAuth = new jwtAuth(callback);
       transferJWT(callback);
 
@@ -70,15 +107,25 @@ function loginEntry(user, pw){
   $.ajax(loginData);
 }
 function transferJWT(jwt){
-  console.log(jwt);
+  console.log("Second Step received: " + jwt.authToken);
   const loginJWT = {
     url: usersDataBankURL,
-    headers:{'Authorization': "Bearer " +  jwt},
+    // jwtAuth: jwt,
+    headers:{'Authorization': "Bearer " +  jwt.authToken},
     //Still cant get it pass the verfied jwt
     // data: jwt,
     datatype: 'json',
     method: 'GET',
-    success: loginToMainPage
+    success: function loginToMainPage(){
+    $('#entrySubmit').click(function(e){
+      console.log("***Entry submit  clicked");
+      e.preventDefault();
+      renderMainPage();
+      showNav();
+      fetchAllPosts();
+    });
+    }
+    // $(loginToMainPage)
   }
 
   console.log(loginJWT);
@@ -131,7 +178,7 @@ function fetchUserPosts(name) {
     // }
   };
   console.log(userPostsData);
-  console.log('parentName:' + name);
+  console.log('parentName:' + name.firstname + ' ' + name.lastName);
   $.ajax(userPostsData)
   .done(function(data){
     console.log("*****DONE*****");
@@ -591,17 +638,17 @@ function getSuggestion(){
 }
 $(getSuggestion);
 
-function myPosts(){
-  $('#myPosts').click(function(e){
-        console.log('*my Posts clicked*');
-        e.preventDefault();
-        //testing
-        // let name = 'Sarah' + ' ' + 'Batahi';
-        let name = 'Tom Smith';
-        renderMainPage();
-        fetchUserPosts(name);
-  });
-}
+// function myPosts(){
+//   $('#myPosts').click(function(e){
+//         console.log('*my Posts clicked*');
+//         e.preventDefault();
+//         //testing
+//         // let name = 'Sarah' + ' ' + 'Batahi';
+//         let name = 'Tom Smith';
+//         renderMainPage();
+//         fetchUserPosts(name);
+//   });
+// }
 
 //_____________________________________________________________
 //users database
@@ -700,15 +747,16 @@ function showNav(){
 $(profileCreation);
 $(reportIssue);
 
-function loginToMainPage(){
-$('#entrySubmit').click(function(e){
-  console.log("***Entry submit  clicked");
-  e.preventDefault();
-  renderMainPage();
-  showNav();
-  fetchAllPosts();
-});
-}
+// function loginToMainPage(){
+// $('#entrySubmit').click(function(e){
+//   console.log("***Entry submit  clicked");
+//   e.preventDefault();
+//   renderMainPage();
+//   showNav();
+//   fetchAllPosts();
+// });
+// }
+// $(loginToMainPage);
 
 function generalQuestions(){
   $('#generalQuestions').click(function(e){

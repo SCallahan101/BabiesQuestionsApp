@@ -220,4 +220,6 @@ function closeServer() {
 if(require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
-module.exports = { app, runServer, closeServer};
+module.exports = { app,
+  // jwtAuth, 
+  runServer, closeServer};

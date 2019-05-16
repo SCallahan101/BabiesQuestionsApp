@@ -112,4 +112,21 @@ router.get('/', (req, res) => {
   .then(users => res.json(users.map(user => user.serialize())))
   .catch(err => res.status(500).json({message: 'Internal Server Error2'}));
 });
+
+//need to get it match to username to get user full name.
+
+router.get("/singleUsername/:username", (req, res) => {
+  console.log('username entered...')
+     User
+    .find({username: {$eq: req.params.username}})
+    .then(dataUsername => {
+      if(dataUsername){
+        console.log(dataUsername);
+        res.json(dataUsername)
+    }
+  }).catch(err => {
+      console.error(err);
+      res.status(500).json({message: "Something happened from app.get:username area"});
+    });
+});
 module.exports = {router};
