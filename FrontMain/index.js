@@ -64,20 +64,31 @@ function getInfoFromUsername(dataName){
   };
   $.ajax(usernamePath)
   .done(function(name){
-    console.log('Confirmed transfer ' + name.firstName + ' to My Post tab');
-    fetchUserPosts(name);
+    console.log(
+      // 'Confirmed transfer ' + name + ' to My Post tab'
+      JSON.stringify(name),
+      JSON.stringify(name, ['firstName', 'lastName'])
+    );
+    let result = name.find(obj => {
+      return obj
+    });
+    console.log(result.firstName + ' ' + result.lastName);
+    let passTheName = result.firstName + ' ' + result.lastName;
+    //Now Get this information to MyPost
+    myPosts(passTheName)
+    // fetchUserPosts(passTheName);
   });
 }
 
 // $(getInfoFromUsername);
 
-function myPosts(){
+function myPosts(data){
   $('#myPosts').click(function(e){
         console.log('*my Posts clicked*');
         e.preventDefault();
         //testing
         // let name = 'Sarah' + ' ' + 'Batahi';
-        let name = 'Tom Smith';
+        let name = data;
         renderMainPage();
         fetchUserPosts(name);
   });
@@ -178,9 +189,10 @@ function fetchUserPosts(name) {
     // }
   };
   console.log(userPostsData);
-  console.log('parentName:' + name.firstname + ' ' + name.lastName);
+  // console.log('parentName:' + name.firstname + ' ' + name.lastName);
   $.ajax(userPostsData)
   .done(function(data){
+    // console.log(data.firstName + ' ' + data.lastName);
     console.log("*****DONE*****");
     renderUserPosts(data);
   });
@@ -679,16 +691,34 @@ $(getSuggestion);
      console.log(userInfoData.firstName);
      userInfoData.lastName = document.getElementById('profileLN').value;
      console.log(userInfoData.lastName);
+      console.log(userInfoData);
+      registerUserURL(userInfoData)
    });
+
+   // registerUserURL(userInfoData)
  }
  $(receiveUserInfo);
+
+ function registerUserURL(data){
+
+   $.ajax({
+     method: 'POST',
+     url: usernamesDb,
+     data: JSON.stringify(data),
+     success: function(data){
+       alert('Your registration got through');
+     },
+     dataType: 'json',
+     contentType:'application/json'
+   });
+ }
 
 
   function profileCreation() {
     $('#signUp').click(function(e) {
       e.preventDefault();
       $('.container').html(
-        `<form>entrySubmit
+        `<form>
           <fieldset id='profileContainer'>
             <legend>Profile Builder</legend>
             First Name: <input id="profileFN" class='profiletext' type='text' placeholder='Required Input'>
@@ -700,6 +730,8 @@ $(getSuggestion);
             Username: <input id="profileUser" class='profiletext' type='text' placeholder='Required Input'>
             <br>
             Password: <input id="profilePW" class='profiletext' type='text' placeholder='Required Input'>
+            <br>
+            <p>(Must be total of 8 or more characters long!)</p>
             <br>
             <button id='createdProfile'>Finalize the profile</button>
             <input type="reset" value="Clear Inputs">
