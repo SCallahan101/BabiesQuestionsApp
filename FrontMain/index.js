@@ -74,8 +74,10 @@ function getInfoFromUsername(dataName){
     });
     console.log(result.firstName + ' ' + result.lastName);
     let passTheName = result.firstName + ' ' + result.lastName;
+    console.log('double check to see if passing worked' + passTheName);
     //Now Get this information to MyPost
-    myPosts(passTheName)
+    myPosts(passTheName);
+
     // fetchUserPosts(passTheName);
   });
 }
@@ -85,14 +87,17 @@ function getInfoFromUsername(dataName){
 function myPosts(data){
   $('#myPosts').click(function(e){
         console.log('*my Posts clicked*');
+        console.log("passing " + data + ' through myPost function');
         e.preventDefault();
         //testing
         // let name = 'Sarah' + ' ' + 'Batahi';
         let name = data;
-        renderMainPage();
+        //Not working.
+        renderMainPage(name);
         fetchUserPosts(name);
   });
 }
+
 
 
 
@@ -485,8 +490,9 @@ function renderPosts(data) {
 // <ul id="${id}">Post Title: ${obj.title}</ul>
 // <p>The Question: ${obj.question.content}</p>
 // <p>Content: </p>
+// const nameOfUser =
 
-function renderMainPage(){
+function renderMainPage(passName){
   console.log("Render page called!");
   // const currentDate = new Date();
   // const month = currentDate.getMonth() + 1;
@@ -557,16 +563,37 @@ function renderMainPage(){
   $('#postSubmit').click(function(e){
     e.preventDefault();
     let data = {};
-    data.parentName = document.getElementById('whoAndWhere'); //todo add parent name to form
-    data.zipcode = document.getElementById('zip'); //todo add zipcode to form
+    data.parentName = passName;
+    // document.getElementById('whoAndWhere'); //todo add parent name to form
+    data.zipcode = 80246;
+    // document.getElementById('zip'); //todo add zipcode to form
     data.title =  document.getElementById('questionTitle').value;
     data.content = document.getElementById('infoData').value;
     data.childAge = document.getElementById('contentInfo').value;
     data.foundAnswer = document.getElementById('answer').value;
     data.date = document.getElementById('knowWhen').value;
+    console.log("post result" + JSON.stringify(data));
     addPost(data);
+
   });
 }
+
+// function makeAPost(info){
+//   $('#postSubmit').click(function(e){
+//     e.preventDefault();
+//     console.log('parentName: ' + info + ' confirm received');
+//     let data = {};
+//     data.parentName = document.getElementById('whoAndWhere'); //todo add parent name to form
+//     data.zipcode = document.getElementById('zip'); //todo add zipcode to form
+//     data.title =  document.getElementById('questionTitle').value;
+//     data.content = document.getElementById('infoData').value;
+//     data.childAge = document.getElementById('contentInfo').value;
+//     data.foundAnswer = document.getElementById('answer').value;
+//     data.date = document.getElementById('knowWhen').value;
+//     addPost(data);
+//   });
+// }
+// $(makeAPost);
 
 // function postUp(){
 // $('.container').on('click', '#postSubmit', function(e){
@@ -707,6 +734,7 @@ $(getSuggestion);
      data: JSON.stringify(data),
      success: function(data){
        alert('Your registration got through');
+       // renderMainPage
      },
      dataType: 'json',
      contentType:'application/json'
@@ -735,10 +763,12 @@ $(getSuggestion);
             <br>
             <button id='createdProfile'>Finalize the profile</button>
             <input type="reset" value="Clear Inputs">
+            <input class='goBack' value='Back' type='button'>
           </fieldset>
         </form>`
       );
     });
+
   }
 
   function reportIssue() {
@@ -757,16 +787,23 @@ $(getSuggestion);
           </form>
         </section>
         <button>Submit your concern(s)</button>
+        <input class='goBack' value='Back' type='button'>
         `);
     });
   }
+  function previousPage(){
+    $('.container').on('click','.goBack', function(){
+      history.back();
+    });
+  }
+  $(previousPage);
 
-function backToMainPage() {
-  $('#createdProfile').click(function(e){
-    e.preventDefault();
-    $(renderMainPage());
-  });
-}
+// function backToMainPage() {
+//   $('#createdProfile').click(function(e){
+//     e.preventDefault();
+//     $(renderMainPage());
+//   });
+// }
 function showNav(){
   $('#nav').show();
   $(suggestionTab);

@@ -28,6 +28,7 @@ h1 {
 #entryLogin input {
   text-align: center;
   margin: 5px 0;
+  padding: 4px;
 }
 #nav .hide{
   visibility: hidden;
@@ -190,6 +191,7 @@ h3{
   margin-left: 40%;
   padding: 10px;
   display: inline-block;
+  border-radius: 10px;
 }
 .profiletext {
   margin: 5px;
