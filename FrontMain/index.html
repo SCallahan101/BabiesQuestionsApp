@@ -18,6 +18,36 @@
           <!-- <li class='navBox' id='refresh'><input type='button' value='Refresh the data>'</li> -->
         </ul>
        </nav>
+       <div id='creationBtn' hidden>
+       <img id='postCreation' src='http://cdn.onlinewebfonts.com/svg/img_504212.png'>
+       <p id='buttonSign'>Open/Close</p>
+     </div>
+       <br>
+       <div id='postbox'>
+         <h2>Post Question</h2>
+         <form id="singlePost">
+           <fieldset id='postDesign'>
+           <legend>Fill those boxes out</legend>
+           Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
+           <br>
+           Content: <input id='infoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
+           <br>
+           Your child: <input id='contentInfo' type='text' placeholder='Child age?'>
+           <br>
+           <p>Found your answer?</p>
+             <select id='answer' name='gotAnswer'>
+               <option value=''>Pick one</option>
+               <option value='No'>No</option>
+               <option value='Yes'>Yes</option>
+             </select>
+           <br>
+           <p id='knowWhen'>date: ${newCurrentDate}</p>
+           <br>
+           <input type="reset" value="Clear Out">
+           <input id="postSubmit" type='submit' value='Submit the post'></input>
+           </fieldset>
+         </form>
+       </div>
        <div id='menuDesignation'>
          <img id='dropMenu' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtm504QPXDPkYyZ8MaqN_mu1EqCSZf8KGTA8KKlJGqkKDZ0TBk'>
            <ul id='navRes' hidden>

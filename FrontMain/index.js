@@ -74,9 +74,11 @@ function getInfoFromUsername(dataName){
     });
     console.log(result.firstName + ' ' + result.lastName);
     let passTheName = result.firstName + ' ' + result.lastName;
-    console.log('double check to see if passing worked' + passTheName);
+    console.log('double check to see if passing worked ' + passTheName);
     //Now Get this information to MyPost
     myPosts(passTheName);
+    // addPost()
+    passingName(passTheName);
 
     // fetchUserPosts(passTheName);
   });
@@ -92,8 +94,8 @@ function myPosts(data){
         //testing
         // let name = 'Sarah' + ' ' + 'Batahi';
         let name = data;
-        //Not working.
-        renderMainPage(name);
+
+        renderMainPage();
         fetchUserPosts(name);
   });
 }
@@ -219,7 +221,7 @@ function renderUserPosts(data) {
       <p>By: ${obj.parentName} <span>from: ${obj.zipcode}</span></p>
       <p>Content: ${obj.question.content} <span> For my ${obj.question.childAge} yrs child</span></p>
       <p>Found answer? - ${obj.question.foundAnswer} </p>
-      <p>Posted by: ${obj.question.date}</p>
+      <p>Date posted: ${obj.question.date}</p>
       <div class='post-user'>
       </div>
       Put your comment below here:
@@ -308,7 +310,7 @@ function addPost(dataPost) {
           <p>By: ${dataPost.parentName} <span id='zipcode'>from: ${dataPost.zipcode}</span></p>
           <p>Content: ${dataPost.content} <span id='contentInfo'> For my ${dataPost.childAge} yrs child</span></p>
           <p>Found answer? - ${dataPost.foundAnswer} </p>
-          <p>Posted by: ${dataPost.date}</p>
+          <p>Date posted: ${dataPost.date}</p>
           Put your comment below here:
           <br>
           <input type='textarea' id='comment_${dataPost.id}'>
@@ -432,7 +434,7 @@ function renderPosts(data) {
       <p>By: ${obj.parentName} <span>from: ${obj.zipcode}</span></p>
       <p>Content: ${obj.question.content} <span> For my ${obj.question.childAge} yrs child</span></p>
       <p>Found answer? - ${obj.question.foundAnswer} </p>
-      <p>Posted by: ${obj.question.date}</p>
+      <p>Date posted: ${obj.question.date}</p>
       <div class='post-user'>
       </div>
       Put your comment below here:
@@ -492,8 +494,34 @@ function renderPosts(data) {
 // <p>Content: </p>
 // const nameOfUser =
 
-function renderMainPage(passName){
-  console.log("Render page called!");
+//something to receive the username and passing it to createPost
+function passingName(name){
+  $('.container').submit('#postSubmit', function(e){
+    e.preventDefault();
+    console.log('The transcation executed ' + name);
+    // const theName = name;
+    e.preventDefault();
+    let data = {};
+    data.parentName = name;
+    // document.getElementById('whoAndWhere'); //todo add parent name to form
+    data.zipcode = 80246;
+    // document.getElementById('zip'); //todo add zipcode to form
+    data.title =  document.getElementById('questionTitle').value;
+    data.content = document.getElementById('infoData').value;
+    data.childAge = document.getElementById('contentInfo').value;
+    data.foundAnswer = document.getElementById('answer').value;
+    data.date = document.getElementById('knowWhen').value;
+    console.log("post result" + JSON.stringify(data));
+    renderMainPage();
+    addPost(data);
+  });
+}
+$(passingName);
+
+function renderMainPage(){
+  // let obj = passName;
+  // console.log("Render page called!");
+  // console.log('variable received: ' + obj);
   // const currentDate = new Date();
   // const month = currentDate.getMonth() + 1;
   // const day = currentDate.getDate();
@@ -502,35 +530,6 @@ function renderMainPage(passName){
   // const newCurrentDate = month + "/" + day + "/" + year;
 
   $('#container-main').html(`
-
-  <img id='postCreation' src='http://cdn.onlinewebfonts.com/svg/img_504212.png'>
-  <p id='buttonSign'>Open/Close</p>
-  <br>
-  <div id='postbox'>
-    <h2>Post Question</h2>
-    <form id="singlePost">
-      <fieldset id='postDesign'>
-      <legend>Fill those boxes out</legend>
-      Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
-      <br>
-      Content: <input id='infoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
-      <br>
-      Your child: <input id='contentInfo' type='text' placeholder='Child age?'>
-      <br>
-      <p>Found your answer?</p>
-        <select id='answer' name='gotAnswer'>
-          <option value=''>Pick one</option>
-          <option value='No'>No</option>
-          <option value='Yes'>Yes</option>
-        </select>
-      <br>
-      <p id='knowWhen'>date: ${newCurrentDate}</p>
-      <br>
-      <input type="reset" value="Clear Out">
-      <input id="postSubmit" type='submit' value='Submit the post'></input>
-      </fieldset>
-    </form>
-  </div>
   <section id='secondaryContainer'>
   <h3>Your Sharing Center</h3>
    <ul id='usersPosts'>
@@ -560,22 +559,22 @@ function renderMainPage(passName){
   // title: req.body.title,
   // zipcode: req.body.zipcode,
   // question: req.body.question
-  $('#postSubmit').click(function(e){
-    e.preventDefault();
-    let data = {};
-    data.parentName = passName;
-    // document.getElementById('whoAndWhere'); //todo add parent name to form
-    data.zipcode = 80246;
-    // document.getElementById('zip'); //todo add zipcode to form
-    data.title =  document.getElementById('questionTitle').value;
-    data.content = document.getElementById('infoData').value;
-    data.childAge = document.getElementById('contentInfo').value;
-    data.foundAnswer = document.getElementById('answer').value;
-    data.date = document.getElementById('knowWhen').value;
-    console.log("post result" + JSON.stringify(data));
-    addPost(data);
-
-  });
+  // $('#postSubmit').submit(function(e){
+  //   e.preventDefault();
+  //   let data = {};
+  //   // data.parentName = document.getElementById('').value;
+  //   // document.getElementById('whoAndWhere'); //todo add parent name to form
+  //   data.zipcode = 80246;
+  //   // document.getElementById('zip'); //todo add zipcode to form
+  //   data.title =  document.getElementById('questionTitle').value;
+  //   data.content = document.getElementById('infoData').value;
+  //   data.childAge = document.getElementById('contentInfo').value;
+  //   data.foundAnswer = document.getElementById('answer').value;
+  //   data.date = document.getElementById('knowWhen').value;
+  //   console.log("post result" + JSON.stringify(data));
+  //   addPost(data);
+  //
+  // });
 }
 
 // function makeAPost(info){
@@ -706,25 +705,25 @@ $(getSuggestion);
 //     }
 //     $(addUsers);
 
- function receiveUserInfo(){
-   $('.container').submit('#createdProfile', function(e){
-     e.preventDefault();
-     let userInfoData = {};
-     userInfoData.username = document.getElementById('profileUser').value;
-     console.log(userInfoData.username);
-     userInfoData.password = document.getElementById('profilePW').value;
-     console.log(userInfoData.password);
-     userInfoData.firstName = document.getElementById('profileFN').value;
-     console.log(userInfoData.firstName);
-     userInfoData.lastName = document.getElementById('profileLN').value;
-     console.log(userInfoData.lastName);
-      console.log(userInfoData);
-      registerUserURL(userInfoData)
-   });
-
-   // registerUserURL(userInfoData)
- }
- $(receiveUserInfo);
+ // function receiveUserInfo(){
+ //   $('.container').submit('#createdProfile', function(e){
+ //     e.preventDefault();
+ //     let userInfoData = {};
+ //     userInfoData.username = document.getElementById('profileUser').value;
+ //     console.log(userInfoData.username);
+ //     userInfoData.password = document.getElementById('profilePW').value;
+ //     console.log(userInfoData.password);
+ //     userInfoData.firstName = document.getElementById('profileFN').value;
+ //     console.log(userInfoData.firstName);
+ //     userInfoData.lastName = document.getElementById('profileLN').value;
+ //     console.log(userInfoData.lastName);
+ //      console.log(userInfoData);
+ //      registerUserURL(userInfoData)
+ //   });
+ //
+ //   // registerUserURL(userInfoData)
+ // }
+ // $(receiveUserInfo);
 
  function registerUserURL(data){
 
@@ -807,6 +806,7 @@ $(getSuggestion);
 function showNav(){
   $('#nav').show();
   $(suggestionTab);
+  $('#creationBtn').show();
   $(createPost);
   $(myPosts);
   $(generalQuestions);
