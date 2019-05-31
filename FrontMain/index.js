@@ -100,7 +100,18 @@ function myPosts(data){
   });
 }
 
-
+function peekInPw() {
+  $('#peekPW').click(function(e){
+    e.preventDefault();
+    const x = document.getElementById("loginPassword");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  });
+}
+$(peekInPw);
 
 
 function loginEntry(user, pw){
@@ -113,12 +124,15 @@ function loginEntry(user, pw){
     },
     dataType: 'json',
     method: 'POST',
-    success: function passIt(callback){
+    success: function(callback){
       console.log("First Step - received and sending: " + callback.authToken);
       // const jwtAuth = new jwtAuth(callback);
       transferJWT(callback);
 
       // const confirmedJWT = new localStrategy(data.user, data.password, callback);
+    },
+    error: function(callback){
+      alert('Please recheck your username and/or password for potential error');
     }
   };
   console.log(loginData);
@@ -135,13 +149,13 @@ function transferJWT(jwt){
     datatype: 'json',
     method: 'GET',
     success: function loginToMainPage(){
-    $('#entrySubmit').click(function(e){
+    // $('#entrySubmit').click(function(e){
       console.log("***Entry submit  clicked");
-      e.preventDefault();
+      // e.preventDefault();
       renderMainPage();
       showNav();
       fetchAllPosts();
-    });
+    // });
     }
     // $(loginToMainPage)
   }
@@ -224,9 +238,6 @@ function renderUserPosts(data) {
       <p>Date posted: ${obj.question.date}</p>
       <div class='post-user'>
       </div>
-      Put your comment below here:
-      <br>
-      <input type='textarea' id='comment_${obj.id}'>
       <input type='hidden' value='${obj.id}'>
       <br>
       <button class='editPost' id='${editButtonId}'>Edit my post!</button>
@@ -311,9 +322,6 @@ function addPost(dataPost) {
           <p>Content: ${dataPost.content} <span id='contentInfo'> For my ${dataPost.childAge} yrs child</span></p>
           <p>Found answer? - ${dataPost.foundAnswer} </p>
           <p>Date posted: ${dataPost.date}</p>
-          Put your comment below here:
-          <br>
-          <input type='textarea' id='comment_${dataPost.id}'>
           <input type='hidden' value='${dataPost.id}'>
           <br>
           <button class='editPost'>Edit my post!</button>
@@ -334,7 +342,7 @@ function addPost(dataPost) {
                   <option value='Yes'>Yes</option>
                 </select>
               <br>
-              <p id='knowWhen'>date: </p>
+              <p id='knowWhen'>date: ${newCurrentDate}</p>
               <br>
               <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
             </fieldset>
@@ -426,6 +434,7 @@ function renderPosts(data) {
     let deleteButtonId = `deleteButton_${i}`;
     let editButtonId = `editCreation_${i}`;
 
+
     console.log(deleteButtonId);
     console.log(editButtonId);
     $('#usersPosts').append(`
@@ -437,9 +446,6 @@ function renderPosts(data) {
       <p>Date posted: ${obj.question.date}</p>
       <div class='post-user'>
       </div>
-      Put your comment below here:
-      <br>
-      <input type='textarea' id='comment_${obj.id}'>
       <input type='hidden' value='${obj.id}'>
       <br>
       <button class='editPost' id='${editButtonId}'>Edit my post!</button>
@@ -510,7 +516,7 @@ function passingName(name){
     data.content = document.getElementById('infoData').value;
     data.childAge = document.getElementById('contentInfo').value;
     data.foundAnswer = document.getElementById('answer').value;
-    data.date = document.getElementById('knowWhen').value;
+    data.date = newCurrentDate ;
     console.log("post result" + JSON.stringify(data));
     renderMainPage();
     addPost(data);
@@ -540,9 +546,6 @@ function renderMainPage(){
      <p>Found answer: Y/N </p>
      <div class='post-user'>
      </div>
-     Put your comment below here:
-     <br>
-     <input type='textarea'>
      <br>
      <button id='editCreation'>Edit my post!</button>
      <button class='deleteButton'>Delete this Post</button>
