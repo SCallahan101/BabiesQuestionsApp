@@ -144,16 +144,20 @@ h3{
   left: 10px;
   top: 100px;
 }
+
 #postEditBox{
-  width: 380px;
-  height: 250px;
-  background:  white;
-  border: solid lightblue;
+  width: 370px;
+  height: 235px;
+  background: white;
+  border: solid pink;
   position: absolute;
-  top: 138px;
-  left: 33%;
+  left: 50.5%;
+  margin-left: -206px;
+  top: 51.5%;
+  margin-top: -133px;
   z-index: 2;
   padding: 10px;
+  border-radius: 10px;
   display: none;
 }
 #postDesign {
@@ -305,6 +309,7 @@ ul li.s {
   /* border: 1px solid black; */
 }
 #secondaryContainer{
+  margin-top: 30px;
   height: 474px;
 }
 #nav {
@@ -312,27 +317,42 @@ ul li.s {
   /* border-color: transparent; */
   /* display: initial; */
 }
+#postbox{
+  width: 290px;
+  margin-top: 176px;
+  margin-left: -162px;
+}
+#postEditBox {
+  width: 290px;
+  margin-top: -65px;
+  margin-left: -164px;
+  }
+#postCreation {
+    z-index: 2;
+}
 #dropMenu {
   visibility: visible;
   display: inline-block;
-  top: 55px;
-  left: 22px;
+  top: 136px;
+  left: 13px;
   z-index: 1;
+  border-radius: 10px;
 }
 #dropMenu:hover {
   /* background: gold; */
 border: 2px solid skyblue;
 }
-#menuDesignation {
+#menuDesignation .hide{
   position: relative;
   display: inline-block;
+
 }
 
 #navRes {
   display: none;
   position: absolute;
-  top: 115px;
-  left: 30px;
+  top: 169px;
+  left: 66px;
   background-color: #f9f9f9;
   min-width: 45px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -356,7 +376,7 @@ border: 2px solid gray;
   margin: 5px;
 }
 .navBoxRes:hover{
-  background-color: turquoise;
+  background-color: pink;
   border-radius: 5px;
 
 }
@@ -378,6 +398,9 @@ border: 2px solid gray;
 @media only screen and (max-width:320px ){
 h1 {
   margin-right: -58px;
+}
+#postEditBox{
+  margin-left: 10px;
 }
 }
 @media only screen and (max-width: ){

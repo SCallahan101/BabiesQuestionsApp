@@ -155,6 +155,7 @@ function transferJWT(jwt){
       renderMainPage();
       showNav();
       fetchAllPosts();
+      $('#menuDesignation').show();
     // });
     }
     // $(loginToMainPage)
