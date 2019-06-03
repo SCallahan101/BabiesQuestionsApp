@@ -146,7 +146,7 @@ function transferJWT(jwt){
     headers:{'Authorization': "Bearer " +  jwt.authToken},
     //Still cant get it pass the verfied jwt
     // data: jwt,
-    datatype: 'jsonp',
+    dataType: 'jsonp',
     method: 'GET',
     success: function loginToMainPage(){
     // $('#entrySubmit').click(function(e){
@@ -352,7 +352,7 @@ function addPost(dataPost) {
           <button>Delete this Post</button>
         </li>`);
     },
-    datatype: 'jsonp',
+    dataType: 'jsonp',
     contentType: 'application/json'
   });
 }
