@@ -503,7 +503,7 @@ function renderPosts(data) {
 
 //something to receive the username and passing it to createPost
 function passingName(name){
-  $('.container').submit('#postSubmit', function(e){
+  $('#singlePost').submit('#postSubmit', function(e){
     e.preventDefault();
     console.log('The transcation executed ' + name);
     // const theName = name;
@@ -517,7 +517,7 @@ function passingName(name){
     data.content = document.getElementById('infoData').value;
     data.childAge = document.getElementById('contentInfo').value;
     data.foundAnswer = document.getElementById('answer').value;
-    data.date = newCurrentDate ;
+    data.date = newCurrentDate;
     console.log("post result" + JSON.stringify(data));
     renderMainPage();
     addPost(data);
@@ -646,7 +646,7 @@ function freqAQs(){
 $(freqAQs);
 
 function suggestionTab() {
-  $('.container').on('click', '#suggestion', function(e){
+  $('#suggestion').click( function(e){
     e.preventDefault();
     $('#secondaryContainer').html(`
       <form id='suggestionForm'>
@@ -660,7 +660,7 @@ function suggestionTab() {
         <br>
         <textarea class='suggestiontext' placeholder='please type down here'></textarea>
         <br>
-        <button id='suggestionButton'>Submit your suggestion</button>
+        <input type='submit' id='suggestionButton' value='Submit your suggestion'>
       </form>`)
       // let email = document.getElementByClassName('reportbox').value;
       // let suggestion = document.getElementByClassName('suggestiontext').value;
@@ -671,10 +671,11 @@ function suggestionTab() {
 function getSuggestion(){
   let email = document.getElementsByClassName('reportbox').value;
   let suggestion = document.getElementsByClassName('suggestiontext').value;
-  $('#suggestionButton').click(function(e){
+  $('#container-main').submit('#suggestionButton', function(e){
     e.preventDefault();
     alert('Your suggestion was submitted! Congratulation and thank you for your time!');
     console.log(email + ': ' + suggestion);
+    renderMainPage();
   })
 // console.log(email + ': ' + suggestion);
 }
