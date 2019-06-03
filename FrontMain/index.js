@@ -58,7 +58,7 @@ function getInfoFromUsername(dataName){
     // data: {
     //   'username': dataName
     // },
-    dataType: 'json',
+    dataType: 'jsonp',
     method: 'GET'
     // success:
   };
@@ -122,7 +122,7 @@ function loginEntry(user, pw){
       'username': user,
       'password': pw
     },
-    dataType: 'json',
+    dataType: 'jsonp',
     method: 'POST',
     success: function(callback){
       console.log("First Step - received and sending: " + callback.authToken);
@@ -146,7 +146,7 @@ function transferJWT(jwt){
     headers:{'Authorization': "Bearer " +  jwt.authToken},
     //Still cant get it pass the verfied jwt
     // data: jwt,
-    datatype: 'json',
+    datatype: 'jsonp',
     method: 'GET',
     success: function loginToMainPage(){
     // $('#entrySubmit').click(function(e){
@@ -180,7 +180,7 @@ const usersDataBankURL = 'http://localhost:4747/api/protected'
 function fetchAllPosts() {
   const postsData = {
     url: posts_centerURL,
-    dataType: 'json',
+    dataType: 'jsonp',
     method: 'GET',
     success: renderPosts
   };
@@ -198,7 +198,7 @@ function fetchUserPosts(name) {
     // + '/' + name,
     // cache: false,
     // data: {'parentName': name},
-    dataType: 'json',
+    dataType: 'jsonp',
     method: 'GET'
     // ,
     // parentName: parentName,
@@ -352,7 +352,7 @@ function addPost(dataPost) {
           <button>Delete this Post</button>
         </li>`);
     },
-    datatype: 'json',
+    datatype: 'jsonp',
     contentType: 'application/json'
   });
 }
@@ -739,7 +739,7 @@ $(getSuggestion);
        alert('Your registration got through');
        // renderMainPage
      },
-     dataType: 'json',
+     dataType: 'jsonp',
      contentType:'application/json'
    });
  }
@@ -796,7 +796,9 @@ $(getSuggestion);
   }
   function previousPage(){
     $('.container').on('click','.goBack', function(){
-      history.back();
+      console.log('go back clicked')
+      location.reload();
+      // window.history.back();
     });
   }
   $(previousPage);
