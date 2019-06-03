@@ -675,7 +675,6 @@ function getSuggestion(){
     e.preventDefault();
     alert('Your suggestion was submitted! Congratulation and thank you for your time!');
     console.log(email + ': ' + suggestion);
-    renderMainPage();
   })
 // console.log(email + ': ' + suggestion);
 }
