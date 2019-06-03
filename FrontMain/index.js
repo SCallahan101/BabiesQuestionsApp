@@ -1,5 +1,6 @@
 'use strict'
 
+const CORS = 'https://cors-anywhere.herokuapp.com/';
 
 // JWT works
 // function getToken(){
@@ -54,7 +55,7 @@ const usernamesDb = 'http://localhost:4747/api/users'
 function getInfoFromUsername(dataName){
   console.log("retrieved the username: " + dataName);
   const usernamePath = {
-    url: usernamesDb + "/singleUsername/" + dataName,
+    url: CORS + usernamesDb + "/singleUsername/" + dataName,
     // data: {
     //   'username': dataName
     // },
@@ -117,7 +118,7 @@ $(peekInPw);
 function loginEntry(user, pw){
   console.log(user + " | " + pw);
   const loginData = {
-    url: usersLoginURL,
+    url:CORS + usersLoginURL,
     data: {
       'username': user,
       'password': pw
@@ -141,7 +142,7 @@ function loginEntry(user, pw){
 function transferJWT(jwt){
   console.log("Second Step received: " + jwt.authToken);
   const loginJWT = {
-    url: usersDataBankURL,
+    url: CORS + usersDataBankURL,
     // jwtAuth: jwt,
     headers:{'Authorization': "Bearer " +  jwt.authToken},
     //Still cant get it pass the verfied jwt
@@ -179,7 +180,7 @@ const usersDataBankURL = 'http://localhost:4747/api/protected'
 
 function fetchAllPosts() {
   const postsData = {
-    url: posts_centerURL,
+    url: CORS + posts_centerURL,
     dataType: 'jsonp',
     method: 'GET',
     success: renderPosts
@@ -194,7 +195,7 @@ function fetchAllPosts() {
 // let name = "Nick" + " Reed"; //parentName
 function fetchUserPosts(name) {
   const userPostsData = {
-    url: posts_centerURL + "/parent/" + name ,
+    url: CORS + posts_centerURL + "/parent/" + name ,
     // + '/' + name,
     // cache: false,
     // data: {'parentName': name},
@@ -311,7 +312,7 @@ function addPost(dataPost) {
   console.log('add new post: ' + dataPost.parentName + ' ' + dataPost.zipcode + ' ' + dataPost.title + ' ' + dataPost.content + ' ' + dataPost.childAge + ' ' + dataPost.foundAnswer);
   $.ajax({
     method: 'POST',
-    url: posts_centerURL,
+    url: CORS + posts_centerURL,
     data: JSON.stringify(dataPost),
     success: function(data) {
       alert('Your post was submitted');
@@ -367,7 +368,7 @@ function addPost(dataPost) {
 function deletePost(postId) {
   console.log('Deleting Post `' + postId + '`');
   $.ajax({
-    url: posts_centerURL + '/' + postId,
+    url: CORS + posts_centerURL + '/' + postId,
     method: 'DELETE',
     success: function(e){
       console.log('Post deleted with id' + postId);
@@ -387,7 +388,7 @@ function updatePost(changePost) {
   // }
   let id = changePost.id;
   $.ajax({
-    url: posts_centerURL + '/' + id,
+    url: CORS + posts_centerURL + '/' + id,
     method: "PUT",
     contentType: "application/json",
     // dataType: "json",
@@ -733,7 +734,7 @@ $(getSuggestion);
 
    $.ajax({
      method: 'POST',
-     url: usernamesDb,
+     url: CORS + usernamesDb,
      data: JSON.stringify(data),
      success: function(data){
        alert('Your registration got through');
