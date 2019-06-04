@@ -1,6 +1,6 @@
 'use strict'
 
-const CORS = 'https://cors-anywhere.herokuapp.com/';
+// const CORS = 'https://cors-anywhere.herokuapp.com/';
 
 // JWT works
 // function getToken(){
@@ -50,12 +50,12 @@ function collectLoginData(){
 }
 $(collectLoginData);
 
-const usernamesDb = 'http://localhost:4747/api/users'
+const usernamesDb = 'https://evening-wave-91131.herokuapp.com/api/users'
 
 function getInfoFromUsername(dataName){
   console.log("retrieved the username: " + dataName);
   const usernamePath = {
-    url: CORS + usernamesDb + "/singleUsername/" + dataName,
+    url: usernamesDb + "/singleUsername/" + dataName,
     // data: {
     //   'username': dataName
     // },
@@ -118,7 +118,7 @@ $(peekInPw);
 function loginEntry(user, pw){
   console.log(user + " | " + pw);
   const loginData = {
-    url:CORS + usersLoginURL,
+    url: usersLoginURL,
     data: {
       'username': user,
       'password': pw
@@ -142,7 +142,7 @@ function loginEntry(user, pw){
 function transferJWT(jwt){
   console.log("Second Step received: " + jwt.authToken);
   const loginJWT = {
-    url: CORS + usersDataBankURL,
+    url: usersDataBankURL,
     // jwtAuth: jwt,
     headers:{'Authorization': "Bearer " +  jwt.authToken},
     //Still cant get it pass the verfied jwt
@@ -172,15 +172,15 @@ function userCreation(){
 
 
 
-const posts_centerURL = 'http://localhost:4747/questionPost'
+const posts_centerURL = 'https://evening-wave-91131.herokuapp.com/questionPost'
 // const userPosts_URL = 'http://localhost:4747/questionPost/User'
 
-const usersLoginURL = 'http://localhost:4747/api/auth/login'
-const usersDataBankURL = 'http://localhost:4747/api/protected'
+const usersLoginURL = 'https://evening-wave-91131.herokuapp.com/api/auth/login'
+const usersDataBankURL = 'https://evening-wave-91131.herokuapp.com/api/protected'
 
 function fetchAllPosts() {
   const postsData = {
-    url: CORS + posts_centerURL,
+    url: posts_centerURL,
     dataType: 'jsonp',
     method: 'GET',
     success: renderPosts
@@ -195,7 +195,7 @@ function fetchAllPosts() {
 // let name = "Nick" + " Reed"; //parentName
 function fetchUserPosts(name) {
   const userPostsData = {
-    url: CORS + posts_centerURL + "/parent/" + name ,
+    url: posts_centerURL + "/parent/" + name ,
     // + '/' + name,
     // cache: false,
     // data: {'parentName': name},
@@ -312,7 +312,7 @@ function addPost(dataPost) {
   console.log('add new post: ' + dataPost.parentName + ' ' + dataPost.zipcode + ' ' + dataPost.title + ' ' + dataPost.content + ' ' + dataPost.childAge + ' ' + dataPost.foundAnswer);
   $.ajax({
     method: 'POST',
-    url: CORS + posts_centerURL,
+    url: posts_centerURL,
     data: JSON.stringify(dataPost),
     success: function(data) {
       alert('Your post was submitted');
@@ -368,7 +368,7 @@ function addPost(dataPost) {
 function deletePost(postId) {
   console.log('Deleting Post `' + postId + '`');
   $.ajax({
-    url: CORS + posts_centerURL + '/' + postId,
+    url: posts_centerURL + '/' + postId,
     method: 'DELETE',
     success: function(e){
       console.log('Post deleted with id' + postId);
@@ -388,7 +388,7 @@ function updatePost(changePost) {
   // }
   let id = changePost.id;
   $.ajax({
-    url: CORS + posts_centerURL + '/' + id,
+    url: posts_centerURL + '/' + id,
     method: "PUT",
     contentType: "application/json",
     // dataType: "json",
@@ -734,7 +734,7 @@ $(getSuggestion);
 
    $.ajax({
      method: 'POST',
-     url: CORS + usernamesDb,
+     url: usernamesDb,
      data: JSON.stringify(data),
      success: function(data){
        alert('Your registration got through');
