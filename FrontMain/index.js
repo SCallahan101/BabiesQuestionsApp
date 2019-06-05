@@ -50,7 +50,7 @@ function collectLoginData(){
 }
 $(collectLoginData);
 
-const usernamesDb = 'https://evening-wave-91131.herokuapp.com/api/users'
+const usernamesDb = '://evening-wave-91131.herokuapp.com/api/users'
 
 function getInfoFromUsername(dataName){
   console.log("retrieved the username: " + dataName);
@@ -172,11 +172,11 @@ function userCreation(){
 
 
 
-const posts_centerURL = 'https://evening-wave-91131.herokuapp.com/questionPost'
+const posts_centerURL = '://evening-wave-91131.herokuapp.com/questionPost'
 // const userPosts_URL = 'http://localhost:4747/questionPost/User'
 
-const usersLoginURL = 'https://evening-wave-91131.herokuapp.com/api/auth/login'
-const usersDataBankURL = 'https://evening-wave-91131.herokuapp.com/api/protected'
+const usersLoginURL = '://evening-wave-91131.herokuapp.com/api/auth/login'
+const usersDataBankURL = '://evening-wave-91131.herokuapp.com/api/protected'
 
 function fetchAllPosts() {
   const postsData = {
