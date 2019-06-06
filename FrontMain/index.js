@@ -146,6 +146,9 @@ function loginEntry(user, pw){
             msg = 'Time out error.';
         } else if (exception === 'abort') {
             msg = 'Ajax request aborted.';
+        } else if (exception === 'parsererror') {
+            console.log(JSON.stringify(exception));
+            msg = 'Requested JSON parse failed.';
         } else {
             msg = 'Uncaught Error.\n' + jqXHR.responseText;
         }
