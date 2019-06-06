@@ -118,21 +118,21 @@ $(peekInPw);
 function loginEntry(user, pw){
   console.log(user + " | " + pw);
   const loginData = {
-    url: usersLoginURL,
-    data: {
+    "url": usersLoginURL,
+    "data": {
       "username": user,
       "password": pw
     },
-    dataType: 'jsonp',
-    method: 'POST',
-    success: function(callback){
+    "dataType": 'jsonp',
+    "method": 'POST',
+    "success": function(callback){
       console.log("First Step - received and sending: " + callback.authToken);
       // const jwtAuth = new jwtAuth(callback);
       transferJWT(callback);
 
       // const confirmedJWT = new localStrategy(data.user, data.password, callback);
     },
-    error: function (jqXHR, exception) {
+    "error": function (jqXHR, exception) {
        console.log("sanity check, log in error callback");
        var msg = '';
        if (jqXHR.status === 0) {
