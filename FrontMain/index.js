@@ -142,9 +142,9 @@ function loginEntry(user, pw){
        } else if (jqXHR.status == 500) {
            msg = 'Internal Server Error [500].';
        } else if (exception === 'parsererror') {
-           console.log(JSON.stringify(exception));
-           msg = 'Requested JSON parse failed.';
-       } else if (exception === 'timeout') {
+            console.log(JSON.stringify(jqXHR));
+            msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
            msg = 'Time out error.';
        } else if (exception === 'abort') {
            msg = 'Ajax request aborted.';
