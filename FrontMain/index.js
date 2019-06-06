@@ -120,8 +120,8 @@ function loginEntry(user, pw){
   const loginData = {
     url: usersLoginURL,
     data: {
-      'username': user,
-      'password': pw
+      "username": user,
+      "password": pw
     },
     dataType: 'jsonp',
     method: 'POST',
