@@ -59,7 +59,7 @@ function getInfoFromUsername(dataName){
     // data: {
     //   'username': dataName
     // },
-    dataType: 'jsonp',
+    dataType: 'json',
     method: 'GET'
     // success:
   };
@@ -118,21 +118,22 @@ $(peekInPw);
 function loginEntry(user, pw){
   console.log(user + " | " + pw);
   const loginData = {
-    "url": usersLoginURL,
-    "data": {
+    url: usersLoginURL,
+    data: {
       "username": user,
       "password": pw
     },
-    "dataType": 'jsonp',
-    "method": 'POST',
-    "success": function(callback){
+    // jsonp: "callback",
+    dataType: 'json',
+    method: 'POST',
+    success: function(callback){
       console.log("First Step - received and sending: " + callback.authToken);
       // const jwtAuth = new jwtAuth(callback);
       transferJWT(callback);
 
       // const confirmedJWT = new localStrategy(data.user, data.password, callback);
     },
-    "error": function (jqXHR, exception) {
+    error: function (jqXHR, exception) {
        console.log("sanity check, log in error callback");
        var msg = '';
        if (jqXHR.status === 0) {
@@ -188,7 +189,7 @@ function transferJWT(jwt){
     headers:{'Authorization': "Bearer " +  jwt.authToken},
     //Still cant get it pass the verfied jwt
     // data: jwt,
-    dataType: 'jsonp',
+    dataType: 'json',
     method: 'GET',
     success: function loginToMainPage(){
     // $('#entrySubmit').click(function(e){
@@ -222,7 +223,7 @@ const usersDataBankURL = 'https://evening-wave-91131.herokuapp.com/api/protected
 function fetchAllPosts() {
   const postsData = {
     url: posts_centerURL,
-    dataType: 'jsonp',
+    dataType: 'json',
     method: 'GET',
     success: renderPosts
   };
@@ -240,7 +241,7 @@ function fetchUserPosts(name) {
     // + '/' + name,
     // cache: false,
     // data: {'parentName': name},
-    dataType: 'jsonp',
+    dataType: 'json',
     method: 'GET'
     // ,
     // parentName: parentName,
@@ -394,7 +395,7 @@ function addPost(dataPost) {
           <button>Delete this Post</button>
         </li>`);
     },
-    dataType: 'jsonp',
+    dataType: 'json',
     contentType: 'application/json'
   });
 }
@@ -781,7 +782,7 @@ $(getSuggestion);
        alert('Your registration got through');
        // renderMainPage
      },
-     dataType: 'jsonp',
+     dataType: 'json',
      contentType:'application/json'
    });
  }
