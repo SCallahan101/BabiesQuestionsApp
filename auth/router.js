@@ -19,8 +19,10 @@ const createAuthToken =  function(user){
 const localAuth = passport.authenticate('local', {session: false});
 router.use(bodyParser.json());
 router.post('/login', localAuth, (req, res) => {
+  console.log("posting to login");
   const authToken = createAuthToken(req.user.serialize());
   res.json({authToken});
+  console.log("posted to login");
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
