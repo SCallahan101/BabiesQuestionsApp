@@ -16,8 +16,8 @@ router.post('/', jsonParser, (req, res) => {
   if (missingField) {
     return res.status(422).json({
       code: 422,
-      reason: 'ValidationError',
-      message: 'Missing field',
+      reason: 'Beware of Validation Error',
+      message: 'please fill your missing field',
       location: missingField
     });
   }
@@ -29,7 +29,7 @@ router.post('/', jsonParser, (req, res) => {
   if (nonStringField) {
     return res.status(422).json({
       code: 422,
-      reason: 'ValidationError',
+      reason: 'Beware of Validation Error',
       message: 'Incorrect field type: expected string',
       location: nonStringField
     });
@@ -39,7 +39,7 @@ router.post('/', jsonParser, (req, res) => {
   if (nonTrimmedField) {
     return res.status(422).json({
       code: 422,
-      reason: "ValidationError",
+      reason: "Beware of Validation Error",
       message: 'Cannot start or end with whitespace',
       location: nonTrimmedField
     });
@@ -65,7 +65,7 @@ router.post('/', jsonParser, (req, res) => {
   if (tooSmallField || tooLargeField) {
     return res.status(422).json({
       code: 422,
-      reason: 'ValidationError',
+      reason: 'Beware of Validation Error',
       message: tooSmallField
       ? `Must be at least ${sizedFields[tooSmallField].min} characters long`
       : `Must be at most ${sizedFields[tooLargeField].max} characters long`,
@@ -81,7 +81,7 @@ router.post('/', jsonParser, (req, res) => {
   .then(count => {
     if(count > 0) {return Promise.reject({
       code: 422,
-      reason: 'ValidationError',
+      reason: 'Beware of Validation Error',
       message: 'Username already taken',
       location: 'username'
     });
@@ -100,7 +100,7 @@ router.post('/', jsonParser, (req, res) => {
     return res.status(201).json(user.serialize());
   })
   .catch(err => {
-    if (err.reason === 'ValidationError') {
+    if (err.reason === 'Beware of Validation Error') {
       return res.status(err.code).json(err);
     }
     res.status(500).json({code: 500, message: 'Internal Server Error1'});
