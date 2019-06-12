@@ -270,6 +270,13 @@ function renderUserPosts(data) {
     let id = 'questionData_' + i;
     let deleteButtonId = `deleteButton_${i}`;
     let editButtonId = `editCreation_${i}`;
+    console.log('For the user - ' + obj.question.date);
+    let event = new Date(obj.question.date);
+
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    let filteredUserDate = event.toLocaleDateString('en-US', options);
+
 
     console.log(deleteButtonId);
     console.log(editButtonId);
@@ -279,7 +286,7 @@ function renderUserPosts(data) {
       <p>By: ${obj.parentName} <span>from: ${obj.zipcode}</span></p>
       <p>Content: ${obj.question.content} <span> For my ${obj.question.childAge} yrs child</span></p>
       <p>Found answer? - ${obj.question.foundAnswer} </p>
-      <p>Date posted: ${obj.question.date}</p>
+      <p>Date posted: ${filteredUserDate}</p>
       <div class='post-user'>
       </div>
       <input type='hidden' value='${obj.id}'>
@@ -302,7 +309,7 @@ function renderUserPosts(data) {
               <option value='Yes'>Yes</option>
             </select>
           <br>
-          <p id='editKnowWhen'>date: </p>
+          <p id='editKnowWhen'>date: ${new Date}</p>
           <br>
           <input type="reset" value="Clear Out">
           <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
@@ -375,6 +382,12 @@ function addPost(dataPost) {
     date: dataPost.date
   };
   console.log('add new post: ' + dataPost.parentName + ' ' + dataPost.zipcode + ' ' + dataPost.title + ' ' + dataPost.content + ' ' + dataPost.childAge + ' ' + dataPost.foundAnswer);
+  let event = new Date(dataPost.date);
+
+  let options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  let filteredAddPostDate = event.toLocaleDateString('en-US', options);
+
   $.ajax({
     method: 'POST',
     url: posts_centerURL,
@@ -389,7 +402,7 @@ function addPost(dataPost) {
           <p>By: ${dataPost.parentName} <span id='zipcode'>from: ${dataPost.zipcode}</span></p>
           <p>Content: ${dataPost.content} <span id='contentInfo'> For my ${dataPost.childAge} yrs child</span></p>
           <p>Found answer? - ${dataPost.foundAnswer} </p>
-          <p>Date posted: ${dataPost.date}</p>
+          <p>Date posted: ${filteredAddPostDate}</p>
           <input type='hidden' value='${dataPost.id}'>
           <br>
           <button class='editPost'>Edit my post!</button>
@@ -410,7 +423,7 @@ function addPost(dataPost) {
                   <option value='Yes'>Yes</option>
                 </select>
               <br>
-              <p id='knowWhen'>date: ${newCurrentDate}</p>
+              <p id='knowWhen'>date: </p>
               <br>
               <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
             </fieldset>
@@ -485,12 +498,12 @@ function updatePost(changePost) {
   });
 }
 
-const currentDate = new Date();
-const month = currentDate.getMonth() + 1;
-const day = currentDate.getDate();
-const year = currentDate.getFullYear();
-
-const newCurrentDate = month + "/" + day + "/" + year;
+// const currentDate = new Date();
+// const month = currentDate.getMonth() + 1;
+// const day = currentDate.getDate();
+// const year = currentDate.getFullYear();
+//
+// const newCurrentDate = month + "/" + day + "/" + year;
 
 function renderPosts(data) {
   console.log("Client received data");
@@ -499,6 +512,12 @@ function renderPosts(data) {
     let id = 'questionData_' + i;
     let deleteButtonId = `deleteButton_${i}`;
     let editButtonId = `editCreation_${i}`;
+    console.log(obj.question.date);
+    let event = new Date(obj.question.date);
+
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    let filteredDate = event.toLocaleDateString('en-US', options);
 
 
     console.log(deleteButtonId);
@@ -511,7 +530,7 @@ function renderPosts(data) {
       <p>Content: "${obj.question.content}"</p>
       <p>from my ${obj.question.childAge} yrs child</p>
       <p>Found answer? - ${obj.question.foundAnswer} </p>
-      <p>Date posted: ${obj.question.date}</p>
+      <p>Date posted: ${filteredDate}</p>
       <div class='post-user'>
       </div>
       <input type='hidden' value='${obj.id}'>
@@ -534,7 +553,7 @@ function renderPosts(data) {
               <option value='Yes'>Yes</option>
             </select>
           <br>
-          <p id='editKnowWhen'>date: ${newCurrentDate} </p>
+          <p id='editKnowWhen'>date:  </p>
           <br>
           <input type="reset" value="Clear Out">
           <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
@@ -584,7 +603,7 @@ function passingName(name){
     data.content = document.getElementById('infoData').value;
     data.childAge = document.getElementById('contentInfo').value;
     data.foundAnswer = document.getElementById('answer').value;
-    // data.date = newCurrentDate;
+    data.date = new Date();
     console.log("post result" + JSON.stringify(data));
     renderMainPage();
     addPost(data);
@@ -741,7 +760,7 @@ function suggestionTab() {
 function getSuggestion(){
   // let email = document.getElementById('suggestionEmail').value;
   // let suggestion = document.getElementById('suggestiontext').value;
-  $('#suggestionForm').submit('#suggestionButton', function(e){
+  $('#suggestionForm').submit(function(e){
     e.preventDefault();
     let email = document.getElementById('suggestionEmail').value;
     let suggestion = document.getElementById('suggestiontext').value;
