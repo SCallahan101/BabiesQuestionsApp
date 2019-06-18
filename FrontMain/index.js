@@ -133,7 +133,7 @@ function reportIssue() {
       <h2>Issue(s) report page</h2>
       <section>
         <p>Please share your concern regarding anything in this site</p>
-        <form id='submitIssue'>
+        <form id='submitIssue' aria-label='Submit your concern'>
           <input class='reportbox' type='text' placeholder='Your name?'>
           <br>
           <input class='reportbox' type='text' placeholder='Your email?'>
@@ -152,7 +152,7 @@ function profileCreation() {
   $('#signUp').click(function(e) {
     e.preventDefault();
     $('.container').html(
-      `<form id='profileForm'>
+      `<form id='profileForm' aria-label='Create your new profile'>
         <fieldset id='profileContainer'>
           <legend>Profile Builder</legend>
           First Name: <input id="profileFN" class='profiletext' type='text' placeholder='Required Input'>
@@ -271,7 +271,7 @@ function renderPosts(data) {
       <br>
       <button class='editPost' id='${editButtonId}'><span>Edit my post!</span></button>
       <div id='postEditBox'>
-      <form id='postEdit'>
+      <form id='postEdit' aria-label='Edit your post'>
       <fieldset id='postDesign'>
         <legend>Edit your post</legend>
           Title: <input id="editQuestionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
@@ -356,7 +356,7 @@ function renderPosts(data) {
         <br>
         <button class='editPost' id='${editButtonId}'><span>Edit my post!</span></button>
         <div id='postEditBox'>
-        <form id='postEdit'>
+        <form id='postEdit' aria-label='Inside the edit box'>
         <fieldset id='postDesign'>
           <legend>Edit your post</legend>
             Title: <input id="editQuestionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
@@ -467,7 +467,7 @@ function addPost(dataPost) {
           <br>
           <button class='editPost'><span>Edit my post!</span></button>
           <div id='postEditBox'>
-          <form id='postEdit'>
+          <form id='postEdit' aria-label='Edit tool'>
           <fieldset id='postDesign'>
             <legend>Edit your post</legend>
               Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
@@ -506,10 +506,10 @@ function showNav(){
 }
 
 function suggestionTab() {
-  $('#suggestion').click( function(e){
+  $('#suggestionTab').click( function(e){
     e.preventDefault();
     $('#secondaryContainer').html(`
-      <form id='suggestionForm'>
+      <form id='suggestionForm' aria-label='Make any suggestion to improve the site.'>
         Your email please?<br>
         <input id='suggestionEmail' type='text' placeholder='Your email?'>
         <br>
@@ -627,7 +627,7 @@ function generalIcon(){
 }
 
 function freqAQs(){
-  $('.container').on('click', '#faq', function(e){
+  $('.container').on('click', '#faqTab', function(e){
     e.preventDefault();
     $('#secondaryContainer').html(`
       <h2>Your FAQs board!</h2>

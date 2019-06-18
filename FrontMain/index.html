@@ -15,18 +15,18 @@
         <ul id='nav' hidden>
           <li class='navBox' id='generalQuestions'>Everyone's Posts</li>
           <li class='navBox' id='myPosts'>My Posts</li>
-          <li class='navBox' id='faq'>FAQs</li>
-          <li class='navBox' id='suggestion'>Suggestions</li>
+          <li class='navBox' id='faqTab'>FAQs</li>
+          <li class='navBox' id='suggestionTab'>Suggestions</li>
         </ul>
        </nav>
        <div id='creationBtn' hidden>
-       <img id='postCreation' src='https://cdn.onlinewebfonts.com/svg/img_504212.png'>
+       <img id='postCreation' src='https://cdn.onlinewebfonts.com/svg/img_504212.png' alt='post your new post'>
        <p id='buttonSign'>Open/Close</p>
      </div>
        <br>
        <div id='postbox'>
          <h2>Post Question</h2>
-         <form id="singlePost">
+         <form id="singlePost" aria-label='Create a post'>
            <fieldset id='postDesign'>
            <legend>Fill those boxes out</legend>
            Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
@@ -50,17 +50,17 @@
          </form>
        </div>
        <div id='menuDesignation' hidden>
-         <img id='dropMenu' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtm504QPXDPkYyZ8MaqN_mu1EqCSZf8KGTA8KKlJGqkKDZ0TBk'>
+         <img id='dropMenu' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtm504QPXDPkYyZ8MaqN_mu1EqCSZf8KGTA8KKlJGqkKDZ0TBk' alt='menu dropButton'>
            <ul id='navRes' hidden>
              <li class='navBoxRes' id='generalQuestions2'>General Questions</li>
              <li class='navBoxRes' id='myPosts2'>My Posts</li>
-             <li class='navBoxRes' id='faq'>FAQs</li>
-             <li class='navBoxRes' id='suggestion'>Suggestions</li>
+             <li class='navBoxRes' id='faqTab'>FAQs</li>
+             <li class='navBoxRes' id='suggestionTab'>Suggestions</li>
            </ul>
        </div>
     <div id='container-main'>
      <div class='box-login'>
-      <form id='entryLogin'>
+      <form id='entryLogin' aria-label='Get your username and password entry'>
        <legend></legend>
        <label>Login:</label>
        <br>
@@ -73,7 +73,7 @@
        <input id="peekPW" type='checkbox'>Peek at Your Password
        <br>
        <!-- <input id='entrySubmit' type='submit' value='Login'> -->
-       <img id='entrySubmit' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png">
+       <img id='entrySubmit' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png" alt='entryButton'>
       </form>
       <p>Are you new to this site? <br> If so, please click sign up button down below here.</p>
       <p>&#8615; &#8615; &#8615;</p>
@@ -81,7 +81,7 @@
      </div>
     </div>
     </main>
-    <img id='reportButton' src='https://image.flaticon.com/icons/png/512/81/81774.png'>
+    <img id='reportButton' src='https://image.flaticon.com/icons/png/512/81/81774.png' alt='reportIcon'>
     <script
       src="https://code.jquery.com/jquery-3.3.1.js"
       integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
