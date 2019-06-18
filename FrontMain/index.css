@@ -1,18 +1,13 @@
 body * {
   margin: 0;
   padding: 0;
-
 }
 h1 {
   text-align: center;
   font-size: 30px;
-  /* border: 1px solid gray; */
   word-wrap: normal;
-  /* margin-right: -10px; */
 }
-
 .container{
-  /* border: solid black 1px; */
   position: relative;
   height: 530px;
 }
@@ -56,16 +51,12 @@ img {
   padding: 10px;
   text-align: center;
   display: block;
-  /* background-color: turquoise; */
   background: -moz-linear-gradient(left, rgba(38,172,192,0) 0%, rgba(38,172,192,0.8) 15%, rgba(38,172,192,1) 19%, rgba(38,172,192,1) 20%, rgba(72,214,222,1) 50%, rgba(38,172,192,1) 80%, rgba(38,172,192,1) 81%, rgba(38,172,192,0.8) 85%, rgba(38,172,192,0) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left, rgba(38,172,192,0) 0%,rgba(38,172,192,0.8) 15%,rgba(38,172,192,1) 19%,rgba(38,172,192,1) 20%,rgba(72,214,222,1) 50%,rgba(38,172,192,1) 80%,rgba(38,172,192,1) 81%,rgba(38,172,192,0.8) 85%,rgba(38,172,192,0) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right, rgba(38,172,192,0) 0%,rgba(38,172,192,0.8) 15%,rgba(38,172,192,1) 19%,rgba(38,172,192,1) 20%,rgba(72,214,222,1) 50%,rgba(38,172,192,1) 80%,rgba(38,172,192,1) 81%,rgba(38,172,192,0.8) 85%,rgba(38,172,192,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0026acc0', endColorstr='#0026acc0',GradientType=1 ); /* IE6-9 */
-
+  background: -webkit-linear-gradient(left, rgba(38,172,192,0) 0%,rgba(38,172,192,0.8) 15%,rgba(38,172,192,1) 19%,rgba(38,172,192,1) 20%,rgba(72,214,222,1) 50%,rgba(38,172,192,1) 80%,rgba(38,172,192,1) 81%,rgba(38,172,192,0.8) 85%,rgba(38,172,192,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(38,172,192,0) 0%,rgba(38,172,192,0.8) 15%,rgba(38,172,192,1) 19%,rgba(38,172,192,1) 20%,rgba(72,214,222,1) 50%,rgba(38,172,192,1) 80%,rgba(38,172,192,1) 81%,rgba(38,172,192,0.8) 85%,rgba(38,172,192,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0026acc0', endColorstr='#0026acc0',GradientType=1 ); /* IE6-9 */
   border-radius: 10px;
-  /* background-image: linear-gradient(tomato, turquoise); */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /* border: solid blue; */
 }
 #reportButton {
   width: 47px;
@@ -74,7 +65,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0026acc0', e
   bottom: 27px;
 }
 #reportButton:hover {
-  /* background-color: gold; */
   border: 2px solid skyblue;
   border-radius: 10px;
 }
@@ -85,18 +75,13 @@ footer {
 #nav {
   cursor: pointer;
   margin: 0 100px;
-  /* border: solid red; */
   height: 34px;
   text-align: center;
 }
 .navBox {
   display: inline-block;
-  /* border: solid purple; */
   margin-right: -4px;
   padding: 5px 6px;
-  /* background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS09BvaCJg-v4kNXoiDUU39He-7v3gZh3XxaceU1mo1VazG7PDR');
-  background-size: 100% 100%;
-  background-repeat: no-repeat; */
 }
 .navBox:hover {
   text-decoration: underline;
@@ -105,13 +90,10 @@ h3{
   text-align: center;
 }
 #postCreation{
-  /* background-color: gold; */
   position: absolute;
   left: 20px;
   width: 50px;
   height: auto;
-  /* border: solid 2px gray; */
-  /* color: black; */
   text-align: center;
   text-decoration: none;
   margin-top: 5px;
@@ -119,7 +101,6 @@ h3{
   border-radius: 5px;
 }
 #postCreation:hover{
-  /* background-color: gold; */
   border: 2px solid skyblue;
   border-radius: 10px;
 }
@@ -132,6 +113,9 @@ h3{
   margin-top: 5px;
   padding: 2px;
   border-radius: 5px; */
+}
+#answer{
+  margin: 5px;
 }
 #postbox {
   width: 380px;
@@ -153,7 +137,173 @@ h3{
   left: 10px;
   top: 100px;
 }
-
+.editPost{
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 108px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.editPost span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.editPost span:after{
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.editPost:hover{
+  background-color: #ff6699;
+}
+.editPost:hover span{
+  padding-right: 12px;
+}
+.editPost:hover span:after{
+  opacity: 1;
+  right: 0;
+}
+.deletebutton{
+  display: inline-block;
+  border-radius: 4px;
+  /* ff3300 */
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 122px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.deletebutton span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.deletebutton span:after{
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.deletebutton:hover {
+  background-color: #ff3300;
+}
+.deletebutton:hover span{
+  padding-right: 12px;
+}
+.deletebutton:hover span:after{
+  opacity: 1;
+  right: 0;
+}
+#submitreport{
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 165px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+#submitreport span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+#submitreport span:after{
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+#submitreport:hover {
+  background-color: #33cc33;
+}
+#submitreport:hover span{
+  padding-right: 12px;
+}
+#submitreport:hover span:after{
+  opacity: 1;
+  right: 0;
+}
+.goBack{
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 118px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+#postSubmit{
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 118px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.clearOutButton{
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 118px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+#createdProfile{
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 138px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
 #postEditBox{
   width: 370px;
   height: 235px;
@@ -185,12 +335,27 @@ h3{
 .reporttext {
   width: 600px;
   height: 300px;
-  /* text-align: center; */
   resize: none;
   margin: 5px 0;
 }
 #suggestionForm{
   text-align: center;
+}
+#suggestionEmail{
+  padding: 8px;
+}
+#suggestionButton{
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
 }
 #suggestiontext {
   width: 500px;
@@ -212,34 +377,27 @@ h3{
   border-radius: 3px;
 }
 #secondaryContainer {
-  /* display: grid;
-  grid-template-columns: auto auto auto auto; */
-
   border: solid white 1px;
   margin-top: 5px;
   padding: 10px;
   margin: -15px 100px;
   height: 471px;
   overflow-y: scroll;
-  overflow-x:hidden
-  /* text-align: center; */
+  overflow-x: hidden;
 }
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
   background: lightgrey;
   border-radius: 10px;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: skyblue;
   border-radius: 20px;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
@@ -258,10 +416,9 @@ h3{
   background-color: white;
   border-radius: 10px;
 }
-
 ul.f {
   list-style-position: inside;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
   margin-left: 20px;
 }
 ul li.s {
@@ -291,21 +448,21 @@ ul li.s {
 }
 }
 @media only screen and (max-width:792px ){
-  #container-main {
-    height: 486px;
-  }
-  #usersPosts {
-    text-align: center;
-    display: grid;
-    grid-template-columns: auto;
-    grid-gap: 10px;
-  }
-  #title {
-    font-size: 25px;
-  }
-  #buttonSign{
-    top: 108px;
-  }
+#container-main {
+  height: 486px;
+}
+#usersPosts {
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+}
+#title {
+  font-size: 25px;
+}
+#buttonSign{
+  top: 108px;
+}
 }
 @media only screen and (max-width:600px ){
 #title {
@@ -316,7 +473,6 @@ ul li.s {
   position: absolute;
   top: 5px;
   height: 523px;
-  /* border: 1px solid black; */
 }
 #secondaryContainer{
   margin-top: 30px;
@@ -324,8 +480,6 @@ ul li.s {
 }
 #nav {
   visibility: hidden;
-  /* border-color: transparent; */
-  /* display: initial; */
 }
 #postbox{
   width: 290px;
@@ -349,15 +503,12 @@ ul li.s {
   border-radius: 10px;
 }
 #dropMenu:hover {
-  /* background: gold; */
-border: 2px solid skyblue;
+  border: 2px solid skyblue;
 }
 #menuDesignation .hide{
   position: relative;
   display: inline-block;
-
 }
-
 #navRes {
   display: none;
   position: absolute;
@@ -369,13 +520,6 @@ border: 2px solid skyblue;
   padding: 12px 16px;
   z-index: 1;
 }
-/* #dropMenu{
-  background-color: gold;
-} */
-/* #dropMenu:hover {
-border: 2px solid gray;
-} */
-
 #menuDesignation:hover #navRes {
   display: block;
   border: 1px solid black;
@@ -388,23 +532,8 @@ border: 2px solid gray;
 .navBoxRes:hover{
   background-color: pink;
   border-radius: 5px;
-
 }
-/* .navBox{
-  position: absolute;
-  left: 0px;
-} */
 }
-/* #buttonSign {
-  top: 68px;
-} */
-/*it makes no sense here how media queries works
-
-/* #postbox {
-  width: 50%;
-  height: 60%;
-  margin-left: -136px
-} */
 @media only screen and (max-width:320px ){
 h1 {
   margin-right: -58px;
@@ -412,7 +541,4 @@ h1 {
 #postEditBox{
   margin-left: 10px;
 }
-}
-@media only screen and (max-width: ){
-
 }
