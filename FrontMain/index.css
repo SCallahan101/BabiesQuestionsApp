@@ -214,6 +214,44 @@ h3{
   opacity: 1;
   right: 0;
 }
+.heartButton{
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 116px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.heartButton span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+.heartButton span:after{
+  content: '\2665';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -10px;
+  transition: 0.5s;
+}
+.heartButton:hover{
+  background-color: #ff6699;
+}
+.heartButton:hover span{
+  padding-right: 12px;
+}
+.heartButton:hover span:after{
+  opacity: 1;
+  right: 0;
+}
 #submitreport{
   display: inline-block;
   border-radius: 4px;

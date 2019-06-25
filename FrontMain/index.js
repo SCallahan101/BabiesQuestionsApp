@@ -16,6 +16,18 @@ function peekInPw() {
     }
   });
 }
+function peekInProfilePw() {
+  $('#peekProfilePW').click(function(e){
+    e.preventDefault();
+    const y = document.getElementById("profilePW");
+    if (y.type === "password") {
+      y.type = "text";
+    } else {
+      y.type = "password";
+    }
+  });
+}
+// $(peekInProfilePw);
 
 function collectLoginData(){
   $('#entryLogin').on('click','#entrySubmit', function(e){
@@ -163,8 +175,9 @@ function profileCreation() {
           <br>
           Username: <input id="profileUser" class='profiletext' type='text' placeholder='Required Input'>
           <br>
-          Password: <input id="profilePW" class='profiletext' type='text' placeholder='Required Input'>
+          Password: <input id="profilePW" class='profiletext' type='password' placeholder='Required Input' value=''>
           <br>
+          <input id="peekProfilePW" type='checkbox'>Peek at Your Profile Password
           <p>(Must be total of 8 or more characters long!)</p>
           <br>
           <input id='createdProfile' value='Finalize the profile' type='submit'>
@@ -173,6 +186,7 @@ function profileCreation() {
         </fieldset>
       </form>`
     );
+    peekInProfilePw();
   });
 }
 
@@ -201,7 +215,7 @@ function registerUserURL(data){
     data: JSON.stringify(data),
     contentType:'application/json',
     success: function(data){
-      alert('Your registration got through');
+      swal('Your registration got through!', 'New accomplishment for you!', 'success');
     },
     error: function (jqXHR, exception) {
        console.log("sanity check, log in error callback");
@@ -223,7 +237,7 @@ function registerUserURL(data){
            msg = 'Uncaught Error.\n' + jqXHR.responseText;
        }
      console.log(msg);
-     alert('Something went terrible wrong. Check: ' + msg);
+     swal('Something went terrible wrong. Check: ' + msg, 'warning');
    }
   });
 }
@@ -269,7 +283,7 @@ function renderPosts(data) {
       </div>
       <input type='hidden' value='${obj.id}'>
       <br>
-      <button class='editPost' id='${editButtonId}'><span>Edit my post!</span></button>
+
       <div id='postEditBox'>
       <form id='postEdit' aria-label='Edit your post'>
       <fieldset id='postDesign'>
@@ -294,21 +308,27 @@ function renderPosts(data) {
         </fieldset>
       </form>
       </div>
-      <button class='deletebutton' id='${deleteButtonId}'><span>Delete this Post</span></button>
+      <button class='heartButton'><span>Heart this Post</span></button>
     </li>`);
     // console.log('Object id:' + obj.id);
-
-    $('#' + editButtonId).click(function(e){
-      e.preventDefault();
-      $('#postEditBox').toggle(``);
-      // console.log(`Edit called on ${id}`);
-      editPost(obj.id);
-    });
-    $('#' + deleteButtonId).click(function(e){
-      e.preventDefault();
-      deletePost(obj.id);
-      // console.log(`Delete called on ${id}`);
-    });
+      $('.heartButton').click(function(e){
+        e.preventDefault();
+        swal("Your ♥heart♥ is sending to the user", "♥ Looking around for some more ♥", "success");
+      });
+    // $('#' + editButtonId).click(function(e){
+    //   e.preventDefault();
+    //   $('#postEditBox').toggle(``);
+    //   // console.log(`Edit called on ${id}`);
+    //   editPost(obj.id);
+    // });
+    // $('#editSubmit').click(function(){
+    //   $('#postEditBox').hide();
+    // });
+    // $('#' + deleteButtonId).click(function(e){
+    //   e.preventDefault();
+    //   deletePost(obj.id);
+    //   // console.log(`Delete called on ${id}`);
+    // });
 });
 }
 
@@ -389,6 +409,9 @@ function renderPosts(data) {
         // console.log(`Edit called on ${id}`);
         editPost(obj._id);
       });
+      $('#editSubmit').click(function(){
+        $('#postEditBox').hide();
+      });
       $('#' + deleteButtonId).click(function(e){
         e.preventDefault();
         deletePost(obj._id);
@@ -442,7 +465,7 @@ function addPost(dataPost) {
     date: dataPost.date
   };
   // console.log('add new post: ' + dataPost.parentName + ' ' + dataPost.zipcode + ' ' + dataPost.title + ' ' + dataPost.content + ' ' + dataPost.childAge + ' ' + dataPost.foundAnswer);
-  // let event = new Date(dataPost.date);
+  let event = new Date(dataPost.date);
 
   let options = { year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -455,7 +478,7 @@ function addPost(dataPost) {
     dataType: 'json',
     contentType: 'application/json',
     success: function(data) {
-      alert('Your post was submitted');
+      swal('Your post was submitted', 'congratulation', 'success');
       $('#usersPosts').append(
         `<li class='eachPost'>
           <ul id="questionData">Post Title: ${dataPost.title}</ul>
@@ -531,7 +554,7 @@ function getSuggestion(){
     // console.log('clicked worked...');
     // let email = document.getElementById('suggestionEmail').value;
     // let suggestion = document.getElementById('suggestiontext').value;
-    alert('Your suggestion was submitted! Congratulation and thank you for your time!');
+    swal('Your suggestion was submitted!', 'Thank you for your time!', 'success');
     // console.log(email + ': ' + suggestion);
     document.getElementById('suggestionForm').reset();
   });
@@ -583,6 +606,7 @@ function updatePost(changePost) {
     }),
     success: function(changePost) {
       console.log('Successful opened - ' + changePost);
+      fetchAllPosts();
     }
   })
   .done(function(changePost){
@@ -590,7 +614,7 @@ function updatePost(changePost) {
 
   })
   .fail(function(xhr, status, errorThrown){
-    alert('This process has been failed');
+    swal('This process has been failed', 'warning');
     console.log('status: ' + status);
     console.log('error: ' + errorThrown);
     console.log(xhr);
