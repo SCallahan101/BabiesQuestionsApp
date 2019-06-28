@@ -206,6 +206,10 @@ function receiveUserInfo(){
      registerUserURL(userInfoData);
   });
 }
+function reloadTheLogin(){
+  setTimeout(function(){location.reload();}, 3000);
+}
+
 
 function registerUserURL(data){
   // console.log('Transfer completed ' + JSON.stringify(data));
@@ -216,6 +220,8 @@ function registerUserURL(data){
     contentType:'application/json',
     success: function(data){
       swal('Your registration got through!', 'New accomplishment for you!', 'success');
+      // location.reload();
+      $(reloadTheLogin);
     },
     error: function (jqXHR, exception) {
        console.log("sanity check, log in error callback");
@@ -629,6 +635,16 @@ function myPosts(data){
         let name = data;
         renderMainPage();
         fetchUserPosts(name);
+        // myPostIcon(data);
+  });
+  $('#myPosts2').click(function(e){
+        // console.log('*my Posts clicked*');
+        console.log("passing Icon " + data + ' through myPost function');
+        e.preventDefault();
+        let name = data;
+        renderMainPage();
+        fetchUserPosts(name);
+        // myPostIcon(data);
   });
 }
 
@@ -649,6 +665,15 @@ function generalIcon(){
     fetchAllPosts();
   });
 }
+// function myPostIcon(name){
+//   $('#myPosts2').click(function(e){
+//     e.preventDefault();
+//     console.log(name);
+//     // renderMainPage();
+//     // fetchUserPosts(name);
+//     myPosts(name);
+//   });
+// }
 
 function freqAQs(){
   $('.container').on('click', '#faqTab', function(e){
@@ -714,6 +739,7 @@ function executeCRUDProject(){
   $(reportIssue);
   $(passingName);
   $(generalIcon);
+  // $(myPostIcon);
 }
 
 
