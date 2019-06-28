@@ -34,7 +34,7 @@ function collectLoginData(){
     e.preventDefault();
     // const entryInfo = {};
     let username = document.getElementById('loginUsername').value;
-    console.log('username: ' +  username);
+    // console.log('username: ' +  username); phase 1
     let password = document.getElementById('loginPassword').value;
     // console.log("password: " + password);
     // console.log(username "|" password);
@@ -58,7 +58,7 @@ function loginEntry(user, pw){
       transferJWT(callback);
     },
     error: function (jqXHR, exception) {
-       console.log("sanity check, log in error callback");
+       // console.log("sanity check, log in error callback"); phase 1
        var msg = '';
        if (jqXHR.status === 0) {
            msg = 'Not connect.\n Verify Network.';
@@ -92,7 +92,7 @@ function transferJWT(jwt){
     dataType: 'json',
     method: 'GET',
     success: function loginToMainPage(){
-      console.log("***Entry submit  clicked");
+      // console.log("***Entry submit  clicked"); phase 1
       renderMainPage();
       showNav();
       fetchAllPosts();
@@ -105,7 +105,7 @@ function transferJWT(jwt){
 }
 
 function getInfoFromUsername(dataName){
-  console.log("retrieved the username: " + dataName);
+  // console.log("retrieved the username: " + dataName); phase 1
   const usernamePath = {
     url: usernamesDb + "/singleUsername/" + dataName,
     dataType: 'json',
@@ -224,7 +224,7 @@ function registerUserURL(data){
       $(reloadTheLogin);
     },
     error: function (jqXHR, exception) {
-       console.log("sanity check, log in error callback");
+       // console.log("sanity check, log in error callback"); phase 1
        var msg = '';
        if (jqXHR.status === 0) {
            msg = 'Not connect.\n Verify Network.';
@@ -260,7 +260,7 @@ function fetchAllPosts() {
 }
 
 function renderPosts(data) {
-  console.log("Client received data");
+  // console.log("Client received data"); phase 1
   // console.log(data);
   $('#usersPosts').html(' ');
   $.each(data.questionPosts, function(i, obj){
@@ -347,13 +347,13 @@ function renderPosts(data) {
     // console.log(userPostsData);
     $.ajax(userPostsData)
     .done(function(data){
-      console.log("*****DONE*****");
+      // console.log("*****DONE*****"); phase 1
       renderUserPosts(data);
     });
   }
 
   function renderUserPosts(data) {
-    console.log("Client received data");
+    // console.log("Client received data"); phase 1
     // console.log(data);
     $.each(data, function(i, obj){
       let id = 'questionData_' + i;
@@ -446,7 +446,7 @@ function renderPosts(data) {
 function passingName(name){
   $('#singlePost').submit('#postSubmit', function(e){
     e.preventDefault();
-    console.log('The transcation executed ' + name);
+    // console.log('The transcation executed ' + name); phase 1
     e.preventDefault();
     let data = {};
     data.parentName = name;
@@ -611,12 +611,12 @@ function updatePost(changePost) {
       }
     }),
     success: function(changePost) {
-      console.log('Successful opened - ' + changePost);
+      // console.log('Successful opened - ' + changePost); phase 1
       fetchAllPosts();
     }
   })
   .done(function(changePost){
-    console.log('successful:' + changePost);
+    // console.log('successful:' + changePost); phase 1
 
   })
   .fail(function(xhr, status, errorThrown){
@@ -630,7 +630,7 @@ function updatePost(changePost) {
 function myPosts(data){
   $('#myPosts').click(function(e){
         // console.log('*my Posts clicked*');
-        console.log("passing " + data + ' through myPost function');
+        // console.log("passing " + data + ' through myPost function'); phase 1
         e.preventDefault();
         let name = data;
         renderMainPage();
@@ -639,7 +639,7 @@ function myPosts(data){
   });
   $('#myPosts2').click(function(e){
         // console.log('*my Posts clicked*');
-        console.log("passing Icon " + data + ' through myPost function');
+        // console.log("passing Icon " + data + ' through myPost function'); phase 1
         e.preventDefault();
         let name = data;
         renderMainPage();
