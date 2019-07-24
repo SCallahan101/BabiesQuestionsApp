@@ -4,14 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' type='text/css' href='index.css'>
+    <script src="https://kit.fontawesome.com/9f0700aecc.js"></script>
     <title>Thinkful Node.js capstone project: Parents' social media on child's questions</title>
   </head>
   <body>
-    <h1 id='title'>Parents welcome to Wonderland of children questions!</h1>
-    <h3 id='pageExplanation'>This place is a place where parents can share their children's questions. <br> Like the quote - "There is no such a stupid question" <br> The goal is to have parents connect with each others.
-    </h3>
-    <main class='container'>
-      <nav>
+    <header role='banner'>
+      <h1 id='title'>Parents welcome to Wonderland of children questions!</h1>
+      <h5 id='titleInfo'>Please click this for more information</h5>
+      <div id='pageExplanation' hidden>This place is a place where parents can share their children's questions. <br> Like the quote - "There is no such a stupid question" <br> The goal is to have parents connect with each others.
+      </div>
+    </header>
+    <main class='container' role='main'>
+      <nav role='navigation'>
         <ul id='nav' hidden>
           <li class='navBox' id='generalQuestions'>Everyone's Posts</li>
           <li class='navBox' id='myPosts'>My Posts</li>
@@ -21,12 +25,15 @@
        </nav>
        <div id='creationBtn' hidden>
        <img id='postCreation' src='https://cdn.onlinewebfonts.com/svg/img_504212.png' alt='post your new post'>
-       <p id='buttonSign'>Open/Close</p>
+       <!-- <p id='buttonSign'>Open/Close</p> -->
      </div>
        <br>
        <div id='postbox'>
-         <h2>Post Question</h2>
-         <form id="singlePost" aria-label='Create a post'>
+         <h2>Post Your Child's Question</h2>
+         <button type="button" class="close" aria-label="Close">
+            <i class="far fa-window-close"></i>
+         </button>
+         <form id="singlePost" aria-label='Create a post' role='form'>
            <fieldset id='postDesign'>
            <legend>Fill those boxes out</legend>
            Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
@@ -50,9 +57,9 @@
          </form>
        </div>
        <div id='menuDesignation' hidden>
-         <img id='dropMenu' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtm504QPXDPkYyZ8MaqN_mu1EqCSZf8KGTA8KKlJGqkKDZ0TBk' alt='menu dropButton'>
+         <img id='dropMenu' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtm504QPXDPkYyZ8MaqN_mu1EqCSZf8KGTA8KKlJGqkKDZ0TBk' alt='menu dropButton' role='navigation'>
            <ul id='navRes' hidden>
-             <li class='navBoxRes' id='generalQuestions2'>General Questions</li>
+             <li class='navBoxRes' id='generalQuestions2'>Everyone's Posts</li>
              <li class='navBoxRes' id='myPosts2'>My Posts</li>
              <li class='navBoxRes' id='faqTab'>FAQs</li>
              <li class='navBoxRes' id='suggestionTab'>Suggestions</li>
@@ -60,7 +67,7 @@
        </div>
     <div id='container-main'>
      <div class='box-login'>
-      <form id='entryLogin' aria-label='Get your username and password entry'>
+      <form id='entryLogin' aria-label='Get your username and password entry' role='form'>
        <legend></legend>
        <label>Login:</label>
        <br>
@@ -72,8 +79,9 @@
        <br>
        <input id="peekPW" type='checkbox'>Peek at Your Password
        <br>
+       <p>Temporary Access: Username - BellaireBoy | Password: user1234</p>
        <!-- <input id='entrySubmit' type='submit' value='Login'> -->
-       <img id='entrySubmit' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png" alt='entryButton'>
+       <img id='entrySubmit' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png" alt='entryButton' >
       </form>
       <p>Are you new to this site? <br> If so, please click sign up button down below here.</p>
       <p>&#8615; &#8615; &#8615;</p>

@@ -1,13 +1,50 @@
 'use strict';
 
+function openTheTitleInfo(){
+  $('#titleInfo').click(function(){
+    $('#pageExplanation').toggle();
+  });
+}
+$(openTheTitleInfo);
+
+
 const posts_centerURL = 'https://evening-wave-91131.herokuapp.com/questionPost';
 const usersLoginURL = 'https://evening-wave-91131.herokuapp.com/api/auth/login';
 const usersDataBankURL = 'https://evening-wave-91131.herokuapp.com/api/protected';
 const usernamesDb = 'https://evening-wave-91131.herokuapp.com/api/users';
 
+// function loginForm(){
+// $(document).ready(function(){
+//   $('#container-main').html(`
+//     <div class='box-login'>
+//      <form id='entryLogin' aria-label='Get your username and password entry' role='form'>
+//       <legend></legend>
+//       <label>Login:</label>
+//       <br>
+//       <input id='loginUsername' type='text' placeholder='Your login name' value=''>
+//       <br>
+//       <label>Password:</label>
+//       <br>
+//       <input id='loginPassword' type="password" placeholder='Your password' value=''>
+//       <br>
+//       <input id="peekPW" type='checkbox'>Peek at Your Password
+//       <br>
+//       <p>Temporary Access: Username - BellaireBoy | Password: user1234</p>
+//       <!-- <input id='entrySubmit' type='submit' value='Login'> -->
+//       <img id='entrySubmit' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png" alt='entryButton' >
+//      </form>
+//      <p>Are you new to this site? <br> If so, please click sign up button down below here.</p>
+//      <p>&#8615; &#8615; &#8615;</p>
+//      <input id='signUp' type='image' value='Sign Up' src='https://cdn3.iconfinder.com/data/icons/user-interface-2-9/34/169-512.png' alt='signup'>
+//     </div>`
+//   );
+// });
+// }
+// $(loginForm);
+
 function peekInPw() {
-  $('#peekPW').click(function(e){
-    e.preventDefault();
+  $('#peekPW').click(function(){
+    // e.preventDefault();
     const x = document.getElementById("loginPassword");
     if (x.type === "password") {
       x.type = "text";
@@ -17,8 +54,7 @@ function peekInPw() {
   });
 }
 function peekInProfilePw() {
-  $('#peekProfilePW').click(function(e){
-    e.preventDefault();
+  $('#peekProfilePW').click(function(){
     const y = document.getElementById("profilePW");
     if (y.type === "password") {
       y.type = "text";
@@ -38,10 +74,45 @@ function collectLoginData(){
     let password = document.getElementById('loginPassword').value;
     // console.log("password: " + password);
     // console.log(username "|" password);
+    // let userInSystem = document.getElementById('loginUsername').value;
+    window.localStorage.setItem("username", username);
+    // let pwInSystem = document.getElementById('loginPassword').value;
+    window.localStorage.setItem("password", password);
+    console.log("Testing for storage " + username + " and " + password);
+    let testAccess = localStorage.getItem("username");
+    console.log("Testing worked: " + testAccess + " ?");
+
     getInfoFromUsername(username);
     loginEntry(username, password);
     });
 }
+
+function stayAfterRefresh(){
+// window.addEventListener("onbeforeunload", function(event){
+//   console.log("listen to refresh button");
+// });
+window.onbeforeunload = function(e){
+  e.preventDefault();
+  console.log('Well I guess it works');
+  e.returnValue = "false";
+};
+$(window).on("unload", function(e){
+  // e.preventDefault();
+  console.log("success with this bs");
+  const stayInWeb = localStorage.getItem("username");
+  console.log("testing " + stayInWeb);
+  const pwInWeb = localStorage.getItem("password");
+  console.log("testing " + pwInWeb);
+  // $(function(){
+  //   $('#loginUsername').val(stayInWeb);
+  //   $('#loginPassword').val(pwInWeb);
+  //   loginEntry(stayInWeb, pwInWeb);
+  // });
+  loginEntry(stayInWeb, pwInWeb);
+  // renderMainPage();
+});
+}
+$(stayAfterRefresh);
 
 function loginEntry(user, pw){
   // console.log(user + " | " + pw);
@@ -82,6 +153,14 @@ function loginEntry(user, pw){
   // console.log(loginData);
   $.ajax(loginData);
 }
+
+// let userInSystem = document.getElementById('loginUsername').value;
+// localStorage.setItem("username", userInSystem);
+// let pwInSystem = document.getElementById('loginPassword').value;
+// localStorage.setItem("password", pwInSystem);
+// console.log("Testing for storage " + userInSystem + " and " + pwInSystem);
+
+
 
 function transferJWT(jwt){
   // console.log("Second Step received: " + jwt.authToken);
@@ -145,7 +224,7 @@ function reportIssue() {
       <h2>Issue(s) report page</h2>
       <section>
         <p>Please share your concern regarding anything in this site</p>
-        <form id='submitIssue' aria-label='Submit your concern'>
+        <form id='submitIssue' aria-label='Submit your concern' role='form'>
           <input class='reportbox' type='text' placeholder='Your name?'>
           <br>
           <input class='reportbox' type='text' placeholder='Your email?'>
@@ -164,7 +243,7 @@ function profileCreation() {
   $('#signUp').click(function(e) {
     e.preventDefault();
     $('.container').html(
-      `<form id='profileForm' aria-label='Create your new profile'>
+      `<form id='profileForm' aria-label='Create your new profile' role='form'>
         <fieldset id='profileContainer'>
           <legend>Profile Builder</legend>
           First Name: <input id="profileFN" class='profiletext' type='text' placeholder='Required Input'>
@@ -291,7 +370,7 @@ function renderPosts(data) {
       <br>
 
       <div id='postEditBox'>
-      <form id='postEdit' aria-label='Edit your post'>
+      <form id='postEdit' aria-label='Edit your post' role='form'>
       <fieldset id='postDesign'>
         <legend>Edit your post</legend>
           Title: <input id="editQuestionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
@@ -309,12 +388,12 @@ function renderPosts(data) {
           <br>
           <p id='editKnowWhen'>date:  </p>
           <br>
-          <input type="reset" value="Clear Out">
+          <input class='clearEdits' type="reset" value="Clear Out">
           <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
         </fieldset>
       </form>
       </div>
-      <button class='heartButton'><span>Heart this Post</span></button>
+      <button class='heartButton' label='Heart this Post'><span>♥</span></button>
     </li>`);
     // console.log('Object id:' + obj.id);
       $('.heartButton').click(function(e){
@@ -366,6 +445,8 @@ function renderPosts(data) {
 
       let filteredUserDate = event.toLocaleDateString('en-US', options);
 
+      let editEvent = new Date;
+      let filteredNewDate = editEvent.toLocaleDateString('en-US', options);
 
       // console.log(deleteButtonId);
       // console.log(editButtonId);
@@ -382,14 +463,18 @@ function renderPosts(data) {
         <br>
         <button class='editPost' id='${editButtonId}'><span>Edit my post!</span></button>
         <div id='postEditBox'>
-        <form id='postEdit' aria-label='Inside the edit box'>
+        <h2>Modify your post</h2>
+        <button type="button" class="closeEdit" aria-label="Close">
+           <i class="far fa-window-close"></i>
+        </button>
+        <form id='postEdit' aria-label='Inside the edit box' role='form'>
         <fieldset id='postDesign'>
           <legend>Edit your post</legend>
             Title: <input id="editQuestionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
             <br>
             Content: <input id='editInfoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
             <br>
-            Your child: <input id='editContentInfo' type='text' placeholder='Child age?'>
+            Your child's age: <input id='editContentInfo' type='text' placeholder='Child age?'>
             <br>
             <p>Found your answer?</p>
               <select id='editAnswer' name='gotAnswer'>
@@ -398,9 +483,9 @@ function renderPosts(data) {
                 <option value='Yes'>Yes</option>
               </select>
             <br>
-            <p id='editKnowWhen'>date: ${new Date}</p>
+            <p id='editKnowWhen'>Current Date: ${filteredNewDate}</p>
             <br>
-            <input type="reset" value="Clear Out">
+            <input class='clearEdits' type="reset" value="Clear Out">
             <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
           </fieldset>
         </form>
@@ -414,7 +499,11 @@ function renderPosts(data) {
         $('#postEditBox').toggle(``);
         // console.log(`Edit called on ${id}`);
         editPost(obj._id);
+        emptyEditPost(obj._id);
       });
+      $('.closeEdit').click(function(){
+        $('#postEditBox').hide();
+      })
       $('#editSubmit').click(function(){
         $('#postEditBox').hide();
       });
@@ -429,6 +518,7 @@ function renderPosts(data) {
   function editPost(callId){
     $('#container-main').submit('#editSubmit', function(e){
       e.preventDefault();
+
       // console.log(callId);
       let editedData = {};
       editedData.id = callId;
@@ -484,7 +574,7 @@ function addPost(dataPost) {
     dataType: 'json',
     contentType: 'application/json',
     success: function(data) {
-      swal('Your post was submitted', 'congratulation', 'success');
+      swal('Your post was submitted', 'congratulations', 'success');
       $('#usersPosts').append(
         `<li class='eachPost'>
           <ul id="questionData">Post Title: ${dataPost.title}</ul>
@@ -496,7 +586,7 @@ function addPost(dataPost) {
           <br>
           <button class='editPost'><span>Edit my post!</span></button>
           <div id='postEditBox'>
-          <form id='postEdit' aria-label='Edit tool'>
+          <form id='postEdit' aria-label='Edit tool' role='form'>
           <fieldset id='postDesign'>
             <legend>Edit your post</legend>
               Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
@@ -538,7 +628,7 @@ function suggestionTab() {
   $('#suggestionTab').click( function(e){
     e.preventDefault();
     $('#secondaryContainer').html(`
-      <form id='suggestionForm' aria-label='Make any suggestion to improve the site.'>
+      <form id='suggestionForm' aria-label='Make any suggestion to improve the site.' role='form'>
         Your email please?<br>
         <input id='suggestionEmail' type='text' placeholder='Your email?'>
         <br>
@@ -572,6 +662,9 @@ function createPost(){
     // console.log('post testing worked');
     $('#postbox').toggle(``);
   });
+  $('.close').click(function(){
+    $('#postbox').hide();
+  })
   $('#postSubmit').click(function(){
     $('#postbox').hide();
   });
@@ -681,13 +774,13 @@ function freqAQs(){
     $('#secondaryContainer').html(`
       <h2>Your FAQs board!</h2>
       <ul class='f' > Information center for your Questions/Answers
-        <li>Q: Is there any children age limit for asking question?
-          <li class='s'>A: Guess as long it is before teenager age since this site is design for early age questions.</li>
+        <li>Q: Is there any children age limit for asking a question?
+          <li class='s'>A: Guess as long it is before teenager age since this site is designed for early age child's questions.</li>
         </li>
-        <li>Q: Can I post a child's ridiclous, embarass, awkward, and hard question?
-          <li class='s'>A: Hell yeah, there is no question that is not allow to be share! </li>
+        <li>Q: Can I post a child's ridiculous, embarrassed, awkward, and hard question?
+          <li class='s'>A: Hell yeah, there is no question that is not allowed to be share! </li>
         </li>
-        <li>Q: Where can I report about my concern?
+        <li>Q: Where can I report about my concern(s)?
           <li class='s'>A: You can find the icon at bottom left corner. Just click it away.</li>
         </li>
         <li>Q: More questions coming up!
@@ -703,13 +796,22 @@ function previousPage(){
     location.reload();
   });
 }
-
+//
 // function empty(){
 //   const xTitle = document.getElementById('questionTitle').value;
 //   const xContent = document.getElementById('infoData').value;
 //   const xAge = document.getElementById('contentInfo').value;
 //   const xAnswer = document.getElementById('answer').value;
-//
+  //
+  // $('#singlePost').submit(function(e){
+  //   e.preventDefault();
+  //   if($.trim($("#questionTitle").val()) === "" || $.trim($("#infoData").val()) === "" || $.trim($('#contentInfo').val()) === "" || $.trim($("#answer").val() === "")) {
+  //     swal("You didn't fill out one of the fields", "failure");
+  //     return false;
+  //   }
+  // });
+
+
 //
 //   if (xTitle == ""){
 //     alert('Please enter title.');
@@ -727,7 +829,29 @@ function previousPage(){
 //     return true;
 //   };
 // }
+// $(empty);
 
+function emptyPost(){
+  $('#postSubmit').click(function(){
+    if($("#questionTitle").val() == '' || $("#infoData").val() == '' || $("#contentInfo").val() == '' || $("#answer").val() == '') {
+      swal('Missing information in one of information inputs', 'failure');
+      return false;
+    }
+  });
+}
+
+$(emptyPost);
+
+function emptyEditPost(dataID){
+  $("#editSubmit").click(function(){
+    if($(`#${dataID}`).val() == '' || $("#editQuestionTitle").val() == ''
+    || $('#editInfoData').val() == '' || $("#editContentInfo").val() == '' || $("#editAnswer").val() == ''){
+      swal("You missed one or some editing inputs, please double check", "failure");
+      return false;
+    }
+  });
+}
+$(emptyEditPost);
 
 function executeCRUDProject(){
   $(receiveUserInfo);

@@ -7,6 +7,12 @@ h1 {
   font-size: 30px;
   word-wrap: normal;
 }
+#titleInfo{
+  text-align: center;
+}
+#pageExplanation{
+  text-align: center;
+}
 .container{
   position: relative;
   height: 530px;
@@ -47,9 +53,10 @@ img {
 }
 .box-login {
   margin: 60px;
-  margin-top: 25px;
+  margin-top: 0px;
   padding: 10px;
   text-align: center;
+  font-weight: bold;
   display: block;
   background: -moz-linear-gradient(left, rgba(38,172,192,0) 0%, rgba(38,172,192,0.8) 15%, rgba(38,172,192,1) 19%, rgba(38,172,192,1) 20%, rgba(72,214,222,1) 50%, rgba(38,172,192,1) 80%, rgba(38,172,192,1) 81%, rgba(38,172,192,0.8) 85%, rgba(38,172,192,0) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(left, rgba(38,172,192,0) 0%,rgba(38,172,192,0.8) 15%,rgba(38,172,192,1) 19%,rgba(38,172,192,1) 20%,rgba(72,214,222,1) 50%,rgba(38,172,192,1) 80%,rgba(38,172,192,1) 81%,rgba(38,172,192,0.8) 85%,rgba(38,172,192,0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -58,6 +65,7 @@ img {
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 #reportButton {
   width: 47px;
   position: absolute;
@@ -91,12 +99,13 @@ h3{
 }
 #postCreation{
   position: absolute;
+  top: 75px;
   left: 20px;
   width: 50px;
   height: auto;
   text-align: center;
   text-decoration: none;
-  margin-top: 5px;
+  /* margin-top: 5px; */
   padding: 2px;
   border-radius: 5px;
 }
@@ -131,6 +140,28 @@ h3{
   padding: 10px;
   display: none;
   border-radius: 10px;
+  box-shadow: 0 0 0 518px rgba(0,0,0,0.7)
+}
+.close{
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  width: 23px;
+  height: 21px;
+  border: none;
+  background: lightblue;
+}
+.closeEdit{
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  width: 23px;
+  height: 21px;
+  border: none;
+  background: #ff6699;
+}
+.far{
+  font-size: 23px;
 }
 #buttonSign {
   position: absolute;
@@ -221,12 +252,12 @@ h3{
   border: none;
   color: #FFFFFF;
   text-align: center;
-  font-size: 13px;
-  padding: 7px;
-  width: 116px;
+  padding: 3px;
+  width: 70px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
+  font-size: 25px;
 }
 .heartButton span{
   cursor: pointer;
@@ -234,20 +265,20 @@ h3{
   position: relative;
   transition: 0.5s;
 }
-.heartButton span:after{
+/* .heartButton span:after{
   content: '\2665';
   position: absolute;
   opacity: 0;
   top: 0;
   right: -10px;
   transition: 0.5s;
-}
+} */
 .heartButton:hover{
   background-color: #ff6699;
 }
-.heartButton:hover span{
+/* .heartButton:hover span{
   padding-right: 12px;
-}
+} */
 .heartButton:hover span:after{
   opacity: 1;
   right: 0;
@@ -325,6 +356,32 @@ h3{
   font-size: 13px;
   padding: 7px;
   width: 118px;
+  /* transition: all 0.5s; */
+  cursor: pointer;
+  margin: 5px;
+}
+.clearEdits{
+  border-radius: 4px;
+  background-color: #ff6699;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+#editSubmit{
+  border-radius: 4px;
+  background-color: #ff6699;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 13px;
+  padding: 7px;
+  width: 140px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -344,7 +401,7 @@ h3{
 }
 #postEditBox{
   width: 370px;
-  height: 235px;
+  height: 288px;
   background: white;
   border: solid pink;
   position: absolute;
@@ -356,6 +413,7 @@ h3{
   padding: 10px;
   border-radius: 10px;
   display: none;
+  box-shadow: 0 0 0 528px rgba(0,0,0,0.7)
 }
 #postDesign {
   padding: 10px;
@@ -419,27 +477,28 @@ h3{
   margin-top: 5px;
   padding: 10px;
   margin: -15px 100px;
-  height: 471px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  height: 94%;
+  overflow: auto;
+  /* overflow-y: none;
+  overflow-x: none; */
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
-}
+} */
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   background: lightgrey;
   border-radius: 10px;
-}
+} */
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: skyblue;
   border-radius: 20px;
-}
+} */
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
+} */
 #usersPosts {
   display: grid;
   text-align: center;
@@ -473,17 +532,17 @@ ul li.s {
 #container-main {
   height: 476px;
 }
-#secondaryContainer {
+/* #secondaryContainer {
   height: 450px;
-}
+} */
 }
 @media only screen and (max-width:960px ){
 #container-main {
   height: 475px;
 }
-#secondaryContainer {
+/* #secondaryContainer {
   height: 450px;
-}
+} */
 }
 @media only screen and (max-width:792px ){
 #container-main {
@@ -509,12 +568,13 @@ ul li.s {
 #container-main{
   margin: auto 5px;
   position: absolute;
-  top: 5px;
+  top: 50px;
   height: 523px;
 }
 #secondaryContainer{
   margin-top: 30px;
-  height: 474px;
+  height: 73%;
+  margin-left: 30px;
   margin-right: 30px;
 }
 #nav {
@@ -529,15 +589,17 @@ ul li.s {
   width: 290px;
   margin-top: -65px;
   margin-left: -164px;
-  }
+}
 #postCreation {
     z-index: 2;
 }
 #dropMenu {
   visibility: visible;
   display: inline-block;
-  top: 136px;
-  left: 13px;
+  top: 10px;
+  /* left: 280px; */
+  margin-left: 50%;
+  margin-right: 50%;
   z-index: 1;
   border-radius: 10px;
 }
@@ -551,8 +613,12 @@ ul li.s {
 #navRes {
   display: none;
   position: absolute;
-  top: 169px;
-  left: 66px;
+  top: 71px;
+  /* left: 66px; */
+  /* right: 114px; */
+  margin-left: 54.3%;
+  margin-right: 19%;
+  font-size: 15px;
   background-color: #f9f9f9;
   min-width: 45px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -572,6 +638,24 @@ ul li.s {
   background-color: pink;
   border-radius: 5px;
 }
+#postCreation{
+  margin-left: auto;
+    /* margin-right: auto; */
+    left: 38%;
+    /* margin-right: 67%; */
+    /* right: 75px; */
+    top: 17px;
+}
+#reportButton{
+  left: 46%;
+  right: 50%;
+  bottom: -20px;
+}
+}
+@media only screen and (max-width:445px){
+  #postCreation{
+    left: 34%;
+  }
 }
 @media only screen and (max-width:320px ){
 h1 {
@@ -580,10 +664,20 @@ h1 {
 h3{
   font-size: small;
 }
+.box-login{
+  margin: 25px 0px;
+  width: 95%;
+}
+.container{
+  width: 115%;
+}
+#reportButton{
+  bottom: 19px;
+}
 #postEditBox{
   margin-left: 10px;
 }
-#pageExplanation{
+/* #pageExplanation{
   margin-left: 50px;
-}
+} */
 }
