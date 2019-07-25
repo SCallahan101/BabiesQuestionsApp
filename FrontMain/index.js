@@ -13,34 +13,42 @@ const usersLoginURL = 'https://evening-wave-91131.herokuapp.com/api/auth/login';
 const usersDataBankURL = 'https://evening-wave-91131.herokuapp.com/api/protected';
 const usernamesDb = 'https://evening-wave-91131.herokuapp.com/api/users';
 
-// function loginForm(){
-// $(document).ready(function(){
-//   $('#container-main').html(`
-//     <div class='box-login'>
-//      <form id='entryLogin' aria-label='Get your username and password entry' role='form'>
-//       <legend></legend>
-//       <label>Login:</label>
-//       <br>
-//       <input id='loginUsername' type='text' placeholder='Your login name' value=''>
-//       <br>
-//       <label>Password:</label>
-//       <br>
-//       <input id='loginPassword' type="password" placeholder='Your password' value=''>
-//       <br>
-//       <input id="peekPW" type='checkbox'>Peek at Your Password
-//       <br>
-//       <p>Temporary Access: Username - BellaireBoy | Password: user1234</p>
-//       <!-- <input id='entrySubmit' type='submit' value='Login'> -->
-//       <img id='entrySubmit' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png" alt='entryButton' >
-//      </form>
-//      <p>Are you new to this site? <br> If so, please click sign up button down below here.</p>
-//      <p>&#8615; &#8615; &#8615;</p>
-//      <input id='signUp' type='image' value='Sign Up' src='https://cdn3.iconfinder.com/data/icons/user-interface-2-9/34/169-512.png' alt='signup'>
-//     </div>`
-//   );
-// });
-// }
-// $(loginForm);
+function loginForm(){
+$(document).ready(function(){
+  const loggedJWT = sessionStorage.getItem("jwt");
+  console.log("transfer testing - " + loggedJWT);
+  if(loggedJWT === true){
+    console.log("condition worked");
+    transferJWT(loggedJWT);
+    // renderMainPage();
+  } else{
+    $('#container-main').html(`
+      <div class='box-login'>
+       <form id='entryLogin' aria-label='Get your username and password entry' role='form'>
+        <legend></legend>
+        <label>Login:</label>
+        <br>
+        <input id='loginUsername' type='text' placeholder='Your login name' value=''>
+        <br>
+        <label>Password:</label>
+        <br>
+        <input id='loginPassword' type="password" placeholder='Your password' value=''>
+        <br>
+        <input id="peekPW" type='checkbox'>Peek at Your Password
+        <br>
+        <p>Temporary Access: Username - BellaireBoy | Password: user1234</p>
+        <!-- <input id='entrySubmit' type='submit' value='Login'> -->
+        <img id='entrySubmit' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png" alt='entryButton' >
+       </form>
+       <p>Are you new to this site? <br> If so, please click sign up button down below here.</p>
+       <p>&#8615; &#8615; &#8615;</p>
+       <input id='signUp' type='image' value='Sign Up' src='https://cdn3.iconfinder.com/data/icons/user-interface-2-9/34/169-512.png' alt='signup'>
+      </div>`
+    );
+  }
+});
+}
+$(loginForm);
 
 function peekInPw() {
   $('#peekPW').click(function(){
@@ -75,12 +83,12 @@ function collectLoginData(){
     // console.log("password: " + password);
     // console.log(username "|" password);
     // let userInSystem = document.getElementById('loginUsername').value;
-    window.localStorage.setItem("username", username);
-    // let pwInSystem = document.getElementById('loginPassword').value;
-    window.localStorage.setItem("password", password);
-    console.log("Testing for storage " + username + " and " + password);
-    let testAccess = localStorage.getItem("username");
-    console.log("Testing worked: " + testAccess + " ?");
+    // window.sessionStorage.setItem("username", username);
+    // // let pwInSystem = document.getElementById('loginPassword').value;
+    // window.sessionStorage.setItem("password", password);
+    // console.log("Testing for storage " + username + " and " + password);
+    // let testAccess = sessionStorage.getItem("username");
+    // console.log("Testing worked: " + testAccess + " ?");
 
     getInfoFromUsername(username);
     loginEntry(username, password);
@@ -99,9 +107,9 @@ window.onbeforeunload = function(e){
 $(window).on("unload", function(e){
   // e.preventDefault();
   console.log("success with this bs");
-  const stayInWeb = localStorage.getItem("username");
+  const stayInWeb = sessionStorage.getItem("username");
   console.log("testing " + stayInWeb);
-  const pwInWeb = localStorage.getItem("password");
+  const pwInWeb = sessionStorage.getItem("password");
   console.log("testing " + pwInWeb);
   // $(function(){
   //   $('#loginUsername').val(stayInWeb);
@@ -112,7 +120,32 @@ $(window).on("unload", function(e){
   // renderMainPage();
 });
 }
-$(stayAfterRefresh);
+// $(stayAfterRefresh);
+
+function keepUserLoggedIn(){
+  $(document).ready(function(){
+    const stayInWeb = sessionStorage.getItem("username");
+    console.log("testing2 " + stayInWeb);
+    const pwInWeb = sessionStorage.getItem("password");
+    console.log("testing2 " + pwInWeb);
+    // $(function(){
+    //   $('#loginUsername').val(stayInWeb);
+    //   $('#loginPassword').val(pwInWeb);
+    //   loginEntry(stayInWeb, pwInWeb);
+    // });
+    loginEntry(stayInWeb, pwInWeb);
+  });
+}
+// $(keepUserLoggedIn);
+
+function logOutUser(){
+  $('#logOut').on('click', function(){
+    window.sessionStorage.removeItem("username");
+    window.sessionStorage.removeItem("password");
+    location.reload();
+  });
+}
+$(logOutUser);
 
 function loginEntry(user, pw){
   // console.log(user + " | " + pw);
@@ -163,11 +196,15 @@ function loginEntry(user, pw){
 
 
 function transferJWT(jwt){
-  // console.log("Second Step received: " + jwt.authToken);
+  console.log("Second Step received: " + jwt.authToken);
+  console.log("different test " + JSON.stringify(jwt));
+  window.sessionStorage.setItem("jwt", jwt.authToken);
+  const secondaryJWT = JSON.stringify(jwt);
+  console.log("Double checking on second console log: " + secondaryJWT);
   // console.log(usersDataBankURL);
   const loginJWT = {
     url: usersDataBankURL,
-    headers:{'Authorization': "Bearer " +  jwt.authToken},
+    headers:{'Authorization': "Bearer " +  jwt.authToken || secondaryJWT},
     dataType: 'json',
     method: 'GET',
     success: function loginToMainPage(){
@@ -285,9 +322,9 @@ function receiveUserInfo(){
      registerUserURL(userInfoData);
   });
 }
-function reloadTheLogin(){
-  setTimeout(function(){location.reload();}, 3000);
-}
+// function reloadTheLogin(){
+//   setTimeout(function(){location.reload();}, 3000);
+// }
 
 
 function registerUserURL(data){
@@ -300,7 +337,7 @@ function registerUserURL(data){
     success: function(data){
       swal('Your registration got through!', 'New accomplishment for you!', 'success');
       // location.reload();
-      $(reloadTheLogin);
+      // $(reloadTheLogin);
     },
     error: function (jqXHR, exception) {
        // console.log("sanity check, log in error callback"); phase 1
