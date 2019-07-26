@@ -17,9 +17,12 @@ function loginForm(){
 $(document).ready(function(){
   const loggedJWT = sessionStorage.getItem("jwt");
   console.log("transfer testing - " + loggedJWT);
-  if(loggedJWT === true){
+  if(loggedJWT){
     console.log("condition worked");
-    transferJWT(loggedJWT);
+    const data = {
+      "authToken": loggedJWT
+    }
+    transferJWT(data);
     // renderMainPage();
   } else{
     $('#container-main').html(`
@@ -94,49 +97,6 @@ function collectLoginData(){
     loginEntry(username, password);
     });
 }
-
-function stayAfterRefresh(){
-// window.addEventListener("onbeforeunload", function(event){
-//   console.log("listen to refresh button");
-// });
-window.onbeforeunload = function(e){
-  e.preventDefault();
-  console.log('Well I guess it works');
-  e.returnValue = "false";
-};
-$(window).on("unload", function(e){
-  // e.preventDefault();
-  console.log("success with this bs");
-  const stayInWeb = sessionStorage.getItem("username");
-  console.log("testing " + stayInWeb);
-  const pwInWeb = sessionStorage.getItem("password");
-  console.log("testing " + pwInWeb);
-  // $(function(){
-  //   $('#loginUsername').val(stayInWeb);
-  //   $('#loginPassword').val(pwInWeb);
-  //   loginEntry(stayInWeb, pwInWeb);
-  // });
-  loginEntry(stayInWeb, pwInWeb);
-  // renderMainPage();
-});
-}
-// $(stayAfterRefresh);
-
-function keepUserLoggedIn(){
-  $(document).ready(function(){
-    const stayInWeb = sessionStorage.getItem("username");
-    console.log("testing2 " + stayInWeb);
-    const pwInWeb = sessionStorage.getItem("password");
-    console.log("testing2 " + pwInWeb);
-    // $(function(){
-    //   $('#loginUsername').val(stayInWeb);
-    //   $('#loginPassword').val(pwInWeb);
-    //   loginEntry(stayInWeb, pwInWeb);
-    // });
-    loginEntry(stayInWeb, pwInWeb);
-  });
-}
-// $(keepUserLoggedIn);
 
 function logOutUser(){
   $('#logOut').on('click', function(){
@@ -238,6 +198,7 @@ function getInfoFromUsername(dataName){
     });
     // console.log(result.firstName + ' ' + result.lastName);
     let passTheName = result.firstName + ' ' + result.lastName;
+        window.sessionStorage.setItem("user", passTheName);
     // console.log('double check to see if passing worked ' + passTheName);
     //Now Get this information to MyPost
     myPosts(passTheName);
@@ -455,8 +416,11 @@ function renderPosts(data) {
 }
 
   function fetchUserPosts(name) {
+    console.log("For god sake of testing: " + name);
+    const stayInWeb = sessionStorage.getItem("user");
+    console.log("Double checking " + stayInWeb);
     const userPostsData = {
-      url: posts_centerURL + "/parent/" + name ,
+      url: posts_centerURL + "/parent/" + name || stayInWeb,
       dataType: 'json',
       method: 'GET'
     };
@@ -760,9 +724,10 @@ function updatePost(changePost) {
 function myPosts(data){
   $('#myPosts').click(function(e){
         // console.log('*my Posts clicked*');
-        // console.log("passing " + data + ' through myPost function'); phase 1
+        console.log("passing " + data + ' through myPost function');
         e.preventDefault();
         let name = data;
+        console.log("name checking not function: " + name);
         renderMainPage();
         fetchUserPosts(name);
         // myPostIcon(data);
