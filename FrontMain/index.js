@@ -206,7 +206,7 @@ function getInfoFromUsername(dataName){
 }
 
 function renderMainPage(){
-  $('#logOut').show();
+  $('#divLogOut').show();
   $('#container-main').html(`
   <section id='secondaryContainer'>
   <h3>Your Sharing Center</h3>
