@@ -100,8 +100,7 @@ function collectLoginData(){
 
 function logOutUser(){
   $('#logOut').on('click', function(){
-    window.sessionStorage.removeItem("username");
-    window.sessionStorage.removeItem("password");
+    window.sessionStorage.removeItem("jwt");
     location.reload();
   });
 }
@@ -198,7 +197,7 @@ function getInfoFromUsername(dataName){
     });
     // console.log(result.firstName + ' ' + result.lastName);
     let passTheName = result.firstName + ' ' + result.lastName;
-        window.sessionStorage.setItem("user", passTheName);
+        // window.sessionStorage.setItem("user", passTheName);
     // console.log('double check to see if passing worked ' + passTheName);
     //Now Get this information to MyPost
     myPosts(passTheName);
@@ -207,6 +206,7 @@ function getInfoFromUsername(dataName){
 }
 
 function renderMainPage(){
+  $('#logOut').show();
   $('#container-main').html(`
   <section id='secondaryContainer'>
   <h3>Your Sharing Center</h3>
@@ -417,6 +417,7 @@ function renderPosts(data) {
 
   function fetchUserPosts(name) {
     console.log("For god sake of testing: " + name);
+    window.sessionStorage.setItem("user", name);
     const stayInWeb = sessionStorage.getItem("user");
     console.log("Double checking " + stayInWeb);
     const userPostsData = {
@@ -433,6 +434,7 @@ function renderPosts(data) {
   }
 
   function renderUserPosts(data) {
+    $('#usersPosts').html(' ');
     // console.log("Client received data"); phase 1
     // console.log(data);
     $.each(data, function(i, obj){
@@ -728,8 +730,15 @@ function myPosts(data){
         e.preventDefault();
         let name = data;
         console.log("name checking not function: " + name);
+        const stayInWeb = sessionStorage.getItem("user");
+        console.log("Double checking " + stayInWeb);
+        if(stayInWeb){
+          renderMainPage();
+          fetchUserPosts(stayInWeb);
+        }else {
         renderMainPage();
         fetchUserPosts(name);
+      }
         // myPostIcon(data);
   });
   $('#myPosts2').click(function(e){

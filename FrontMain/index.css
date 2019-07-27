@@ -1,6 +1,7 @@
 body * {
   margin: 0;
   padding: 0;
+  font-family: 'Ubuntu', sans-serif;
 }
 h1 {
   text-align: center;
@@ -22,6 +23,20 @@ button {
 }
 img {
   cursor: pointer;
+}
+#logOut{
+  position: absolute;
+  /* top: 75px; */
+  display: inline;
+  border-radius: 4px;
+  background-color: #0099ff;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 7px;
+  width: 88px;
+  margin: 5px 0px 5px 21px;
 }
 #signUp {
   width: 50px;
@@ -140,7 +155,7 @@ h3{
   padding: 10px;
   display: none;
   border-radius: 10px;
-  box-shadow: 0 0 0 518px rgba(0,0,0,0.7)
+  box-shadow: 0 0 0 530px rgba(0,0,0,0.7)
 }
 .close{
   position: absolute;
@@ -413,7 +428,7 @@ h3{
   padding: 10px;
   border-radius: 10px;
   display: none;
-  box-shadow: 0 0 0 528px rgba(0,0,0,0.7)
+  box-shadow: 0 0 0 540px rgba(0,0,0,0.7)
 }
 #postDesign {
   padding: 10px;
@@ -473,7 +488,7 @@ h3{
   border-radius: 3px;
 }
 #secondaryContainer {
-  border: solid white 1px;
+  /* border: solid white 1px; */
   margin-top: 5px;
   padding: 10px;
   margin: -15px 100px;
@@ -672,7 +687,7 @@ h3{
   width: 115%;
 }
 #reportButton{
-  bottom: 19px;
+  bottom: -20px;
 }
 #postEditBox{
   margin-left: 10px;
