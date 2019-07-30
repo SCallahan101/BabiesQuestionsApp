@@ -1,11 +1,11 @@
 'use strict';
 
-function openTheTitleInfo(){
-  $('#titleInfo').click(function(){
-    $('#pageExplanation').toggle();
-  });
-}
-$(openTheTitleInfo);
+// function openTheTitleInfo(){
+//   $('#titleInfo').click(function(){
+//     $('#pageExplanation').toggle();
+//   });
+// }
+// $(openTheTitleInfo);
 
 
 const posts_centerURL = 'https://evening-wave-91131.herokuapp.com/questionPost';
@@ -40,8 +40,7 @@ $(document).ready(function(){
         <input id="peekPW" type='checkbox'>Peek at Your Password
         <br>
         <p>Temporary Access: Username - BellaireBoy | Password: user1234</p>
-        <!-- <input id='entrySubmit' type='submit' value='Login'> -->
-        <img id='entrySubmit' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png" alt='entryButton' >
+        <input id='entrySubmit' type='image' src="https://img.icons8.com/ios/50/000000/login-rounded-filled.png" alt='entryButton'>
        </form>
        <p>Are you new to this site? <br> If so, please click sign up button down below here.</p>
        <p>&#8615; &#8615; &#8615;</p>
@@ -52,6 +51,15 @@ $(document).ready(function(){
 });
 }
 $(loginForm);
+
+// function enterClick(){
+// $('#loginPassword').keypress(function(e){
+//   if(e.which == 13){
+//     $("#entrySubmit").click();
+//   }
+// })
+// }
+// $(enterClick);
 
 function peekInPw() {
   $('#peekPW').click(function(){
@@ -197,7 +205,7 @@ function getInfoFromUsername(dataName){
     });
     // console.log(result.firstName + ' ' + result.lastName);
     let passTheName = result.firstName + ' ' + result.lastName;
-        // window.sessionStorage.setItem("user", passTheName);
+        window.sessionStorage.setItem("user", passTheName);
     // console.log('double check to see if passing worked ' + passTheName);
     //Now Get this information to MyPost
     myPosts(passTheName);
@@ -206,6 +214,7 @@ function getInfoFromUsername(dataName){
 }
 
 function renderMainPage(){
+  $('#status').show();
   $('#divLogOut').show();
   $('#container-main').html(`
   <section id='secondaryContainer'>
@@ -218,6 +227,7 @@ function renderMainPage(){
 function reportIssue() {
   $('#reportButton').click(function(e){
     e.preventDefault();
+    $('#reportButton').hide();
     $('.container').html(`
       <h2>Issue(s) report page</h2>
       <section>
@@ -391,13 +401,8 @@ function renderPosts(data) {
         </fieldset>
       </form>
       </div>
-      <button class='heartButton' label='Heart this Post'><span>♥</span></button>
     </li>`);
     // console.log('Object id:' + obj.id);
-      $('.heartButton').click(function(e){
-        e.preventDefault();
-        swal("Your ♥heart♥ is sending to the user", "♥ Looking around for some more ♥", "success");
-      });
     // $('#' + editButtonId).click(function(e){
     //   e.preventDefault();
     //   $('#postEditBox').toggle(``);
@@ -421,7 +426,7 @@ function renderPosts(data) {
     const stayInWeb = sessionStorage.getItem("user");
     console.log("Double checking " + stayInWeb);
     const userPostsData = {
-      url: posts_centerURL + "/parent/" + name || stayInWeb,
+      url: posts_centerURL + "/parent/" + stayInWeb,
       dataType: 'json',
       method: 'GET'
     };
@@ -537,12 +542,16 @@ function renderPosts(data) {
   }
 
 function passingName(name){
+  // console.log("checking phase" + name);
+  const personName = sessionStorage.getItem("user");
+  console.log("phase checkpoint: " + personName);
   $('#singlePost').submit('#postSubmit', function(e){
     e.preventDefault();
     // console.log('The transcation executed ' + name); phase 1
     e.preventDefault();
     let data = {};
-    data.parentName = name;
+    data.parentName = personName;
+    console.log(data.parentName);
     data.zipcode = 80246;
 
     data.title =  document.getElementById('questionTitle').value;
@@ -613,7 +622,28 @@ function addPost(dataPost) {
           </div>
           <button class='deletebutton'><span>Delete this Post</span></button>
         </li>`);
-    }
+    },
+    error: function (jqXHR, exception) {
+       // console.log("sanity check, log in error callback"); phase 1
+       var msg = '';
+       if (jqXHR.status === 0) {
+           msg = 'Not connect.\n Verify Network.';
+       } else if (jqXHR.status == 404) {
+           msg = 'Requested page not found. [404]';
+       } else if (jqXHR.status == 500) {
+           msg = 'Internal Server Error [500].';
+       } else if (exception === 'parsererror') {
+            console.log(JSON.stringify(jqXHR));
+            msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
+           msg = 'Time out error.';
+       } else if (exception === 'abort') {
+           msg = 'Ajax request aborted.';
+       } else {
+           msg = 'Uncaught Error.\n' + jqXHR.responseText;
+       }
+     console.log(msg);
+   }
   });
 }
 

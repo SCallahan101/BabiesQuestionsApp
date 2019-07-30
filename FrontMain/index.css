@@ -8,9 +8,9 @@ h1 {
   font-size: 30px;
   word-wrap: normal;
 }
-#titleInfo{
+/* #titleInfo{
   text-align: center;
-}
+} */
 #pageExplanation{
   text-align: center;
 }
@@ -35,8 +35,12 @@ img {
   text-align: center;
   font-size: 15px;
   padding: 7px;
-  width: 88px;
-  margin: 5px 0px 5px 21px;
+  width: 74px;
+  margin: 5px 0px 5px 14px;
+}
+#status{
+  margin-left: 15px;
+  width: 72px;
 }
 #signUp {
   width: 50px;
@@ -82,10 +86,12 @@ img {
 }
 
 #reportButton {
-  width: 47px;
+  width: 35px;
   position: absolute;
-  left: 32px;
-  bottom: 27px;
+  left: 22px;
+  top: 90px;
+  z-index: 4;
+  /* bottom: 27px */
 }
 #reportButton:hover {
   border: 2px solid skyblue;
@@ -114,8 +120,8 @@ h3{
 }
 #postCreation{
   position: absolute;
-  top: 75px;
-  left: 20px;
+  top: 112px;
+  left: 13px;
   width: 50px;
   height: auto;
   text-align: center;
@@ -155,7 +161,7 @@ h3{
   padding: 10px;
   display: none;
   border-radius: 10px;
-  box-shadow: 0 0 0 530px rgba(0,0,0,0.7)
+  box-shadow: 0 0 0 100em rgba(0,0,0,0.7)
 }
 .close{
   position: absolute;
@@ -428,7 +434,7 @@ h3{
   padding: 10px;
   border-radius: 10px;
   display: none;
-  box-shadow: 0 0 0 540px rgba(0,0,0,0.7)
+  box-shadow: 0 0 0 100em rgba(0,0,0,0.7)
 }
 #postDesign {
   padding: 10px;
@@ -491,11 +497,14 @@ h3{
   /* border: solid white 1px; */
   margin-top: 5px;
   padding: 10px;
-  margin: -15px 100px;
+  margin: -50px 100px;
   height: 94%;
   overflow: auto;
   /* overflow-y: none;
   overflow-x: none; */
+}
+#secondaryContainer::-webkit-scrollbar {
+  width: 0 !important
 }
 /* ::-webkit-scrollbar {
   width: 10px;
