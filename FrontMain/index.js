@@ -214,6 +214,7 @@ function getInfoFromUsername(dataName){
 }
 
 function renderMainPage(){
+  // $('#reportButton').hide();
   $('#status').show();
   $('#divLogOut').show();
   $('#container-main').html(`
@@ -225,10 +226,10 @@ function renderMainPage(){
   }
 
 function reportIssue() {
-  $('#reportButton').click(function(e){
+  $('#reportBug').click(function(e){
     e.preventDefault();
-    $('#reportButton').hide();
-    $('.container').html(`
+    // $('#reportButton').hide();
+    $('#secondaryContainer').html(`
       <h2>Issue(s) report page</h2>
       <section>
         <p>Please share your concern regarding anything in this site</p>
@@ -239,13 +240,26 @@ function reportIssue() {
           <br>
           <textarea class='reporttext' placeholder='please type down here'></textarea>
           <br>
-          <button id='submitreport' type='reset'><span>Submit your concern(s)</span></button>
+          <input id='submitreport' type='submit' value='Submit your concern(s)'>
           <input class='goBack' value='Back' type='button'>
         </form>
       </section>
       `);
   });
 }
+function shareBugReport(){
+  $('#secondaryContainer').submit('#submitreport', function(e){
+    e.preventDefault();
+    // console.log('clicked worked...');
+    // let email = document.getElementById('suggestionEmail').value;
+    // let suggestion = document.getElementById('suggestiontext').value;
+    swal('Your bug report was submitted!', 'Thank you for your time!', 'success');
+    // console.log('working or not');
+    // console.log(email + ': ' + suggestion);
+    document.getElementById('submitIssue').reset();
+  });
+}
+
 
 function profileCreation() {
   $('#signUp').click(function(e) {
@@ -366,41 +380,15 @@ function renderPosts(data) {
     // console.log(editButtonId);
     $('#usersPosts').append(`
       <li class='eachPost'>
-      <ul id="questionData">Post Title: "${obj.title}"</ul>
-      <p>Parent: ${obj.parentName}</p>
-      <p>Content: "${obj.question.content}"</p>
+      <ul id="questionData">"${obj.title}"</ul>
+      <p>By ${obj.parentName}</p>
+      <p> - ${obj.question.content} - </p>
       <p>from my ${obj.question.childAge} yrs child</p>
       <p>Found answer? - ${obj.question.foundAnswer} </p>
-      <p>Date posted: ${filteredDate}</p>
+      <p>Posted by ${filteredDate}</p>
       <div class='post-user'>
       </div>
       <input type='hidden' value='${obj.id}'>
-      <br>
-
-      <div id='postEditBox'>
-      <form id='postEdit' aria-label='Edit your post' role='form'>
-      <fieldset id='postDesign'>
-        <legend>Edit your post</legend>
-          Title: <input id="editQuestionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
-          <br>
-          Content: <input id='editInfoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
-          <br>
-          Your child: <input id='editContentInfo' type='text' placeholder='Child age?'>
-          <br>
-          <p>Found your answer?</p>
-            <select id='editAnswer' name='gotAnswer'>
-              <option value=''>Pick one</option>
-              <option value='No'>No</option>
-              <option value='Yes'>Yes</option>
-            </select>
-          <br>
-          <p id='editKnowWhen'>date:  </p>
-          <br>
-          <input class='clearEdits' type="reset" value="Clear Out">
-          <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
-        </fieldset>
-      </form>
-      </div>
     </li>`);
     // console.log('Object id:' + obj.id);
     // $('#' + editButtonId).click(function(e){
@@ -447,6 +435,10 @@ function renderPosts(data) {
       let deleteButtonId = `deleteButton_${i}`;
       let editButtonId = `editCreation_${i}`;
       // console.log('For the user - ' + obj.question.date);
+
+      $('#editQuestionTitle').val(obj.title);
+
+
       let event = new Date(obj.question.date);
 
       let options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -460,10 +452,11 @@ function renderPosts(data) {
       // console.log(editButtonId);
       $('#usersPosts').append(`
         <li class='eachPost'>
-        <ul id="questionData">Post Title: ${obj.title}</ul>
-        <p>By: ${obj.parentName} <span>from: ${obj.zipcode}</span></p>
-        <p>Content: ${obj.question.content} <span> For my ${obj.question.childAge} yrs child</span></p>
-        <p>Found answer? - ${obj.question.foundAnswer} </p>
+        <ul id="questionData">"${obj.title}"</ul>
+        <p>By: ${obj.parentName}</p>
+        <p>- ${obj.question.content} -</p>
+        <p> from my ${obj.question.childAge} yrs child</p>
+        <p>Found answer? ${obj.question.foundAnswer} </p>
         <p>Date posted: ${filteredUserDate}</p>
         <div class='post-user'>
         </div>
@@ -480,9 +473,11 @@ function renderPosts(data) {
           <legend>Edit your post</legend>
             Title: <input id="editQuestionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
             <br>
+            <input id='editParentName' type='text' value='${obj.parentName}' hidden>
+            <br>
             Content: <input id='editInfoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
             <br>
-            Your child's age: <input id='editContentInfo' type='text' placeholder='Child age?'>
+            Your child's age: <input id='editContentInfo' type='text' placeholder='Child age?' value=''>
             <br>
             <p>Found your answer?</p>
               <select id='editAnswer' name='gotAnswer'>
@@ -506,6 +501,10 @@ function renderPosts(data) {
         e.preventDefault();
         $('#postEditBox').toggle(``);
         // console.log(`Edit called on ${id}`);
+        $('#editQuestionTitle').val(obj.title);
+        $('#editInfoData').val(obj.question.content);
+        $('#editContentInfo').val(obj.question.childAge);
+        $('#editAnswer').val(obj.question.foundAnswer);
         editPost(obj._id);
         emptyEditPost(obj._id);
       });
@@ -530,8 +529,8 @@ function renderPosts(data) {
       // console.log(callId);
       let editedData = {};
       editedData.id = callId;
-      editedData.parentName = 'Nobody';
-      editedData.zipcode = 55555;
+      editedData.parentName = document.getElementById('editParentName').value;
+      // editedData.zipcode = 55555;
       editedData.content = document.getElementById('editInfoData').value;
       editedData.childAge = document.getElementById('editContentInfo').value;
       editedData.foundAnswer = document.getElementById('editAnswer').value;
@@ -552,7 +551,7 @@ function passingName(name){
     let data = {};
     data.parentName = personName;
     console.log(data.parentName);
-    data.zipcode = 80246;
+    // data.zipcode = 80246;
 
     data.title =  document.getElementById('questionTitle').value;
     data.content = document.getElementById('infoData').value;
@@ -589,38 +588,13 @@ function addPost(dataPost) {
       swal('Your post was submitted', 'congratulations', 'success');
       $('#usersPosts').append(
         `<li class='eachPost'>
-          <ul id="questionData">Post Title: ${dataPost.title}</ul>
-          <p>By: ${dataPost.parentName} <span id='zipcode'>from: ${dataPost.zipcode}</span></p>
-          <p>Content: ${dataPost.content} <span id='contentInfo'> For my ${dataPost.childAge} yrs child</span></p>
-          <p>Found answer? - ${dataPost.foundAnswer} </p>
+          <ul id="questionData"> "${dataPost.title}""</ul>
+          <p>By ${dataPost.parentName}</p>
+          <p>- ${dataPost.content} -</p>
+          <p id='contentInfo'> from my ${dataPost.childAge} yrs child</p>
+          <p>Found answer? ${dataPost.foundAnswer} </p>
           <p>Date posted: ${filteredAddPostDate}</p>
           <input type='hidden' value='${dataPost.id}'>
-          <br>
-          <button class='editPost'><span>Edit my post!</span></button>
-          <div id='postEditBox'>
-          <form id='postEdit' aria-label='Edit tool' role='form'>
-          <fieldset id='postDesign'>
-            <legend>Edit your post</legend>
-              Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
-              <br>
-              Content: <input id='infoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
-              <br>
-              Your child: <input id='contentInfo' type='text' placeholder='Child age?'>
-              <br>
-              <p>Found your answer?</p>
-                <select id='answer' name='gotAnswer'>
-                  <option value=''>Pick one</option>
-                  <option value='No'>No</option>
-                  <option value='Yes'>Yes</option>
-                </select>
-              <br>
-              <p id='knowWhen'>date: </p>
-              <br>
-              <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
-            </fieldset>
-          </form>
-          </div>
-          <button class='deletebutton'><span>Delete this Post</span></button>
         </li>`);
     },
     error: function (jqXHR, exception) {
@@ -655,6 +629,8 @@ function showNav(){
   $(myPosts);
   $(generalQuestions);
   $(getSuggestion);
+  $(shareBugReport);
+  $(reportIssue);
 }
 
 function suggestionTab() {
@@ -665,7 +641,7 @@ function suggestionTab() {
         Your email please?<br>
         <input id='suggestionEmail' type='text' placeholder='Your email?'>
         <br>
-        it is for future following up
+        for future following up
         <br>
         <div>----------------------------------------------------------------</div>
         Your Suggestion(s):
@@ -710,7 +686,9 @@ function deletePost(postId) {
     method: 'DELETE',
     success: function(){
       // console.log('Post deleted with id' + postId);
-      fetchAllPosts();
+      // fetchAllPosts();
+      const theUser = sessionStorage.getItem("user");
+      fetchUserPosts(theUser);
     }
   });
 }
@@ -728,7 +706,7 @@ function updatePost(changePost) {
     data: JSON.stringify({
       "title": changePost.title,
       "parentName": changePost.parentName,
-      "zipcode": changePost.zipcode,
+      // "zipcode": changePost.zipcode,
       "question": {
         "content": changePost.content,
         "childAge": changePost.childAge,
@@ -901,7 +879,7 @@ function executeCRUDProject(){
   $(peekInPw);
   $(collectLoginData);
   $(profileCreation);
-  $(reportIssue);
+  // $(reportIssue);
   $(passingName);
   $(generalIcon);
   // $(myPostIcon);

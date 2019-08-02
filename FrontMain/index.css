@@ -71,7 +71,7 @@ img {
   /* 45deg or 270deg */
 }
 .box-login {
-  margin: 60px;
+  margin: 20px;
   margin-top: 0px;
   padding: 10px;
   text-align: center;
@@ -85,25 +85,25 @@ img {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#reportButton {
+/* #reportButton {
   width: 35px;
   position: absolute;
-  left: 22px;
-  top: 90px;
+  left: 77px;
+  bottom: 215px;
   z-index: 4;
   /* bottom: 27px */
-}
-#reportButton:hover {
+} */
+/* #reportButton:hover {
   border: 2px solid skyblue;
   border-radius: 10px;
-}
+} */
 footer {
   position: absolute;
   bottom: 0;
 }
 #nav {
   cursor: pointer;
-  margin: 0 100px;
+  margin: 5px 100px;
   height: 34px;
   text-align: center;
 }
@@ -114,13 +114,15 @@ footer {
 }
 .navBox:hover {
   text-decoration: underline;
+  border: 1px solid skyblue;
+  border-radius: 5px;
 }
 h3{
   text-align: center;
 }
 #postCreation{
   position: absolute;
-  top: 112px;
+  top: 115px;
   left: 13px;
   width: 50px;
   height: auto;
@@ -149,7 +151,7 @@ h3{
 }
 #postbox {
   width: 380px;
-  height: 250px;
+  height: auto;
   background:  white;
   border: solid lightblue;
   position: absolute;
@@ -422,7 +424,7 @@ h3{
 }
 #postEditBox{
   width: 370px;
-  height: 288px;
+  height: auto;
   background: white;
   border: solid pink;
   position: absolute;
@@ -451,7 +453,7 @@ h3{
 }
 .reporttext {
   width: 600px;
-  height: 300px;
+  height: 280px;
   resize: none;
   margin: 5px 0;
 }
@@ -460,6 +462,7 @@ h3{
 }
 #suggestionEmail{
   padding: 8px;
+  margin: 5px;
 }
 #suggestionButton{
   border-radius: 4px;
@@ -482,11 +485,12 @@ h3{
   margin: 5px 0;
 }
 #profileContainer {
-  margin-top: 20px;
-  margin-left: 40%;
+  margin-left: 36%;
   padding: 10px;
+  margin-top: 12px;
   display: inline-block;
   border-radius: 10px;
+  transition: ease all .5s;
 }
 .profiletext {
   margin: 5px;
@@ -552,21 +556,51 @@ ul li.s {
   left: 13px;
   visibility: hidden;
 }
+@media only screen and (max-width: 1600px){
+  #profileContainer{
+    margin-left: 36%;
+  }
+  /* #reportButton{
+    left: 49%;
+    bottom: 49%;
+  } */
+}
 @media only screen and (max-width:1326px ){
 #container-main {
   height: 476px;
 }
+#profileContainer{
+  margin-left: 33%;
+}
+
 /* #secondaryContainer {
   height: 450px;
+} */
+}
+@media only screen and (max-width:1024px){
+#profileContainer{
+  margin-left: 29%;
+}
+/* #reportButton{
+  left: 48%;
+  bottom: 62%;
 } */
 }
 @media only screen and (max-width:960px ){
 #container-main {
   height: 475px;
 }
+#profileContainer{
+  margin-left: 27%;
+}
 /* #secondaryContainer {
   height: 450px;
 } */
+}
+@media only screen and (max-width:817px){
+#profileContainer{
+  margin-left: 22%;
+}
 }
 @media only screen and (max-width:792px ){
 #container-main {
@@ -583,6 +617,31 @@ ul li.s {
 }
 #buttonSign{
   top: 108px;
+}
+#profileContainer{
+  margin-left: 27%;
+}
+}
+@media only screen and (max-width:788px){
+#profileContainer{
+  margin-left: 21%;
+}
+}
+@media only screen and (max-width:768px){
+#profileContainer{
+  margin-left: 21%;
+}
+.box-login{
+  margin-top: -8px;
+}
+/* #reportButton{
+  left: 48%;
+  bottom: 50%;
+} */
+}
+@media only screen and (max-width:671px){
+#profileContainer{
+  margin-left: 14%;
 }
 }
 @media only screen and (max-width:600px ){
@@ -670,16 +729,97 @@ ul li.s {
     /* right: 75px; */
     top: 17px;
 }
-#reportButton{
+/* #reportButton{
   left: 46%;
   right: 50%;
   bottom: -20px;
+} */
+#profileContainer{
+  margin-top: 10px;
+  margin-left: 13%;
+}
+#pageExplanation{
+  font-size: small;
+}
+}
+@media only screen and (max-width:540px){
+#profileContainer{
+  margin-left: 8%;
 }
 }
 @media only screen and (max-width:445px){
   #postCreation{
     left: 34%;
   }
+#profileContainer{
+  font-size: small;
+  margin-left: 9%;
+  width: 310px;
+}
+}
+@media only screen and (max-width:414px){
+#profileContainer{
+  margin-left: 8%;
+}
+#postbox{
+  margin-left: -156px;
+}
+h2{
+  font-size: medium;
+}
+}
+@media only screen and (max-width:411px){
+#profileContainer{
+  margin-left: 8%;
+}
+.box-login{
+  margin-top: -35px;
+}
+#postbox{
+  margin-left: -160px;
+}
+h2{
+  font-size: medium;
+}
+/* #reportButton{
+  bottom: 23%;
+} */
+}
+@media only screen and (max-width:375px){
+#profileContainer{
+  margin-left: 4%;
+}
+#pageExplanation{
+  /* font-size: small; */
+  margin-right: 0%;
+}
+/* #reportButton{
+  left: 46%;
+  bottom: 16%;
+} */
+}
+@media only screen and (max-width:360px){
+#profileContainer{
+  margin-left: 2%;
+}
+.box-login{
+  margin-top: -35px;
+}
+#postbox{
+  margin-left: -158px;
+  font-size: small;
+}
+h2{
+  font-size: medium;
+}
+#postEditBox{
+  margin-top: -217px;
+  margin-left: -160px;
+}
+/* #reportButton{
+  left: 46%;
+  bottom: 12%;
+} */
 }
 @media only screen and (max-width:320px ){
 h1 {
@@ -689,17 +829,24 @@ h3{
   font-size: small;
 }
 .box-login{
-  margin: 25px 0px;
+  /* margin: 25px 0px; */
+  margin-left: 0px;
   width: 95%;
 }
 .container{
   width: 115%;
 }
-#reportButton{
+/* #reportButton{
   bottom: -20px;
-}
+} */
 #postEditBox{
-  margin-left: 10px;
+  margin-left: -156px;
+}
+#profileContainer{
+  margin-left: 4%;
+}
+#pageExplanation{
+  margin-right: -17%;
 }
 /* #pageExplanation{
   margin-left: 50px;
