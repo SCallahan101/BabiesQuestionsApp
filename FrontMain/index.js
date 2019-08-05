@@ -209,7 +209,7 @@ function getInfoFromUsername(dataName){
     // console.log('double check to see if passing worked ' + passTheName);
     //Now Get this information to MyPost
     myPosts(passTheName);
-    passingName(passTheName);
+    // passingName(passTheName);
   });
 }
 
@@ -241,7 +241,6 @@ function reportIssue() {
           <textarea class='reporttext' placeholder='please type down here'></textarea>
           <br>
           <input id='submitreport' type='submit' value='Submit your concern(s)'>
-          <input class='goBack' value='Back' type='button'>
         </form>
       </section>
       `);
@@ -256,7 +255,8 @@ function shareBugReport(){
     swal('Your bug report was submitted!', 'Thank you for your time!', 'success');
     // console.log('working or not');
     // console.log(email + ': ' + suggestion);
-    document.getElementById('submitIssue').reset();
+    // document.getElementById('submitIssue').reset();
+    clearFields('submitIssue');
   });
 }
 
@@ -368,14 +368,14 @@ function renderPosts(data) {
     let id = 'questionData_' + i;
     let deleteButtonId = `deleteButton_${i}`;
     let editButtonId = `editCreation_${i}`;
-    // console.log(obj.question.date);
+    console.log('render post check for date: ' + obj.question.date);
     let event = new Date(obj.question.date);
 
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     let filteredDate = event.toLocaleDateString('en-US', options);
 
-
+    console.log('filter dates: ' + filteredDate);
     // console.log(deleteButtonId);
     // console.log(editButtonId);
     $('#usersPosts').append(`
@@ -486,7 +486,7 @@ function renderPosts(data) {
                 <option value='Yes'>Yes</option>
               </select>
             <br>
-            <p id='editKnowWhen'>Current Date: ${filteredNewDate}</p>
+            <p>Current Date: <input id='editKnowWhen' type='text' value='${filteredNewDate}'></p>
             <br>
             <input class='clearEdits' type="reset" value="Clear Out">
             <input id="editSubmit" type='submit' value='Submit the edit(s)'></input>
@@ -505,6 +505,7 @@ function renderPosts(data) {
         $('#editInfoData').val(obj.question.content);
         $('#editContentInfo').val(obj.question.childAge);
         $('#editAnswer').val(obj.question.foundAnswer);
+        $('#editKnowWhen').val(filteredNewDate);
         editPost(obj._id);
         emptyEditPost(obj._id);
       });
@@ -525,29 +526,30 @@ function renderPosts(data) {
   function editPost(callId){
     $('#container-main').submit('#editSubmit', function(e){
       e.preventDefault();
-
+      // console.log('the call id is : ' + callId);
       // console.log(callId);
       let editedData = {};
       editedData.id = callId;
+      // console.log(editedData.id);
       editedData.parentName = document.getElementById('editParentName').value;
       // editedData.zipcode = 55555;
       editedData.content = document.getElementById('editInfoData').value;
       editedData.childAge = document.getElementById('editContentInfo').value;
       editedData.foundAnswer = document.getElementById('editAnswer').value;
       editedData.date = document.getElementById('editKnowWhen').value;
+      console.log(editedData.date);
       editedData.title =  document.getElementById('editQuestionTitle').value;
       updatePost(editedData);
     });
   }
 
-function passingName(name){
+function passingName(){
   // console.log("checking phase" + name);
   const personName = sessionStorage.getItem("user");
   console.log("phase checkpoint: " + personName);
   $('#singlePost').submit('#postSubmit', function(e){
     e.preventDefault();
     // console.log('The transcation executed ' + name); phase 1
-    e.preventDefault();
     let data = {};
     data.parentName = personName;
     console.log(data.parentName);
@@ -560,9 +562,14 @@ function passingName(name){
     data.date = new Date();
     // console.log("post result" + JSON.stringify(data));
     addPost(data);
-    // empty();
+    clearFields('singlePost');
   });
 }
+function clearFields(passTheID){
+  console.log('pass or not: ' + passTheID);
+document.getElementById(passTheID).reset();
+}
+
 
 function addPost(dataPost) {
   dataPost.question = {
@@ -661,7 +668,8 @@ function getSuggestion(){
     // let suggestion = document.getElementById('suggestiontext').value;
     swal('Your suggestion was submitted!', 'Thank you for your time!', 'success');
     // console.log(email + ': ' + suggestion);
-    document.getElementById('suggestionForm').reset();
+    // document.getElementById('suggestionForm').reset();
+    clearFields('suggestionForm');
   });
 }
 
@@ -697,6 +705,7 @@ function updatePost(changePost) {
   // console.log(changePost.id);
   // console.log(changePost);
   // console.log('updating post` ' + changePost.id + ' `');
+  console.log('check new date: ' + changePost.date);
   let id = changePost.id;
   $.ajax({
     url: posts_centerURL + '/' + id,
