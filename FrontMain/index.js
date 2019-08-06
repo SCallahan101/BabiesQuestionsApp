@@ -368,7 +368,7 @@ function renderPosts(data) {
     let id = 'questionData_' + i;
     let deleteButtonId = `deleteButton_${i}`;
     let editButtonId = `editCreation_${i}`;
-    console.log('render post check for date: ' + obj.question.date);
+    // console.log('render post check for date: ' + obj.question.date);
     let event = new Date(obj.question.date);
 
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -438,7 +438,7 @@ function renderPosts(data) {
 
       $('#editQuestionTitle').val(obj.title);
 
-
+      console.log('checking viable dates: ' + obj.question.date);
       let event = new Date(obj.question.date);
 
       let options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -460,8 +460,9 @@ function renderPosts(data) {
         <p>Date posted: ${filteredUserDate}</p>
         <div class='post-user'>
         </div>
-        <input type='hidden' value='${obj.id}'>
+        <input type='hidden' value='${obj._id}'>
         <br>
+        <p>${obj._id}</p>
         <button class='editPost' id='${editButtonId}'><span>Edit my post!</span></button>
         <div id='postEditBox'>
         <h2>Modify your post</h2>
@@ -499,6 +500,7 @@ function renderPosts(data) {
 
       $('#' + editButtonId).click(function(e){
         e.preventDefault();
+        console.log('Looks for specifics ' + editButtonId);
         $('#postEditBox').toggle(``);
         // console.log(`Edit called on ${id}`);
         $('#editQuestionTitle').val(obj.title);
@@ -506,6 +508,7 @@ function renderPosts(data) {
         $('#editContentInfo').val(obj.question.childAge);
         $('#editAnswer').val(obj.question.foundAnswer);
         $('#editKnowWhen').val(filteredNewDate);
+        console.log('triple check: ' + obj._id);
         editPost(obj._id);
         emptyEditPost(obj._id);
       });
@@ -526,17 +529,17 @@ function renderPosts(data) {
   function editPost(callId){
     $('#container-main').submit('#editSubmit', function(e){
       e.preventDefault();
-      // console.log('the call id is : ' + callId);
+      console.log('the call id is : ' + callId);
       // console.log(callId);
       let editedData = {};
       editedData.id = callId;
-      // console.log(editedData.id);
+      console.log(editedData.id);
       editedData.parentName = document.getElementById('editParentName').value;
       // editedData.zipcode = 55555;
       editedData.content = document.getElementById('editInfoData').value;
       editedData.childAge = document.getElementById('editContentInfo').value;
       editedData.foundAnswer = document.getElementById('editAnswer').value;
-      editedData.date = document.getElementById('editKnowWhen').value;
+      editedData.date = new Date;
       console.log(editedData.date);
       editedData.title =  document.getElementById('editQuestionTitle').value;
       updatePost(editedData);
@@ -707,6 +710,7 @@ function updatePost(changePost) {
   // console.log('updating post` ' + changePost.id + ' `');
   console.log('check new date: ' + changePost.date);
   let id = changePost.id;
+  console.log(id);
   $.ajax({
     url: posts_centerURL + '/' + id,
     method: "PUT",
@@ -725,12 +729,14 @@ function updatePost(changePost) {
     }),
     success: function(changePost) {
       // console.log('Successful opened - ' + changePost); phase 1
-      fetchAllPosts();
+      // fetchAllPosts();
+      // swal
+      let bringName = sessionStorage.getItem("user");
+      fetchUserPosts(bringName);
     }
   })
   .done(function(changePost){
     // console.log('successful:' + changePost); phase 1
-
   })
   .fail(function(xhr, status, errorThrown){
     swal('This process has been failed', 'warning');
