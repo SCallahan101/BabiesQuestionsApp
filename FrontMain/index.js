@@ -384,7 +384,7 @@ function renderPosts(data) {
       <p>By ${obj.parentName}</p>
       <p> - ${obj.question.content} - </p>
       <p>from my ${obj.question.childAge} yrs child</p>
-      <p>Found answer? - ${obj.question.foundAnswer} </p>
+      <p>- ${obj.question.foundAnswer} answer. </p>
       <p>Posted by ${filteredDate}</p>
       <div class='post-user'>
       </div>
@@ -428,6 +428,7 @@ function renderPosts(data) {
 
   function renderUserPosts(data) {
     $('#usersPosts').html(' ');
+
     // console.log("Client received data"); phase 1
     // console.log(data);
     $.each(data, function(i, obj){
@@ -436,7 +437,7 @@ function renderPosts(data) {
       let editButtonId = `editCreation_${i}`;
       // console.log('For the user - ' + obj.question.date);
 
-      $('#editQuestionTitle').val(obj.title);
+      // $('#editQuestionTitle').val(obj.title);
 
       console.log('checking viable dates: ' + obj.question.date);
       let event = new Date(obj.question.date);
@@ -456,13 +457,11 @@ function renderPosts(data) {
         <p>By: ${obj.parentName}</p>
         <p>- ${obj.question.content} -</p>
         <p> from my ${obj.question.childAge} yrs child</p>
-        <p>Found answer? ${obj.question.foundAnswer} </p>
-        <p>Date posted: ${filteredUserDate}</p>
+        <p>${obj.question.foundAnswer} answer. </p>
+        <p>Posted by: ${filteredUserDate}</p>
         <div class='post-user'>
         </div>
         <input type='hidden' value='${obj._id}'>
-        <br>
-        <p>${obj._id}</p>
         <button class='editPost' id='${editButtonId}'><span>Edit my post!</span></button>
         <div id='postEditBox'>
         <h2>Modify your post</h2>
@@ -498,8 +497,8 @@ function renderPosts(data) {
       </li>`);
       // console.log('Object id:' + obj._id);
 
-      $('#' + editButtonId).click(function(e){
-        e.preventDefault();
+      $('#' + editButtonId).on('click', function(e){
+        // e.stopPropagation();
         console.log('Looks for specifics ' + editButtonId);
         $('#postEditBox').toggle(``);
         // console.log(`Edit called on ${id}`);
@@ -509,7 +508,11 @@ function renderPosts(data) {
         $('#editAnswer').val(obj.question.foundAnswer);
         $('#editKnowWhen').val(filteredNewDate);
         console.log('triple check: ' + obj._id);
-        editPost(obj._id);
+        window.sessionStorage.setItem("id", obj._id);
+
+
+        editPost();
+        //not necessarily to set this way.
         emptyEditPost(obj._id);
       });
       $('.closeEdit').click(function(){
@@ -526,13 +529,34 @@ function renderPosts(data) {
   });
   }
 
-  function editPost(callId){
+  // $('#container-main').submit('#editSubmit', function(e){
+  //   e.preventDefault();
+  //   // console.log('the call id is : ' + callId);
+  //   // console.log(callId);
+  //   let editedData = {};
+  //   editedData.id = document.getElementById('byID').value;
+  //   console.log(editedData.id);
+  //   editedData.parentName = document.getElementById('editParentName').value;
+  //   // editedData.zipcode = 55555;
+  //   editedData.content = document.getElementById('editInfoData').value;
+  //   editedData.childAge = document.getElementById('editContentInfo').value;
+  //   editedData.foundAnswer = document.getElementById('editAnswer').value;
+  //   editedData.date = new Date;
+  //   console.log(editedData.date);
+  //   editedData.title =  document.getElementById('editQuestionTitle').value;
+  //   console.log(editedData);
+  //   updatePost(editedData);
+  // });
+
+
+  function editPost(){
     $('#container-main').submit('#editSubmit', function(e){
       e.preventDefault();
-      console.log('the call id is : ' + callId);
+      // console.log('the call id is : ' + callId);
       // console.log(callId);
+      let newID = sessionStorage.getItem("id");
       let editedData = {};
-      editedData.id = callId;
+      editedData.id = newID;
       console.log(editedData.id);
       editedData.parentName = document.getElementById('editParentName').value;
       // editedData.zipcode = 55555;
@@ -602,10 +626,12 @@ function addPost(dataPost) {
           <p>By ${dataPost.parentName}</p>
           <p>- ${dataPost.content} -</p>
           <p id='contentInfo'> from my ${dataPost.childAge} yrs child</p>
-          <p>Found answer? ${dataPost.foundAnswer} </p>
-          <p>Date posted: ${filteredAddPostDate}</p>
+          <p>${dataPost.foundAnswer} answer.</p>
+          <p>Posted by: ${filteredAddPostDate}</p>
           <input type='hidden' value='${dataPost.id}'>
         </li>`);
+        let bringName = sessionStorage.getItem("user");
+        fetchUserPosts(bringName);
     },
     error: function (jqXHR, exception) {
        // console.log("sanity check, log in error callback"); phase 1
@@ -687,7 +713,7 @@ function createPost(){
   })
   $('#postSubmit').click(function(){
     $('#postbox').hide();
-  });
+  });  $('#editSubmit').empty();
 }
 
 function deletePost(postId) {
@@ -710,7 +736,7 @@ function updatePost(changePost) {
   // console.log('updating post` ' + changePost.id + ' `');
   console.log('check new date: ' + changePost.date);
   let id = changePost.id;
-  console.log(id);
+  console.log('updatePost: ' + id);
   $.ajax({
     url: posts_centerURL + '/' + id,
     method: "PUT",
@@ -751,6 +777,7 @@ function myPosts(data){
         // console.log('*my Posts clicked*');
         console.log("passing " + data + ' through myPost function');
         e.preventDefault();
+        $('#postCreation').show();
         let name = data;
         console.log("name checking not function: " + name);
         const stayInWeb = sessionStorage.getItem("user");
