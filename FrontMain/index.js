@@ -247,7 +247,7 @@ function reportIssue() {
   });
 }
 function shareBugReport(){
-  $('#secondaryContainer').submit('#submitreport', function(e){
+  $('#secondaryContainer').on('click', '#submitreport', function(e){
     e.preventDefault();
     // console.log('clicked worked...');
     // let email = document.getElementById('suggestionEmail').value;
@@ -289,6 +289,7 @@ function profileCreation() {
     );
     peekInProfilePw();
   });
+  receiveUserInfo();
 }
 
 function receiveUserInfo(){
@@ -347,6 +348,7 @@ function registerUserURL(data){
      swal('Something went terrible wrong. Check: ' + msg, 'warning');
    }
   });
+   clearFields('profileForm');
 }
 
 function fetchAllPosts() {
@@ -482,8 +484,8 @@ function renderPosts(data) {
             <p>Found your answer?</p>
               <select id='editAnswer' name='gotAnswer'>
                 <option value=''>Pick one</option>
-                <option value='No'>No</option>
-                <option value='Yes'>Yes</option>
+                <option value="No, I haven't find any">No</option>
+                <option value='Yes, I have found my'>Yes</option>
               </select>
             <br>
             <p>Current Date: <input id='editKnowWhen' type='text' value='${filteredNewDate}'></p>
@@ -691,7 +693,7 @@ function suggestionTab() {
 }
 
 function getSuggestion(){
-  $('#secondaryContainer').submit('#suggestionButton', function(e){
+  $('#secondaryContainer').on('click', '#suggestionButton', function(e){
     e.preventDefault();
     // console.log('clicked worked...');
     // let email = document.getElementById('suggestionEmail').value;
@@ -916,7 +918,7 @@ function emptyEditPost(dataID){
 $(emptyEditPost);
 
 function executeCRUDProject(){
-  $(receiveUserInfo);
+  // $(receiveUserInfo);
   $(freqAQs);
   $(previousPage);
   $(peekInPw);
