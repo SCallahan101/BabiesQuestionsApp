@@ -209,7 +209,7 @@ function getInfoFromUsername(dataName){
     // console.log('double check to see if passing worked ' + passTheName);
     //Now Get this information to MyPost
     myPosts(passTheName);
-    // passingName(passTheName);
+    passingName(passTheName);
   });
 }
 
@@ -509,6 +509,7 @@ function renderPosts(data) {
         $('#editKnowWhen').val(filteredNewDate);
         console.log('triple check: ' + obj._id);
         window.sessionStorage.setItem("id", obj._id);
+        window.sessionStorage.setItem('nameOfParent', obj.parentName);
 
 
         editPost();
@@ -570,16 +571,16 @@ function renderPosts(data) {
     });
   }
 
-function passingName(){
-  // console.log("checking phase" + name);
-  const personName = sessionStorage.getItem("user");
-  console.log("phase checkpoint: " + personName);
+function passingName(name){
+  console.log("checking phase" + name);
+  // const personName = sessionStorage.getItem("user");
+  // console.log("phase checkpoint: " + personName);
   $('#singlePost').submit('#postSubmit', function(e){
     e.preventDefault();
     // console.log('The transcation executed ' + name); phase 1
     let data = {};
-    data.parentName = personName;
-    console.log(data.parentName);
+    data.parentName = name;
+    console.log('In passing name function' + data.parentName);
     // data.zipcode = 80246;
 
     data.title =  document.getElementById('questionTitle').value;
@@ -922,7 +923,7 @@ function executeCRUDProject(){
   $(collectLoginData);
   $(profileCreation);
   // $(reportIssue);
-  $(passingName);
+  // $(passingName);
   $(generalIcon);
   // $(myPostIcon);
 }
