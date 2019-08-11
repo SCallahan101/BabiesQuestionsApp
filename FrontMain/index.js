@@ -148,6 +148,8 @@ function loginEntry(user, pw){
            msg = 'Uncaught Error.\n' + jqXHR.responseText;
        }
      console.log(msg);
+     swal('Please check your username and password','error', 'warning');
+
    }
   };
   // console.log(loginData);
@@ -222,17 +224,19 @@ function renderMainPage(){
   <h3>Your Sharing Center</h3>
    <ul id='usersPosts'>
    </ul>
+  </section>
+  <section id="thirdContainer">
   </section>`);
   }
 
 function reportIssue() {
-  $('#reportBug').click(function(e){
+  $('.reportBug').click(function(e){
     e.preventDefault();
     // $('#reportButton').hide();
     $('#secondaryContainer').html(`
-      <h2>Issue(s) report page</h2>
-      <section>
-        <p>Please share your concern regarding anything in this site</p>
+      <h2 class='bugWords'>Issue(s) report page</h2>
+      <section id='frameBugWork'>
+        <p class='bugWords'>Please share your concern regarding anything in this site</p>
         <form id='submitIssue' aria-label='Submit your concern' role='form'>
           <input class='reportbox' type='text' placeholder='Your name?'>
           <br>
@@ -673,7 +677,7 @@ function showNav(){
 }
 
 function suggestionTab() {
-  $('#suggestionTab').click( function(e){
+  $('.suggestionTab').click( function(e){
     e.preventDefault();
     $('#secondaryContainer').html(`
       <form id='suggestionForm' aria-label='Make any suggestion to improve the site.' role='form'>
@@ -693,7 +697,7 @@ function suggestionTab() {
 }
 
 function getSuggestion(){
-  $('#secondaryContainer').on('click', '#suggestionButton', function(e){
+  $('#thirdContainer').on('click', '#suggestionButton', function(e){
     e.preventDefault();
     // console.log('clicked worked...');
     // let email = document.getElementById('suggestionEmail').value;
@@ -776,7 +780,7 @@ function updatePost(changePost) {
 }
 
 function myPosts(data){
-  $('#myPosts').click(function(e){
+  $('.myPosts').on('click', function(e){
         // console.log('*my Posts clicked*');
         console.log("passing " + data + ' through myPost function');
         e.preventDefault();
@@ -794,16 +798,13 @@ function myPosts(data){
       }
         // myPostIcon(data);
   });
-  $('#myPosts2').click(function(e){
-        // console.log('*my Posts clicked*');
-        // console.log("passing Icon " + data + ' through myPost function'); phase 1
-        e.preventDefault();
-        let name = data;
-        renderMainPage();
-        fetchUserPosts(name);
-        // myPostIcon(data);
-  });
 }
+// function myPosts2(data){
+//   $('#myPosts2').click(function(e){
+//       e.preventDefault();
+//       myPosts(data);
+//   });
+// }
 
 function generalQuestions(){
   $('#generalQuestions').click(function(e){

@@ -452,10 +452,11 @@ h3{
   text-align: center;
 }
 .reporttext {
-  width: 600px;
+  width: 100%;
   height: 280px;
   resize: none;
   margin: 5px 0;
+  text-align: center;
 }
 #suggestionForm{
   text-align: center;
@@ -478,11 +479,17 @@ h3{
   margin: 5px;
 }
 #suggestiontext {
-  width: 500px;
+  width: 100%;
   height: 200px;
   text-align: center;
   resize: none;
   margin: 5px 0;
+}
+.bugWords{
+  text-align: center;
+}
+#submitIssue{
+  text-align: center;
 }
 #profileContainer {
   margin-left: 36%;
@@ -634,10 +641,85 @@ ul li.s {
 .box-login{
   margin-top: -8px;
 }
+#secondaryContainer{
+  height: 155%;
+}
 /* #reportButton{
   left: 48%;
   bottom: 50%;
 } */
+}
+@media only screen and (max-width:684px){
+  #postCreation{
+    margin-left: auto;
+      /* margin-right: auto; */
+      left: 38%;
+      /* margin-right: 67%; */
+      /* right: 75px; */
+      top: 17px;
+      z-index: 2;
+  }
+  #dropMenu {
+    visibility: visible;
+    display: inline-block;
+    top: 10px;
+    /* left: 280px; */
+    margin-left: 50%;
+    margin-right: 50%;
+    z-index: 1;
+    border-radius: 10px;
+  }
+  #dropMenu:hover {
+    border: 2px solid skyblue;
+  }
+  #menuDesignation .hide{
+    position: relative;
+    display: inline-block;
+  }
+  #navRes {
+    display: none;
+    position: absolute;
+    top: 71px;
+    /* left: 66px; */
+    /* right: 114px; */
+    margin-left: 54.3%;
+    margin-right: 19%;
+    font-size: 15px;
+    background-color: #f9f9f9;
+    min-width: 45px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  #menuDesignation:hover #navRes {
+    display: block;
+    border: 1px solid black;
+  }
+  .navBoxRes {
+    list-style: none;
+    border-bottom: 1px solid black;
+    margin: 5px;
+  }
+  .navBoxRes:hover{
+    background-color: pink;
+    border-radius: 5px;
+  }
+  #nav {
+    visibility: hidden;
+  }
+  #status {
+    margin-left: 15px;
+    margin-top: -30px;
+    width: 72px;
+    font-size: smaller;
+}
+#logOut{
+  font-size: small;
+  width: 62px;
+}
+#secondaryContainer{
+  margin: 20px 100px;
+}
 }
 @media only screen and (max-width:671px){
 #profileContainer{
@@ -649,20 +731,20 @@ ul li.s {
   font-size: 20px;
 }
 #container-main{
-  margin: auto 5px;
+  margin: auto 12%;
   position: absolute;
   top: 50px;
   height: 523px;
 }
 #secondaryContainer{
-  margin-top: 30px;
-  height: 73%;
+  margin-top: 45px;
+  height: 90%;
   margin-left: 30px;
-  margin-right: 30px;
+  margin-right: 10px;
 }
-#nav {
+/* #nav {
   visibility: hidden;
-}
+} */
 #postbox{
   width: 290px;
   margin-top: -127px;
@@ -673,15 +755,12 @@ ul li.s {
   margin-top: -65px;
   margin-left: -164px;
 }
-#postCreation {
-    z-index: 2;
-}
-#dropMenu {
+/* #dropMenu {
   visibility: visible;
   display: inline-block;
-  top: 10px;
+  top: 10px; */
   /* left: 280px; */
-  margin-left: 50%;
+  /* margin-left: 50%;
   margin-right: 50%;
   z-index: 1;
   border-radius: 10px;
@@ -696,10 +775,10 @@ ul li.s {
 #navRes {
   display: none;
   position: absolute;
-  top: 71px;
+  top: 71px; */
   /* left: 66px; */
   /* right: 114px; */
-  margin-left: 54.3%;
+  /* margin-left: 54.3%;
   margin-right: 19%;
   font-size: 15px;
   background-color: #f9f9f9;
@@ -720,15 +799,16 @@ ul li.s {
 .navBoxRes:hover{
   background-color: pink;
   border-radius: 5px;
-}
-#postCreation{
-  margin-left: auto;
+} */
+/* #postCreation{
+  margin-left: auto; */
     /* margin-right: auto; */
-    left: 38%;
+    /* left: 38%; */
     /* margin-right: 67%; */
     /* right: 75px; */
-    top: 17px;
-}
+    /* top: 17px;
+    z-index: 2;
+} */
 /* #reportButton{
   left: 46%;
   right: 50%;
@@ -741,6 +821,13 @@ ul li.s {
 #pageExplanation{
   font-size: small;
 }
+.reporttext{
+  width: 301px;
+  height: 205px;
+}
+#submitIssue{
+/* width: 100px; */
+}
 }
 @media only screen and (max-width:540px){
 #profileContainer{
@@ -748,6 +835,12 @@ ul li.s {
 }
 }
 @media only screen and (max-width:445px){
+#container-main{
+  margin: auto 0px;
+}
+#frameBugWork{
+  text-align: center;
+}
   #postCreation{
     left: 34%;
   }
@@ -766,6 +859,16 @@ ul li.s {
 }
 h2{
   font-size: medium;
+}
+#suggestionForm{
+  font-size: small;
+  width: 345px;
+}
+#suggestiontext{
+  width: 100%;
+}
+#secondaryContainer{
+  margin-left: 10px;
 }
 }
 @media only screen and (max-width:411px){
@@ -792,6 +895,9 @@ h2{
 #pageExplanation{
   /* font-size: small; */
   margin-right: 0%;
+}
+#suggestionForm{
+  width: 305px;
 }
 /* #reportButton{
   left: 46%;
