@@ -64,7 +64,7 @@ $(loginForm);
 function peekInPw() {
   $('#peekPW').click(function(){
     // e.preventDefault();
-    const x = document.getElementById("loginPassword");
+    const x = $("#loginPassword");
     if (x.type === "password") {
       x.type = "text";
     } else {
@@ -74,7 +74,7 @@ function peekInPw() {
 }
 function peekInProfilePw() {
   $('#peekProfilePW').click(function(){
-    const y = document.getElementById("profilePW");
+    const y = $("#profilePW");
     if (y.type === "password") {
       y.type = "text";
     } else {
@@ -88,9 +88,9 @@ function collectLoginData(){
   $('#entryLogin').on('click','#entrySubmit', function(e){
     e.preventDefault();
     // const entryInfo = {};
-    let username = document.getElementById('loginUsername').value;
+    let username = $('#loginUsername').val();
     // console.log('username: ' +  username); phase 1
-    let password = document.getElementById('loginPassword').value;
+    let password = $('#loginPassword').val();
     // console.log("password: " + password);
     // console.log(username "|" password);
     // let userInSystem = document.getElementById('loginUsername').value;
@@ -208,7 +208,7 @@ function getInfoFromUsername(dataName){
     // console.log(result.firstName + ' ' + result.lastName);
     let passTheName = result.firstName + ' ' + result.lastName;
         window.sessionStorage.setItem("user", passTheName);
-    // console.log('double check to see if passing worked ' + passTheName);
+    console.log('double check to see if passing worked ' + passTheName);
     //Now Get this information to MyPost
     myPosts(passTheName);
     passingName(passTheName);
@@ -225,8 +225,7 @@ function renderMainPage(){
    <ul id='usersPosts'>
    </ul>
   </section>
-  <section id="thirdContainer">
-  </section>`);
+`);
   }
 
 function reportIssue() {
@@ -268,7 +267,8 @@ function shareBugReport(){
 function profileCreation() {
   $('#signUp').click(function(e) {
     e.preventDefault();
-    $('.container').html(
+    $('#container-main').html(' ');
+    $('#register').html(
       `<form id='profileForm' aria-label='Create your new profile' role='form'>
         <fieldset id='profileContainer'>
           <legend>Profile Builder</legend>
@@ -297,16 +297,16 @@ function profileCreation() {
 }
 
 function receiveUserInfo(){
-  $('.container').submit('#profileForm', function(e){
+  $('#register').submit('#profileForm', function(e){
     e.preventDefault();
     let userInfoData = {};
-    userInfoData.username = document.getElementById('profileUser').value;
+    userInfoData.username = $('#profileUser').val();
     // console.log(userInfoData.username);
-    userInfoData.password = document.getElementById('profilePW').value;
+    userInfoData.password = $('#profilePW').val();
     // console.log(userInfoData.password);
-    userInfoData.firstName = document.getElementById('profileFN').value;
+    userInfoData.firstName = $('#profileFN').val();
     // console.log(userInfoData.firstName);
-    userInfoData.lastName = document.getElementById('profileLN').value;
+    userInfoData.lastName = $("#profileLN").val();
     // console.log(userInfoData.lastName);
      // console.log(userInfoData);
      registerUserURL(userInfoData);
@@ -565,14 +565,14 @@ function renderPosts(data) {
       let editedData = {};
       editedData.id = newID;
       console.log(editedData.id);
-      editedData.parentName = document.getElementById('editParentName').value;
+      editedData.parentName = $('#editParentName').val();
       // editedData.zipcode = 55555;
-      editedData.content = document.getElementById('editInfoData').value;
-      editedData.childAge = document.getElementById('editContentInfo').value;
-      editedData.foundAnswer = document.getElementById('editAnswer').value;
+      editedData.content = $('editInfoData').val();
+      editedData.childAge = $('#editContentInfo').val();
+      editedData.foundAnswer = $('#editAnswer').val();
       editedData.date = new Date;
       console.log(editedData.date);
-      editedData.title =  document.getElementById('editQuestionTitle').value;
+      editedData.title =  $('#editQuestionTitle').val();
       updatePost(editedData);
     });
   }
@@ -589,10 +589,10 @@ function passingName(name){
     console.log('In passing name function' + data.parentName);
     // data.zipcode = 80246;
 
-    data.title =  document.getElementById('questionTitle').value;
-    data.content = document.getElementById('infoData').value;
-    data.childAge = document.getElementById('contentInfo').value;
-    data.foundAnswer = document.getElementById('answer').value;
+    data.title =  $('#questionTitle').val();
+    data.content = $('#infoData').val();
+    data.childAge = $('#contentInfo').val();
+    data.foundAnswer = $('#answer').val();
     data.date = new Date();
     // console.log("post result" + JSON.stringify(data));
     addPost(data);
@@ -601,7 +601,8 @@ function passingName(name){
 }
 function clearFields(passTheID){
   console.log('pass or not: ' + passTheID);
-document.getElementById(passTheID).reset();
+// $(passTheID).reset();
+$("#"+ passTheID)[0].reset();
 }
 
 
@@ -697,7 +698,7 @@ function suggestionTab() {
 }
 
 function getSuggestion(){
-  $('#thirdContainer').on('click', '#suggestionButton', function(e){
+  $('#secondaryContainer').on('click', '#suggestionButton', function(e){
     e.preventDefault();
     // console.log('clicked worked...');
     // let email = document.getElementById('suggestionEmail').value;

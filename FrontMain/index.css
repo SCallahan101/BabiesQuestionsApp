@@ -84,7 +84,9 @@ img {
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+#register{
+  margin-top: -475px;
+}
 /* #reportButton {
   width: 35px;
   position: absolute;
@@ -492,7 +494,7 @@ h3{
   text-align: center;
 }
 #profileContainer {
-  margin-left: 36%;
+  margin-left: 38%;
   padding: 10px;
   margin-top: 12px;
   display: inline-block;
@@ -598,7 +600,7 @@ ul li.s {
   height: 475px;
 }
 #profileContainer{
-  margin-left: 27%;
+  margin-left: 25%;
 }
 /* #secondaryContainer {
   height: 450px;
@@ -736,6 +738,9 @@ ul li.s {
   top: 50px;
   height: 523px;
 }
+#register{
+  margin-top: 0%;
+}
 #secondaryContainer{
   margin-top: 45px;
   height: 90%;
@@ -853,6 +858,9 @@ ul li.s {
 @media only screen and (max-width:414px){
 #profileContainer{
   margin-left: 8%;
+}
+#register{
+  margin-top: 0%;
 }
 #postbox{
   margin-left: -156px;
