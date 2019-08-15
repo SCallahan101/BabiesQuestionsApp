@@ -8,13 +8,10 @@ h1 {
   font-size: 30px;
   word-wrap: normal;
 }
-/* #titleInfo{
-  text-align: center;
-} */
-#pageExplanation{
+#pageExplanation {
   text-align: center;
 }
-.container{
+.container {
   position: relative;
   height: 530px;
 }
@@ -24,9 +21,8 @@ button {
 img {
   cursor: pointer;
 }
-#logOut{
+#logOut {
   position: absolute;
-  /* top: 75px; */
   display: inline;
   border-radius: 4px;
   background-color: #0099ff;
@@ -38,7 +34,7 @@ img {
   width: 74px;
   margin: 5px 0px 5px 14px;
 }
-#status{
+#status {
   margin-left: 15px;
   width: 72px;
 }
@@ -57,7 +53,7 @@ img {
   margin: 5px 0;
   padding: 4px;
 }
-#nav .hide{
+#nav .hide {
   visibility: hidden;
 }
 #entrySubmit {
@@ -68,7 +64,6 @@ img {
   transform: rotate(270deg);
   background-color: white;
   border-radius: 30px;
-  /* 45deg or 270deg */
 }
 .box-login {
   margin: 20px;
@@ -84,21 +79,9 @@ img {
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-#register{
+#register {
   margin-top: -475px;
 }
-/* #reportButton {
-  width: 35px;
-  position: absolute;
-  left: 77px;
-  bottom: 215px;
-  z-index: 4;
-  /* bottom: 27px */
-} */
-/* #reportButton:hover {
-  border: 2px solid skyblue;
-  border-radius: 10px;
-} */
 footer {
   position: absolute;
   bottom: 0;
@@ -119,10 +102,10 @@ footer {
   border: 1px solid skyblue;
   border-radius: 5px;
 }
-h3{
+h3 {
   text-align: center;
 }
-#postCreation{
+#postCreation {
   position: absolute;
   top: 115px;
   left: 13px;
@@ -130,25 +113,14 @@ h3{
   height: auto;
   text-align: center;
   text-decoration: none;
-  /* margin-top: 5px; */
   padding: 2px;
   border-radius: 5px;
 }
-#postCreation:hover{
+#postCreation:hover {
   border: 2px solid skyblue;
   border-radius: 10px;
 }
-#editCreation{
-  /* background-color: gold;
-  border: solid 2px gray;
-  color: black;
-  text-align: center;
-  text-decoration: none;
-  margin-top: 5px;
-  padding: 2px;
-  border-radius: 5px; */
-}
-#answer{
+#answer {
   margin: 5px;
 }
 #postbox {
@@ -167,7 +139,7 @@ h3{
   border-radius: 10px;
   box-shadow: 0 0 0 100em rgba(0,0,0,0.7)
 }
-.close{
+.close {
   position: absolute;
   right: 20px;
   top: 12px;
@@ -176,7 +148,7 @@ h3{
   border: none;
   background: lightblue;
 }
-.closeEdit{
+.closeEdit {
   position: absolute;
   right: 20px;
   top: 12px;
@@ -185,7 +157,7 @@ h3{
   border: none;
   background: #ff6699;
 }
-.far{
+.far {
   font-size: 23px;
 }
 #buttonSign {
@@ -193,7 +165,7 @@ h3{
   left: 10px;
   top: 100px;
 }
-.editPost{
+.editPost {
   display: inline-block;
   border-radius: 4px;
   background-color: #0099ff;
@@ -207,13 +179,13 @@ h3{
   cursor: pointer;
   margin: 5px;
 }
-.editPost span{
+.editPost span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
-.editPost span:after{
+.editPost span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -221,20 +193,19 @@ h3{
   right: -20px;
   transition: 0.5s;
 }
-.editPost:hover{
+.editPost:hover {
   background-color: #ff6699;
 }
-.editPost:hover span{
+.editPost:hover span {
   padding-right: 12px;
 }
-.editPost:hover span:after{
+.editPost:hover span:after {
   opacity: 1;
   right: 0;
 }
-.deletebutton{
+.deletebutton {
   display: inline-block;
   border-radius: 4px;
-  /* ff3300 */
   background-color: #0099ff;
   border: none;
   color: #FFFFFF;
@@ -246,13 +217,13 @@ h3{
   cursor: pointer;
   margin: 5px;
 }
-.deletebutton span{
+.deletebutton span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
-.deletebutton span:after{
+.deletebutton span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -263,14 +234,14 @@ h3{
 .deletebutton:hover {
   background-color: #ff3300;
 }
-.deletebutton:hover span{
+.deletebutton:hover span {
   padding-right: 12px;
 }
-.deletebutton:hover span:after{
+.deletebutton:hover span:after {
   opacity: 1;
   right: 0;
 }
-.heartButton{
+.heartButton {
   display: inline-block;
   border-radius: 4px;
   background-color: #0099ff;
@@ -284,31 +255,20 @@ h3{
   margin: 5px;
   font-size: 25px;
 }
-.heartButton span{
+.heartButton span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
-/* .heartButton span:after{
-  content: '\2665';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -10px;
-  transition: 0.5s;
-} */
-.heartButton:hover{
+.heartButton:hover {
   background-color: #ff6699;
 }
-/* .heartButton:hover span{
-  padding-right: 12px;
-} */
-.heartButton:hover span:after{
+.heartButton:hover span:after {
   opacity: 1;
   right: 0;
 }
-#submitreport{
+#submitreport {
   display: inline-block;
   border-radius: 4px;
   background-color: #0099ff;
@@ -322,13 +282,13 @@ h3{
   cursor: pointer;
   margin: 5px;
 }
-#submitreport span{
+#submitreport span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
-#submitreport span:after{
+#submitreport span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -339,14 +299,14 @@ h3{
 #submitreport:hover {
   background-color: #33cc33;
 }
-#submitreport:hover span{
+#submitreport:hover span {
   padding-right: 12px;
 }
-#submitreport:hover span:after{
+#submitreport:hover span:after {
   opacity: 1;
   right: 0;
 }
-.goBack{
+.goBack {
   border-radius: 4px;
   background-color: #0099ff;
   border: none;
@@ -359,7 +319,7 @@ h3{
   cursor: pointer;
   margin: 5px;
 }
-#postSubmit{
+#postSubmit {
   border-radius: 4px;
   background-color: #0099ff;
   border: none;
@@ -372,7 +332,7 @@ h3{
   cursor: pointer;
   margin: 5px;
 }
-.clearOutButton{
+.clearOutButton {
   border-radius: 4px;
   background-color: #0099ff;
   border: none;
@@ -381,11 +341,10 @@ h3{
   font-size: 13px;
   padding: 7px;
   width: 118px;
-  /* transition: all 0.5s; */
   cursor: pointer;
   margin: 5px;
 }
-.clearEdits{
+.clearEdits {
   border-radius: 4px;
   background-color: #ff6699;
   border: none;
@@ -398,7 +357,7 @@ h3{
   cursor: pointer;
   margin: 5px;
 }
-#editSubmit{
+#editSubmit {
   border-radius: 4px;
   background-color: #ff6699;
   border: none;
@@ -411,7 +370,7 @@ h3{
   cursor: pointer;
   margin: 5px;
 }
-#createdProfile{
+#createdProfile {
   border-radius: 4px;
   background-color: #0099ff;
   border: none;
@@ -424,7 +383,7 @@ h3{
   cursor: pointer;
   margin: 5px;
 }
-#postEditBox{
+#postEditBox {
   width: 370px;
   height: auto;
   background: white;
@@ -460,37 +419,7 @@ h3{
   margin: 5px 0;
   text-align: center;
 }
-#suggestionForm{
-  text-align: center;
-}
-#suggestionEmail{
-  padding: 8px;
-  margin: 5px;
-}
-#suggestionButton{
-  border-radius: 4px;
-  background-color: #0099ff;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 13px;
-  padding: 7px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
-#suggestiontext {
-  width: 100%;
-  height: 200px;
-  text-align: center;
-  resize: none;
-  margin: 5px 0;
-}
-.bugWords{
-  text-align: center;
-}
-#submitIssue{
+#submitIssue {
   text-align: center;
 }
 #profileContainer {
@@ -507,35 +436,15 @@ h3{
   border-radius: 3px;
 }
 #secondaryContainer {
-  /* border: solid white 1px; */
   margin-top: 5px;
   padding: 10px;
   margin: -50px 100px;
   height: 94%;
   overflow: auto;
-  /* overflow-y: none;
-  overflow-x: none; */
 }
 #secondaryContainer::-webkit-scrollbar {
   width: 0 !important
 }
-/* ::-webkit-scrollbar {
-  width: 10px;
-} */
-/* Track */
-/* ::-webkit-scrollbar-track {
-  background: lightgrey;
-  border-radius: 10px;
-} */
-/* Handle */
-/* ::-webkit-scrollbar-thumb {
-  background: skyblue;
-  border-radius: 20px;
-} */
-/* Handle on hover */
-/* ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-} */
 #usersPosts {
   display: grid;
   text-align: center;
@@ -552,7 +461,6 @@ h3{
 }
 ul.f {
   list-style-position: inside;
-  /* border: 2px solid blue; */
   margin-left: 20px;
 }
 ul li.s {
@@ -566,98 +474,76 @@ ul li.s {
   visibility: hidden;
 }
 @media only screen and (max-width: 1600px){
-  #profileContainer{
+  #profileContainer {
     margin-left: 36%;
   }
-  /* #reportButton{
-    left: 49%;
-    bottom: 49%;
-  } */
 }
 @media only screen and (max-width:1326px ){
-#container-main {
-  height: 476px;
-}
-#profileContainer{
-  margin-left: 33%;
-}
-
-/* #secondaryContainer {
-  height: 450px;
-} */
+  #container-main {
+    height: 476px;
+  }
+  #profileContainer {
+    margin-left: 33%;
+  }
 }
 @media only screen and (max-width:1024px){
-#profileContainer{
-  margin-left: 29%;
-}
-/* #reportButton{
-  left: 48%;
-  bottom: 62%;
-} */
-}
-@media only screen and (max-width:960px ){
-#container-main {
-  height: 475px;
-}
-#profileContainer{
-  margin-left: 25%;
-}
-/* #secondaryContainer {
-  height: 450px;
-} */
+  #profileContainer {
+    margin-left: 29%;
+  }
+  }
+  @media only screen and (max-width:960px ){
+  #container-main {
+    height: 475px;
+  }
+  #profileContainer {
+    margin-left: 25%;
+  }
 }
 @media only screen and (max-width:817px){
-#profileContainer{
-  margin-left: 22%;
-}
+  #profileContainer {
+    margin-left: 22%;
+  }
 }
 @media only screen and (max-width:792px ){
-#container-main {
-  height: 486px;
-}
-#usersPosts {
-  text-align: center;
-  display: grid;
-  grid-template-columns: auto;
-  grid-gap: 10px;
-}
-#title {
-  font-size: 25px;
-}
-#buttonSign{
-  top: 108px;
-}
-#profileContainer{
-  margin-left: 27%;
-}
+  #container-main {
+    height: 486px;
+  }
+  #usersPosts {
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 10px;
+  }
+  #title {
+    font-size: 25px;
+  }
+  #buttonSign {
+    top: 108px;
+  }
+  #profileContainer {
+    margin-left: 27%;
+  }
 }
 @media only screen and (max-width:788px){
-#profileContainer{
-  margin-left: 21%;
-}
+  #profileContainer {
+    margin-left: 21%;
+  }
 }
 @media only screen and (max-width:768px){
-#profileContainer{
-  margin-left: 21%;
-}
-.box-login{
-  margin-top: -8px;
-}
-#secondaryContainer{
-  height: 155%;
-}
-/* #reportButton{
-  left: 48%;
-  bottom: 50%;
-} */
+  #profileContainer {
+    margin-left: 21%;
+  }
+  .box-login {
+    margin-top: -8px;
+  }
+  #secondaryContainer {
+    height: 155%;
+  }
 }
 @media only screen and (max-width:684px){
-  #postCreation{
+  #postCreation {
     margin-left: auto;
-      /* margin-right: auto; */
       left: 38%;
-      /* margin-right: 67%; */
-      /* right: 75px; */
       top: 17px;
       z-index: 2;
   }
@@ -665,7 +551,6 @@ ul li.s {
     visibility: visible;
     display: inline-block;
     top: 10px;
-    /* left: 280px; */
     margin-left: 50%;
     margin-right: 50%;
     z-index: 1;
@@ -674,7 +559,7 @@ ul li.s {
   #dropMenu:hover {
     border: 2px solid skyblue;
   }
-  #menuDesignation .hide{
+  #menuDesignation .hide {
     position: relative;
     display: inline-block;
   }
@@ -682,8 +567,6 @@ ul li.s {
     display: none;
     position: absolute;
     top: 71px;
-    /* left: 66px; */
-    /* right: 114px; */
     margin-left: 54.3%;
     margin-right: 19%;
     font-size: 15px;
@@ -702,7 +585,7 @@ ul li.s {
     border-bottom: 1px solid black;
     margin: 5px;
   }
-  .navBoxRes:hover{
+  .navBoxRes:hover {
     background-color: pink;
     border-radius: 5px;
   }
@@ -715,254 +598,157 @@ ul li.s {
     width: 72px;
     font-size: smaller;
 }
-#logOut{
-  font-size: small;
-  width: 62px;
-}
-#secondaryContainer{
-  margin: 20px 100px;
-}
+  #logOut {
+    font-size: small;
+    width: 62px;
+  }
+  #secondaryContainer {
+    margin: 20px 100px;
+  }
 }
 @media only screen and (max-width:671px){
-#profileContainer{
-  margin-left: 14%;
-}
+  #profileContainer {
+    margin-left: 14%;
+  }
 }
 @media only screen and (max-width:600px ){
-#title {
-  font-size: 20px;
-}
-#container-main{
-  margin: auto 12%;
-  position: absolute;
-  top: 50px;
-  height: 523px;
-}
-#register{
-  margin-top: 0%;
-}
-#secondaryContainer{
-  margin-top: 45px;
-  height: 90%;
-  margin-left: 30px;
-  margin-right: 10px;
-}
-/* #nav {
-  visibility: hidden;
-} */
-#postbox{
-  width: 290px;
-  margin-top: -127px;
-  margin-left: -128px;
-}
-#postEditBox {
-  width: 290px;
-  margin-top: -65px;
-  margin-left: -164px;
-}
-/* #dropMenu {
-  visibility: visible;
-  display: inline-block;
-  top: 10px; */
-  /* left: 280px; */
-  /* margin-left: 50%;
-  margin-right: 50%;
-  z-index: 1;
-  border-radius: 10px;
-}
-#dropMenu:hover {
-  border: 2px solid skyblue;
-}
-#menuDesignation .hide{
-  position: relative;
-  display: inline-block;
-}
-#navRes {
-  display: none;
-  position: absolute;
-  top: 71px; */
-  /* left: 66px; */
-  /* right: 114px; */
-  /* margin-left: 54.3%;
-  margin-right: 19%;
-  font-size: 15px;
-  background-color: #f9f9f9;
-  min-width: 45px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
-#menuDesignation:hover #navRes {
-  display: block;
-  border: 1px solid black;
-}
-.navBoxRes {
-  list-style: none;
-  border-bottom: 1px solid black;
-  margin: 5px;
-}
-.navBoxRes:hover{
-  background-color: pink;
-  border-radius: 5px;
-} */
-/* #postCreation{
-  margin-left: auto; */
-    /* margin-right: auto; */
-    /* left: 38%; */
-    /* margin-right: 67%; */
-    /* right: 75px; */
-    /* top: 17px;
-    z-index: 2;
-} */
-/* #reportButton{
-  left: 46%;
-  right: 50%;
-  bottom: -20px;
-} */
-#profileContainer{
-  margin-top: 10px;
-  margin-left: 13%;
-}
-#pageExplanation{
-  font-size: small;
-}
-.reporttext{
-  width: 301px;
-  height: 205px;
-}
-#submitIssue{
-/* width: 100px; */
-}
+  #title {
+    font-size: 20px;
+  }
+  #container-main {
+    margin: auto 12%;
+    position: absolute;
+    top: 50px;
+    height: 523px;
+  }
+  #register {
+    margin-top: 0%;
+  }
+  #secondaryContainer {
+    margin-top: 45px;
+    height: 90%;
+    margin-left: 30px;
+    margin-right: 10px;
+  }
+  #postbox {
+    width: 290px;
+    margin-top: -127px;
+    margin-left: -128px;
+  }
+  #postEditBox {
+    width: 290px;
+    margin-top: -180px;
+    margin-left: -152px;
+  }
+  #profileContainer {
+    margin-top: 10px;
+    margin-left: 13%;
+  }
+  #pageExplanation {
+    font-size: small;
+  }
+  .reporttext {
+    width: 301px;
+    height: 205px;
+  }
 }
 @media only screen and (max-width:540px){
-#profileContainer{
-  margin-left: 8%;
-}
+  #profileContainer {
+    margin-left: 8%;
+  }
 }
 @media only screen and (max-width:445px){
-#container-main{
-  margin: auto 0px;
-}
-#frameBugWork{
-  text-align: center;
-}
-  #postCreation{
+  #container-main {
+    margin: auto 25px;
+  }
+  #postCreation {
     left: 34%;
   }
-#profileContainer{
-  font-size: small;
-  margin-left: 9%;
-  width: 310px;
-}
+  #profileContainer {
+    font-size: small;
+    margin-left: 9%;
+    width: 310px;
+  }
 }
 @media only screen and (max-width:414px){
-#profileContainer{
-  margin-left: 8%;
-}
-#register{
-  margin-top: 0%;
-}
-#postbox{
-  margin-left: -156px;
-}
-h2{
-  font-size: medium;
-}
-#suggestionForm{
-  font-size: small;
-  width: 345px;
-}
-#suggestiontext{
-  width: 100%;
-}
-#secondaryContainer{
-  margin-left: 10px;
-}
+  #profileContainer {
+    margin-left: 8%;
+  }
+  #register {
+    margin-top: 0%;
+  }
+  #postbox {
+    margin-left: -156px;
+  }
+  h2 {
+    font-size: medium;
+  }
+  #secondaryContainer {
+    margin-left: 25px;
+  }
 }
 @media only screen and (max-width:411px){
-#profileContainer{
-  margin-left: 8%;
-}
-.box-login{
-  margin-top: -35px;
-}
-#postbox{
-  margin-left: -160px;
-}
-h2{
-  font-size: medium;
-}
-/* #reportButton{
-  bottom: 23%;
-} */
+  #profileContainer {
+    margin-left: 8%;
+  }
+  .box-login {
+    margin-top: -35px;
+  }
+  #postbox {
+    margin-left: -160px;
+  }
+  h2 {
+    font-size: medium;
+  }
 }
 @media only screen and (max-width:375px){
-#profileContainer{
-  margin-left: 4%;
-}
-#pageExplanation{
-  /* font-size: small; */
-  margin-right: 0%;
-}
-#suggestionForm{
-  width: 305px;
-}
-/* #reportButton{
-  left: 46%;
-  bottom: 16%;
-} */
+  #profileContainer {
+    margin-left: 4%;
+  }
+  #pageExplanation {
+    margin-right: 0%;
+  }
 }
 @media only screen and (max-width:360px){
-#profileContainer{
-  margin-left: 2%;
-}
-.box-login{
-  margin-top: -35px;
-}
-#postbox{
-  margin-left: -158px;
-  font-size: small;
-}
-h2{
-  font-size: medium;
-}
-#postEditBox{
-  margin-top: -217px;
-  margin-left: -160px;
-}
-/* #reportButton{
-  left: 46%;
-  bottom: 12%;
-} */
+  #profileContainer {
+    margin-left: 2%;
+  }
+  .box-login {
+    margin-top: -35px;
+  }
+  #postbox {
+    margin-left: -158px;
+    font-size: small;
+  }
+  h2 {
+    font-size: medium;
+  }
+  #postEditBox {
+    margin-top: -217px;
+    margin-left: -160px;
+  }
 }
 @media only screen and (max-width:320px ){
-h1 {
-  margin-right: -58px;
-}
-h3{
-  font-size: small;
-}
-.box-login{
-  /* margin: 25px 0px; */
-  margin-left: 0px;
-  width: 95%;
-}
-.container{
-  width: 115%;
-}
-/* #reportButton{
-  bottom: -20px;
-} */
-#postEditBox{
-  margin-left: -156px;
-}
-#profileContainer{
-  margin-left: 4%;
-}
-#pageExplanation{
-  margin-right: -17%;
-}
-/* #pageExplanation{
-  margin-left: 50px;
-} */
+  h1 {
+    margin-right: -58px;
+  }
+  h3 {
+    font-size: small;
+  }
+  .box-login {
+    margin-left: 0px;
+    width: 95%;
+  }
+  .container {
+    width: 115%;
+  }
+  #postEditBox {
+    margin-left: -156px;
+  }
+  #profileContainer {
+    margin-left: 4%;
+  }
+  #pageExplanation {
+    margin-right: -17%;
+  }
 }

@@ -1,13 +1,5 @@
 'use strict';
 
-// function openTheTitleInfo(){
-//   $('#titleInfo').click(function(){
-//     $('#pageExplanation').toggle();
-//   });
-// }
-// $(openTheTitleInfo);
-
-
 const posts_centerURL = 'https://evening-wave-91131.herokuapp.com/questionPost';
 const usersLoginURL = 'https://evening-wave-91131.herokuapp.com/api/auth/login';
 const usersDataBankURL = 'https://evening-wave-91131.herokuapp.com/api/protected';
@@ -16,14 +8,12 @@ const usernamesDb = 'https://evening-wave-91131.herokuapp.com/api/users';
 function loginForm(){
 $(document).ready(function(){
   const loggedJWT = sessionStorage.getItem("jwt");
-  console.log("transfer testing - " + loggedJWT);
   if(loggedJWT){
-    console.log("condition worked");
     const data = {
       "authToken": loggedJWT
     }
     transferJWT(data);
-    // renderMainPage();
+    keepNameIn();
   } else{
     $('#container-main').html(`
       <div class='box-login'>
@@ -52,19 +42,10 @@ $(document).ready(function(){
 }
 $(loginForm);
 
-// function enterClick(){
-// $('#loginPassword').keypress(function(e){
-//   if(e.which == 13){
-//     $("#entrySubmit").click();
-//   }
-// })
-// }
-// $(enterClick);
-
 function peekInPw() {
   $('#peekPW').click(function(){
     // e.preventDefault();
-    const x = $("#loginPassword");
+    const x = $("#loginPassword")[0];
     if (x.type === "password") {
       x.type = "text";
     } else {
@@ -74,7 +55,7 @@ function peekInPw() {
 }
 function peekInProfilePw() {
   $('#peekProfilePW').click(function(){
-    const y = $("#profilePW");
+    const y = $("#profilePW")[0];
     if (y.type === "password") {
       y.type = "text";
     } else {
@@ -82,25 +63,12 @@ function peekInProfilePw() {
     }
   });
 }
-// $(peekInProfilePw);
 
 function collectLoginData(){
   $('#entryLogin').on('click','#entrySubmit', function(e){
     e.preventDefault();
-    // const entryInfo = {};
     let username = $('#loginUsername').val();
-    // console.log('username: ' +  username); phase 1
     let password = $('#loginPassword').val();
-    // console.log("password: " + password);
-    // console.log(username "|" password);
-    // let userInSystem = document.getElementById('loginUsername').value;
-    // window.sessionStorage.setItem("username", username);
-    // // let pwInSystem = document.getElementById('loginPassword').value;
-    // window.sessionStorage.setItem("password", password);
-    // console.log("Testing for storage " + username + " and " + password);
-    // let testAccess = sessionStorage.getItem("username");
-    // console.log("Testing worked: " + testAccess + " ?");
-
     getInfoFromUsername(username);
     loginEntry(username, password);
     });
@@ -115,7 +83,6 @@ function logOutUser(){
 $(logOutUser);
 
 function loginEntry(user, pw){
-  // console.log(user + " | " + pw);
   const loginData = {
     url: usersLoginURL,
     data: {
@@ -125,11 +92,9 @@ function loginEntry(user, pw){
     dataType: 'json',
     method: 'POST',
     success: function(callback){
-      // console.log("First Step - received and sending: " + callback.authToken);
       transferJWT(callback);
     },
     error: function (jqXHR, exception) {
-       // console.log("sanity check, log in error callback"); phase 1
        var msg = '';
        if (jqXHR.status === 0) {
            msg = 'Not connect.\n Verify Network.';
@@ -152,45 +117,28 @@ function loginEntry(user, pw){
 
    }
   };
-  // console.log(loginData);
   $.ajax(loginData);
 }
 
-// let userInSystem = document.getElementById('loginUsername').value;
-// localStorage.setItem("username", userInSystem);
-// let pwInSystem = document.getElementById('loginPassword').value;
-// localStorage.setItem("password", pwInSystem);
-// console.log("Testing for storage " + userInSystem + " and " + pwInSystem);
-
-
-
 function transferJWT(jwt){
-  console.log("Second Step received: " + jwt.authToken);
-  console.log("different test " + JSON.stringify(jwt));
   window.sessionStorage.setItem("jwt", jwt.authToken);
   const secondaryJWT = JSON.stringify(jwt);
-  console.log("Double checking on second console log: " + secondaryJWT);
-  // console.log(usersDataBankURL);
   const loginJWT = {
     url: usersDataBankURL,
     headers:{'Authorization': "Bearer " +  jwt.authToken || secondaryJWT},
     dataType: 'json',
     method: 'GET',
     success: function loginToMainPage(){
-      // console.log("***Entry submit  clicked"); phase 1
       renderMainPage();
       showNav();
       fetchAllPosts();
       $('#menuDesignation').show();
     }
   };
-
-  // console.log(loginJWT);
   $.ajax(loginJWT);
 }
 
 function getInfoFromUsername(dataName){
-  // console.log("retrieved the username: " + dataName); phase 1
   const usernamePath = {
     url: usernamesDb + "/singleUsername/" + dataName,
     dataType: 'json',
@@ -198,25 +146,21 @@ function getInfoFromUsername(dataName){
   };
   $.ajax(usernamePath)
   .done(function(name){
-    // console.log(
-    //   JSON.stringify(name),
-    //   JSON.stringify(name, ['firstName', 'lastName'])
-    // );
     let result = name.find(obj => {
       return obj;
     });
-    // console.log(result.firstName + ' ' + result.lastName);
     let passTheName = result.firstName + ' ' + result.lastName;
         window.sessionStorage.setItem("user", passTheName);
-    console.log('double check to see if passing worked ' + passTheName);
-    //Now Get this information to MyPost
-    myPosts(passTheName);
     passingName(passTheName);
   });
 }
+function keepNameIn(){
+    const nameAfterRefresh = sessionStorage.getItem("user");
+        myPosts(nameAfterRefresh);
+        passingName(nameAfterRefresh);
+}
 
 function renderMainPage(){
-  // $('#reportButton').hide();
   $('#status').show();
   $('#divLogOut').show();
   $('#container-main').html(`
@@ -227,42 +171,6 @@ function renderMainPage(){
   </section>
 `);
   }
-
-function reportIssue() {
-  $('.reportBug').click(function(e){
-    e.preventDefault();
-    // $('#reportButton').hide();
-    $('#secondaryContainer').html(`
-      <h2 class='bugWords'>Issue(s) report page</h2>
-      <section id='frameBugWork'>
-        <p class='bugWords'>Please share your concern regarding anything in this site</p>
-        <form id='submitIssue' aria-label='Submit your concern' role='form'>
-          <input class='reportbox' type='text' placeholder='Your name?'>
-          <br>
-          <input class='reportbox' type='text' placeholder='Your email?'>
-          <br>
-          <textarea class='reporttext' placeholder='please type down here'></textarea>
-          <br>
-          <input id='submitreport' type='submit' value='Submit your concern(s)'>
-        </form>
-      </section>
-      `);
-  });
-}
-function shareBugReport(){
-  $('#secondaryContainer').on('click', '#submitreport', function(e){
-    e.preventDefault();
-    // console.log('clicked worked...');
-    // let email = document.getElementById('suggestionEmail').value;
-    // let suggestion = document.getElementById('suggestiontext').value;
-    swal('Your bug report was submitted!', 'Thank you for your time!', 'success');
-    // console.log('working or not');
-    // console.log(email + ': ' + suggestion);
-    // document.getElementById('submitIssue').reset();
-    clearFields('submitIssue');
-  });
-}
-
 
 function profileCreation() {
   $('#signUp').click(function(e) {
@@ -299,26 +207,27 @@ function profileCreation() {
 function receiveUserInfo(){
   $('#register').submit('#profileForm', function(e){
     e.preventDefault();
-    let userInfoData = {};
-    userInfoData.username = $('#profileUser').val();
-    // console.log(userInfoData.username);
-    userInfoData.password = $('#profilePW').val();
-    // console.log(userInfoData.password);
-    userInfoData.firstName = $('#profileFN').val();
-    // console.log(userInfoData.firstName);
-    userInfoData.lastName = $("#profileLN").val();
-    // console.log(userInfoData.lastName);
-     // console.log(userInfoData);
-     registerUserURL(userInfoData);
+      if($("#profileUser").val() == '' || $("#profilePW").val() == '' || $("#profileZip").val() == '' ||$("#profileFN").val() == '' || $("#profileLN").val() == '') {
+        swal('Missing information in one of information inputs', 'failure');
+        return false;
+      }else{
+        let userInfoData = {};
+        userInfoData.username = $('#profileUser').val();
+        userInfoData.password = $('#profilePW').val();
+        userInfoData.firstName = $('#profileFN').val();
+        userInfoData.lastName = $("#profileLN").val();
+        registerUserURL(userInfoData);
+      }
+    // let userInfoData = {};
+    // userInfoData.username = $('#profileUser').val();
+    // userInfoData.password = $('#profilePW').val();
+    // userInfoData.firstName = $('#profileFN').val();
+    // userInfoData.lastName = $("#profileLN").val();
+    //  registerUserURL(userInfoData);
   });
 }
-// function reloadTheLogin(){
-//   setTimeout(function(){location.reload();}, 3000);
-// }
-
 
 function registerUserURL(data){
-  // console.log('Transfer completed ' + JSON.stringify(data));
   $.ajax({
     method: 'POST',
     url: usernamesDb,
@@ -326,11 +235,8 @@ function registerUserURL(data){
     contentType:'application/json',
     success: function(data){
       swal('Your registration got through!', 'New accomplishment for you!', 'success');
-      // location.reload();
-      // $(reloadTheLogin);
     },
     error: function (jqXHR, exception) {
-       // console.log("sanity check, log in error callback"); phase 1
        var msg = '';
        if (jqXHR.status === 0) {
            msg = 'Not connect.\n Verify Network.';
@@ -349,7 +255,7 @@ function registerUserURL(data){
            msg = 'Uncaught Error.\n' + jqXHR.responseText;
        }
      console.log(msg);
-     swal('Something went terrible wrong. Check: ' + msg, 'warning');
+     // swal('Something went terrible wrong. Check: ' + msg, 'warning');
    }
   });
    clearFields('profileForm');
@@ -362,28 +268,18 @@ function fetchAllPosts() {
     method: 'GET',
     success: renderPosts
   };
-  // console.log(postsData);
   $.ajax(postsData);
 }
 
 function renderPosts(data) {
-  // console.log("Client received data"); phase 1
-  // console.log(data);
   $('#usersPosts').html(' ');
   $.each(data.questionPosts, function(i, obj){
     let id = 'questionData_' + i;
     let deleteButtonId = `deleteButton_${i}`;
     let editButtonId = `editCreation_${i}`;
-    // console.log('render post check for date: ' + obj.question.date);
     let event = new Date(obj.question.date);
-
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
-
     let filteredDate = event.toLocaleDateString('en-US', options);
-
-    console.log('filter dates: ' + filteredDate);
-    // console.log(deleteButtonId);
-    // console.log(editButtonId);
     $('#usersPosts').append(`
       <li class='eachPost'>
       <ul id="questionData">"${obj.title}"</ul>
@@ -396,67 +292,33 @@ function renderPosts(data) {
       </div>
       <input type='hidden' value='${obj.id}'>
     </li>`);
-    // console.log('Object id:' + obj.id);
-    // $('#' + editButtonId).click(function(e){
-    //   e.preventDefault();
-    //   $('#postEditBox').toggle(``);
-    //   // console.log(`Edit called on ${id}`);
-    //   editPost(obj.id);
-    // });
-    // $('#editSubmit').click(function(){
-    //   $('#postEditBox').hide();
-    // });
-    // $('#' + deleteButtonId).click(function(e){
-    //   e.preventDefault();
-    //   deletePost(obj.id);
-    //   // console.log(`Delete called on ${id}`);
-    // });
 });
 }
 
   function fetchUserPosts(name) {
-    console.log("For god sake of testing: " + name);
     window.sessionStorage.setItem("user", name);
-    const stayInWeb = sessionStorage.getItem("user");
-    console.log("Double checking " + stayInWeb);
     const userPostsData = {
-      url: posts_centerURL + "/parent/" + stayInWeb,
+      url: posts_centerURL + "/parent/" + name,
       dataType: 'json',
       method: 'GET'
     };
-    // console.log(userPostsData);
     $.ajax(userPostsData)
     .done(function(data){
-      // console.log("*****DONE*****"); phase 1
       renderUserPosts(data);
     });
   }
 
   function renderUserPosts(data) {
     $('#usersPosts').html(' ');
-
-    // console.log("Client received data"); phase 1
-    // console.log(data);
     $.each(data, function(i, obj){
       let id = 'questionData_' + i;
       let deleteButtonId = `deleteButton_${i}`;
       let editButtonId = `editCreation_${i}`;
-      // console.log('For the user - ' + obj.question.date);
-
-      // $('#editQuestionTitle').val(obj.title);
-
-      console.log('checking viable dates: ' + obj.question.date);
       let event = new Date(obj.question.date);
-
       let options = { year: 'numeric', month: 'long', day: 'numeric' };
-
       let filteredUserDate = event.toLocaleDateString('en-US', options);
-
       let editEvent = new Date;
       let filteredNewDate = editEvent.toLocaleDateString('en-US', options);
-
-      // console.log(deleteButtonId);
-      // console.log(editButtonId);
       $('#usersPosts').append(`
         <li class='eachPost'>
         <ul id="questionData">"${obj.title}"</ul>
@@ -486,8 +348,8 @@ function renderPosts(data) {
             Your child's age: <input id='editContentInfo' type='text' placeholder='Child age?' value=''>
             <br>
             <p>Found your answer?</p>
-              <select id='editAnswer' name='gotAnswer'>
-                <option value=''>Pick one</option>
+              <select id='editAnswer'>
+                <option disabled selected value>Pick one</option>
                 <option value="No, I haven't find any">No</option>
                 <option value='Yes, I have found my'>Yes</option>
               </select>
@@ -501,25 +363,15 @@ function renderPosts(data) {
         </div>
         <button class='deletebutton' id='${deleteButtonId}'><span>Delete this Post</span></button>
       </li>`);
-      // console.log('Object id:' + obj._id);
-
       $('#' + editButtonId).on('click', function(e){
-        // e.stopPropagation();
-        console.log('Looks for specifics ' + editButtonId);
         $('#postEditBox').toggle(``);
-        // console.log(`Edit called on ${id}`);
         $('#editQuestionTitle').val(obj.title);
         $('#editInfoData').val(obj.question.content);
         $('#editContentInfo').val(obj.question.childAge);
         $('#editAnswer').val(obj.question.foundAnswer);
         $('#editKnowWhen').val(filteredNewDate);
-        console.log('triple check: ' + obj._id);
         window.sessionStorage.setItem("id", obj._id);
-        window.sessionStorage.setItem('nameOfParent', obj.parentName);
-
-
         editPost();
-        //not necessarily to set this way.
         emptyEditPost(obj._id);
       });
       $('.closeEdit').click(function(){
@@ -528,103 +380,64 @@ function renderPosts(data) {
       $('#editSubmit').click(function(){
         $('#postEditBox').hide();
       });
-      $('#' + deleteButtonId).click(function(e){
-        e.preventDefault();
+      $('#' + deleteButtonId).click(function(){
         deletePost(obj._id);
-        // console.log(`Delete called on ${id}`);
       });
   });
   }
 
-  // $('#container-main').submit('#editSubmit', function(e){
-  //   e.preventDefault();
-  //   // console.log('the call id is : ' + callId);
-  //   // console.log(callId);
-  //   let editedData = {};
-  //   editedData.id = document.getElementById('byID').value;
-  //   console.log(editedData.id);
-  //   editedData.parentName = document.getElementById('editParentName').value;
-  //   // editedData.zipcode = 55555;
-  //   editedData.content = document.getElementById('editInfoData').value;
-  //   editedData.childAge = document.getElementById('editContentInfo').value;
-  //   editedData.foundAnswer = document.getElementById('editAnswer').value;
-  //   editedData.date = new Date;
-  //   console.log(editedData.date);
-  //   editedData.title =  document.getElementById('editQuestionTitle').value;
-  //   console.log(editedData);
-  //   updatePost(editedData);
-  // });
-
-
   function editPost(){
     $('#container-main').submit('#editSubmit', function(e){
       e.preventDefault();
-      // console.log('the call id is : ' + callId);
-      // console.log(callId);
       let newID = sessionStorage.getItem("id");
       let editedData = {};
       editedData.id = newID;
-      console.log(editedData.id);
       editedData.parentName = $('#editParentName').val();
       // editedData.zipcode = 55555;
-      editedData.content = $('editInfoData').val();
+      editedData.content = $('#editInfoData').val();
       editedData.childAge = $('#editContentInfo').val();
       editedData.foundAnswer = $('#editAnswer').val();
       editedData.date = new Date;
-      console.log(editedData.date);
       editedData.title =  $('#editQuestionTitle').val();
       updatePost(editedData);
     });
   }
 
 function passingName(name){
-  console.log("checking phase" + name);
-  // const personName = sessionStorage.getItem("user");
-  // console.log("phase checkpoint: " + personName);
   $('#singlePost').submit('#postSubmit', function(e){
     e.preventDefault();
-    // console.log('The transcation executed ' + name); phase 1
     let data = {};
     data.parentName = name;
-    console.log('In passing name function' + data.parentName);
-    // data.zipcode = 80246;
-
     data.title =  $('#questionTitle').val();
     data.content = $('#infoData').val();
     data.childAge = $('#contentInfo').val();
     data.foundAnswer = $('#answer').val();
     data.date = new Date();
-    // console.log("post result" + JSON.stringify(data));
     addPost(data);
     clearFields('singlePost');
   });
 }
 function clearFields(passTheID){
-  console.log('pass or not: ' + passTheID);
-// $(passTheID).reset();
 $("#"+ passTheID)[0].reset();
 }
 
-
 function addPost(dataPost) {
-  dataPost.question = {
-    content: dataPost.content,
-    childAge: dataPost.childAge,
-    foundAnswer: dataPost.foundAnswer,
-    date: dataPost.date
-  };
-  // console.log('add new post: ' + dataPost.parentName + ' ' + dataPost.zipcode + ' ' + dataPost.title + ' ' + dataPost.content + ' ' + dataPost.childAge + ' ' + dataPost.foundAnswer);
   let event = new Date(dataPost.date);
-
   let options = { year: 'numeric', month: 'long', day: 'numeric' };
-
   let filteredAddPostDate = event.toLocaleDateString('en-US', options);
-
   $.ajax({
-    method: 'POST',
     url: posts_centerURL,
-    data: JSON.stringify(dataPost),
-    dataType: 'json',
+    data: JSON.stringify({
+      "title": dataPost.title,
+      "parentName": dataPost.parentName,
+      "question": {
+        "content": dataPost.content,
+        "childAge": dataPost.childAge,
+        "foundAnswer": dataPost.foundAnswer,
+        "date": dataPost.date
+      }
+    }),
+    method: 'POST',
     contentType: 'application/json',
     success: function(data) {
       swal('Your post was submitted', 'congratulations', 'success');
@@ -642,7 +455,7 @@ function addPost(dataPost) {
         fetchUserPosts(bringName);
     },
     error: function (jqXHR, exception) {
-       // console.log("sanity check, log in error callback"); phase 1
+       console.log("sanity check, log in error callback");
        var msg = '';
        if (jqXHR.status === 0) {
            msg = 'Not connect.\n Verify Network.';
@@ -667,53 +480,14 @@ function addPost(dataPost) {
 
 function showNav(){
   $('#nav').show();
-  $(suggestionTab);
   $('#creationBtn').show();
   $(createPost);
   $(myPosts);
   $(generalQuestions);
-  $(getSuggestion);
-  $(shareBugReport);
-  $(reportIssue);
-}
-
-function suggestionTab() {
-  $('.suggestionTab').click( function(e){
-    e.preventDefault();
-    $('#secondaryContainer').html(`
-      <form id='suggestionForm' aria-label='Make any suggestion to improve the site.' role='form'>
-        Your email please?<br>
-        <input id='suggestionEmail' type='text' placeholder='Your email?'>
-        <br>
-        for future following up
-        <br>
-        <div>----------------------------------------------------------------</div>
-        Your Suggestion(s):
-        <br>
-        <textarea id='suggestiontext' placeholder='please type down here'></textarea>
-        <br>
-        <input type='submit' id='suggestionButton' value='Submit your suggestion'>
-      </form>`);
-  });
-}
-
-function getSuggestion(){
-  $('#secondaryContainer').on('click', '#suggestionButton', function(e){
-    e.preventDefault();
-    // console.log('clicked worked...');
-    // let email = document.getElementById('suggestionEmail').value;
-    // let suggestion = document.getElementById('suggestiontext').value;
-    swal('Your suggestion was submitted!', 'Thank you for your time!', 'success');
-    // console.log(email + ': ' + suggestion);
-    // document.getElementById('suggestionForm').reset();
-    clearFields('suggestionForm');
-  });
 }
 
 function createPost(){
-  $('#postCreation').click( function(e){
-    e.preventDefault();
-    // console.log('post testing worked');
+  $('#postCreation').click( function(){
     $('#postbox').toggle(``);
   });
   $('.close').click(function(){
@@ -721,17 +495,15 @@ function createPost(){
   })
   $('#postSubmit').click(function(){
     $('#postbox').hide();
-  });  $('#editSubmit').empty();
+  });
+   $('#editSubmit').empty();
 }
 
 function deletePost(postId) {
-  // console.log('Deleting Post `' + postId + '`');
   $.ajax({
     url: posts_centerURL + '/' + postId,
     method: 'DELETE',
     success: function(){
-      // console.log('Post deleted with id' + postId);
-      // fetchAllPosts();
       const theUser = sessionStorage.getItem("user");
       fetchUserPosts(theUser);
     }
@@ -739,21 +511,14 @@ function deletePost(postId) {
 }
 
 function updatePost(changePost) {
-  // console.log(changePost.id);
-  // console.log(changePost);
-  // console.log('updating post` ' + changePost.id + ' `');
-  console.log('check new date: ' + changePost.date);
   let id = changePost.id;
-  console.log('updatePost: ' + id);
   $.ajax({
     url: posts_centerURL + '/' + id,
     method: "PUT",
     contentType: "application/json",
-    // dataType: "json",
     data: JSON.stringify({
       "title": changePost.title,
       "parentName": changePost.parentName,
-      // "zipcode": changePost.zipcode,
       "question": {
         "content": changePost.content,
         "childAge": changePost.childAge,
@@ -762,15 +527,11 @@ function updatePost(changePost) {
       }
     }),
     success: function(changePost) {
-      // console.log('Successful opened - ' + changePost); phase 1
-      // fetchAllPosts();
-      // swal
       let bringName = sessionStorage.getItem("user");
       fetchUserPosts(bringName);
     }
   })
   .done(function(changePost){
-    // console.log('successful:' + changePost); phase 1
   })
   .fail(function(xhr, status, errorThrown){
     swal('This process has been failed', 'warning');
@@ -782,14 +543,10 @@ function updatePost(changePost) {
 
 function myPosts(data){
   $('.myPosts').on('click', function(e){
-        // console.log('*my Posts clicked*');
-        console.log("passing " + data + ' through myPost function');
         e.preventDefault();
         $('#postCreation').show();
         let name = data;
-        console.log("name checking not function: " + name);
         const stayInWeb = sessionStorage.getItem("user");
-        console.log("Double checking " + stayInWeb);
         if(stayInWeb){
           renderMainPage();
           fetchUserPosts(stayInWeb);
@@ -797,20 +554,13 @@ function myPosts(data){
         renderMainPage();
         fetchUserPosts(name);
       }
-        // myPostIcon(data);
   });
 }
-// function myPosts2(data){
-//   $('#myPosts2').click(function(e){
-//       e.preventDefault();
-//       myPosts(data);
-//   });
-// }
 
 function generalQuestions(){
   $('#generalQuestions').click(function(e){
-    // console.log('*general tab clicked*');
     e.preventDefault();
+    $('#postCreation').hide();
     renderMainPage();
     fetchAllPosts();
   });
@@ -818,21 +568,11 @@ function generalQuestions(){
 
 function generalIcon(){
   $('#generalQuestions2').click(function(e){
-    // console.log('Menu Icon clicked!');
     e.preventDefault();
     renderMainPage();
     fetchAllPosts();
   });
 }
-// function myPostIcon(name){
-//   $('#myPosts2').click(function(e){
-//     e.preventDefault();
-//     console.log(name);
-//     // renderMainPage();
-//     // fetchUserPosts(name);
-//     myPosts(name);
-//   });
-// }
 
 function freqAQs(){
   $('.container').on('click', '#faqTab', function(e){
@@ -858,44 +598,9 @@ function freqAQs(){
 
 function previousPage(){
   $('.container').on('click','.goBack', function(){
-    // console.log('go back clicked');
     location.reload();
   });
 }
-//
-// function empty(){
-//   const xTitle = document.getElementById('questionTitle').value;
-//   const xContent = document.getElementById('infoData').value;
-//   const xAge = document.getElementById('contentInfo').value;
-//   const xAnswer = document.getElementById('answer').value;
-  //
-  // $('#singlePost').submit(function(e){
-  //   e.preventDefault();
-  //   if($.trim($("#questionTitle").val()) === "" || $.trim($("#infoData").val()) === "" || $.trim($('#contentInfo').val()) === "" || $.trim($("#answer").val() === "")) {
-  //     swal("You didn't fill out one of the fields", "failure");
-  //     return false;
-  //   }
-  // });
-
-
-//
-//   if (xTitle == ""){
-//     alert('Please enter title.');
-//     return false;
-//   } else if (xContent == ""){
-//     alert('please enter your content');
-//     return false;
-//   } else if (xAge == ""){
-//     alert("Please enter your child's age");
-//     return false;
-//   } else if (xAnswer == ""){
-//     alert('Please pick your answer');
-//     return false;
-//   } else{
-//     return true;
-//   };
-// }
-// $(empty);
 
 function emptyPost(){
   $('#postSubmit').click(function(){
@@ -920,16 +625,12 @@ function emptyEditPost(dataID){
 $(emptyEditPost);
 
 function executeCRUDProject(){
-  // $(receiveUserInfo);
   $(freqAQs);
   $(previousPage);
   $(peekInPw);
   $(collectLoginData);
   $(profileCreation);
-  // $(reportIssue);
-  // $(passingName);
   $(generalIcon);
-  // $(myPostIcon);
 }
 
 
