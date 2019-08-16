@@ -351,7 +351,7 @@ function renderPosts(data) {
               <select id='editAnswer'>
                 <option disabled selected value>Pick one</option>
                 <option value="No, I haven't find any">No</option>
-                <option value='Yes, I have found my'>Yes</option>
+                <option value='Yes, I did found my'>Yes</option>
               </select>
             <br>
             <p>Current Date: <input id='editKnowWhen' type='text' value='${filteredNewDate}'></p>
@@ -406,15 +406,20 @@ function renderPosts(data) {
 function passingName(name){
   $('#singlePost').submit('#postSubmit', function(e){
     e.preventDefault();
-    let data = {};
-    data.parentName = name;
-    data.title =  $('#questionTitle').val();
-    data.content = $('#infoData').val();
-    data.childAge = $('#contentInfo').val();
-    data.foundAnswer = $('#answer').val();
-    data.date = new Date();
-    addPost(data);
-    clearFields('singlePost');
+      if($("#questionTitle").val() == '' || $("#infoData").val() == '' || $("#contentInfo").val() == '' || $("#answer").val() == '') {
+        swal('Missing information in one of information inputs', 'failure');
+        return false;
+      }else{
+        let data = {};
+        data.parentName = name;
+        data.title =  $('#questionTitle').val();
+        data.content = $('#infoData').val();
+        data.childAge = $('#contentInfo').val();
+        data.foundAnswer = $('#answer').val();
+        data.date = new Date();
+        addPost(data);
+        clearFields('singlePost');
+      }
   });
 }
 function clearFields(passTheID){
@@ -602,17 +607,6 @@ function previousPage(){
   });
 }
 
-function emptyPost(){
-  $('#postSubmit').click(function(){
-    if($("#questionTitle").val() == '' || $("#infoData").val() == '' || $("#contentInfo").val() == '' || $("#answer").val() == '') {
-      swal('Missing information in one of information inputs', 'failure');
-      return false;
-    }
-  });
-}
-
-$(emptyPost);
-
 function emptyEditPost(dataID){
   $("#editSubmit").click(function(){
     if($(`#${dataID}`).val() == '' || $("#editQuestionTitle").val() == ''
@@ -622,7 +616,7 @@ function emptyEditPost(dataID){
     }
   });
 }
-$(emptyEditPost);
+
 
 function executeCRUDProject(){
   $(freqAQs);
@@ -632,6 +626,5 @@ function executeCRUDProject(){
   $(profileCreation);
   $(generalIcon);
 }
-
 
 $(executeCRUDProject);
