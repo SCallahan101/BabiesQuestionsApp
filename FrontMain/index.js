@@ -187,7 +187,7 @@ function profileCreation() {
           <input id="profileLN" class='profiletext' type='text' placeholder='Required Input'>
           <br>
           <label for='zipcode'>Zipcode:</label>
-          <input id="profileZip" class='profiletext' type=''text' placeholder='Required Input'>
+          <input id="profileZip" class='profiletext' type='text' placeholder='Required Input'>
           <br>
           <label for='username'>Username:</label>
           <input id="profileUser" class='profiletext' type='text' placeholder='Required Input'>
@@ -224,12 +224,6 @@ function receiveUserInfo(){
         userInfoData.lastName = $("#profileLN").val();
         registerUserURL(userInfoData);
       }
-    // let userInfoData = {};
-    // userInfoData.username = $('#profileUser').val();
-    // userInfoData.password = $('#profilePW').val();
-    // userInfoData.firstName = $('#profileFN').val();
-    // userInfoData.lastName = $("#profileLN").val();
-    //  registerUserURL(userInfoData);
   });
 }
 
