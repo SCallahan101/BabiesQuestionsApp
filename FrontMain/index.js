@@ -180,17 +180,23 @@ function profileCreation() {
       `<form id='profileForm' aria-label='Create your new profile' role='form'>
         <fieldset id='profileContainer'>
           <legend>Profile Builder</legend>
-          First Name: <input id="profileFN" class='profiletext' type='text' placeholder='Required Input'>
+          <label for='first name'>First Name:</label>
+          <input id="profileFN" class='profiletext' type='text' placeholder='Required Input'>
           <br>
-          Last Name: <input id="profileLN" class='profiletext' type='text' placeholder='Required Input'>
+          <label for='last name'>Last Name:</label>
+          <input id="profileLN" class='profiletext' type='text' placeholder='Required Input'>
           <br>
-          Zipcode: <input id="profileZip" class='profiletext' type=''text' placeholder='Required Input'>
+          <label for='zipcode'>Zipcode:</label>
+          <input id="profileZip" class='profiletext' type=''text' placeholder='Required Input'>
           <br>
-          Username: <input id="profileUser" class='profiletext' type='text' placeholder='Required Input'>
+          <label for='username'>Username:</label>
+          <input id="profileUser" class='profiletext' type='text' placeholder='Required Input'>
           <br>
-          Password: <input id="profilePW" class='profiletext' type='password' placeholder='Required Input' value=''>
+          <label for='password'>Password:</label>
+          <input id="profilePW" class='profiletext' type='password' placeholder='Required Input' value=''>
           <br>
-          <input id="peekProfilePW" type='checkbox'>Peek at Your Profile Password
+          <input id="peekProfilePW" type='checkbox'>
+          <label for='peek in your password'>Peek at Your Profile Password</label>
           <p>(Must be total of 8 or more characters long!)</p>
           <br>
           <input id='createdProfile' value='Finalize the profile' type='submit'>
@@ -282,15 +288,16 @@ function renderPosts(data) {
     let filteredDate = event.toLocaleDateString('en-US', options);
     $('#usersPosts').append(`
       <li class='eachPost'>
-      <ul id="questionData">"${obj.title}"</ul>
-      <p>By ${obj.parentName}</p>
-      <p> - ${obj.question.content} - </p>
-      <p>from my ${obj.question.childAge} yrs child</p>
-      <p>- ${obj.question.foundAnswer} answer. </p>
-      <p>Posted by ${filteredDate}</p>
-      <div class='post-user'>
-      </div>
-      <input type='hidden' value='${obj.id}'>
+        <ul id="questionData">"${obj.title}"
+          <li>By ${obj.parentName}</li>
+          <li> - ${obj.question.content} -</li>
+          <li>from my ${obj.question.childAge} yrs child</li>
+          <li>- ${obj.question.foundAnswer} answer.</li>
+          <li>Posted by ${filteredDate}</li>
+          <div class='post-user'>
+          </div>
+          <input type='hidden' value='${obj.id}'>
+        </ul>
     </li>`);
 });
 }
@@ -321,15 +328,16 @@ function renderPosts(data) {
       let filteredNewDate = editEvent.toLocaleDateString('en-US', options);
       $('#usersPosts').append(`
         <li class='eachPost'>
-        <ul id="questionData">"${obj.title}"</ul>
-        <p>By: ${obj.parentName}</p>
-        <p>- ${obj.question.content} -</p>
-        <p> from my ${obj.question.childAge} yrs child</p>
-        <p>${obj.question.foundAnswer} answer. </p>
-        <p>Posted by: ${filteredUserDate}</p>
-        <div class='post-user'>
-        </div>
-        <input type='hidden' value='${obj._id}'>
+          <ul id="questionData">"${obj.title}"
+            <li>By: ${obj.parentName}</li>
+            <li>- ${obj.question.content} -</li>
+            <li> from my ${obj.question.childAge} yrs child</li>
+            <li>${obj.question.foundAnswer} answer. </li>
+            <li>Posted by: ${filteredUserDate}</li>
+            <div class='post-user'>
+            </div>
+            <input type='hidden' value='${obj._id}'>
+          </ul>
         <button class='editPost' id='${editButtonId}'><span>Edit my post!</span></button>
         <div id='postEditBox'>
         <h2>Modify your post</h2>
@@ -448,13 +456,14 @@ function addPost(dataPost) {
       swal('Your post was submitted', 'congratulations', 'success');
       $('#usersPosts').append(
         `<li class='eachPost'>
-          <ul id="questionData"> "${dataPost.title}""</ul>
-          <p>By ${dataPost.parentName}</p>
-          <p>- ${dataPost.content} -</p>
-          <p id='contentInfo'> from my ${dataPost.childAge} yrs child</p>
-          <p>${dataPost.foundAnswer} answer.</p>
-          <p>Posted by: ${filteredAddPostDate}</p>
-          <input type='hidden' value='${dataPost.id}'>
+          <ul id="questionData"> "${dataPost.title}""
+            <li>By ${dataPost.parentName}</li>
+            <li>- ${dataPost.content} -</li>
+            <li> from my ${dataPost.childAge} yrs child</li>
+            <li>${dataPost.foundAnswer} answer.</li>
+            <li>Posted by: ${filteredAddPostDate}</li>
+            <input type='hidden' value='${dataPost.id}'>
+          </ul>
         </li>`);
         let bringName = sessionStorage.getItem("user");
         fetchUserPosts(bringName);

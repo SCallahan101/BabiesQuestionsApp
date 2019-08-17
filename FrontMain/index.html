@@ -36,13 +36,16 @@
          <form id="singlePost" aria-label='Create a post' role='form'>
            <fieldset id='postDesign'>
            <legend>Fill those boxes out</legend>
-           Title: <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
+           <label for='title'>Title: </label>
+           <input id="questionTitle" class='postInfo' type='text' value='' placeholder='Write down the title'>
            <br>
-           Content: <input id='infoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
+           <label for='content'>Content:</label>
+           <input id='infoData' class='postInfo' type='text' value='' placeholder='Short content of question'>
            <br>
-           Your child: <input id='contentInfo' type='text' placeholder='Child age?'>
+           <label for='child pageExplanation'>Your child:</label>
+           <input id='contentInfo' type='text' placeholder='Child age?'>
            <br>
-           <p>Found my answer?</p>
+           <label for='pick out an answer'>Found my answer?</label>
              <select id='answer'>
                <option value=''>Pick one</option>
                <option value="No, I haven't find any">No</option>
