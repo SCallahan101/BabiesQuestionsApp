@@ -16,4 +16,4 @@ answer to at all. This would encourage the ideal of this quote: "There is no suc
 I felt that new parents often bombarded with how to care for their kids or how to raise them but none "social media 
 for new parents". Our children's questions are always full of surprises, which I am sure of it. 
 
-This app entailed: HTML, CSS, jQuery, JavaScript, MongoDB, Heroku, mLab, Mocha/Chai, and JWT.
+This app entailed: HTML, CSS, jQuery, JavaScript, MongoDB, Heroku, mLab, Mocha/Chai, Node.js, and JWT.
