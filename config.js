@@ -1,5 +1,5 @@
 "use strict";
-exports.DATABASE_URL = process.env.DATABASE_URL || global.DATABASE_URL || 'mongodb+srv://boardCreator619:board123@questionsboard.lchux.mongodb.net/questionsboard?retryWrites=true&w=majority';
+exports.DATABASE_URL = process.env.DATABASE_URL || global.DATABASE_URL || 'mongodb+srv://AtlasUser1234:AtlasPw1234@questionsboard.lchux.mongodb.net/questionsboard?retryWrites=true&w=majority';
 exports.TEST_DATABASE_URL = process.env.TEST_DATABASE_URL || 'mongodb://localhost/test_database_url';
 exports.PORT = process.env.PORT || 4747;
 
